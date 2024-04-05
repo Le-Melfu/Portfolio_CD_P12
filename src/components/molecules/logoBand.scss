@@ -9,11 +9,31 @@
     height: 180px;
 }
 
-.colorband {
-    z-index: 2;
-    display: block;
+.rainbow-dash {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
     padding: 3px;
     height: 10px;
+    overflow: hidden;
+}
+
+.colorband {
+    display: flex;
+    position: relative;
+    top: -300px;
+    border-radius: 100%;
+    padding: 100%;
     background: $main-gradient;
+    animation: rotate 7000ms infinite forwards;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -5,7 +5,9 @@ const LogoBand = () => {
     return (
         <div className="logo-band">
             <Logo />
-            <div className="colorband"></div>
+            <div className="rainbow-dash">
+                <div className="colorband"></div>
+            </div>
         </div>
     )
 }

@@ -1,13 +1,12 @@
 import Carousel from '../components/molecules/carousel'
-import Header from '../components/organisms/header'
 import './home.scss'
 const Home = () => {
     return (
         <div>
             <Carousel />
             <section id="section1">
-                <div class="bloc-presentation">
-                    <div class="presentation">
+                <div className="bloc-presentation">
+                    <div className="presentation">
                         <p>
                             Je m'appelle Clément, j'ai 30 ans et je suis
                             passionné de musique depuis l'âge de 11 ans. Du Rock
