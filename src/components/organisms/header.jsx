@@ -1,20 +1,13 @@
-import LogoBand from '../molecules/logo_band'
+import LogoBand from '../molecules/logoBand'
+import Navbar from '../molecules/navbar'
 
 const Header = () => {
-  return (
-    <header>
-      <LogoBand/>
-      <nav class="menu">
-        <ul>
-          <li>Home</li>
-          <li>CV</li>
-          <li>Musique</li>
-          <li>Galerie de Figurines</li>
-        </ul>
-      </nav>
-    </header>
-  )
-};
+    return (
+        <header>
+            <LogoBand />
+            <Navbar />
+        </header>
+    )
+}
 
-export default Header;
-
+export default Header

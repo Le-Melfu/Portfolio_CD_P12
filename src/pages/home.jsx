@@ -1,15 +1,13 @@
-import ProfilePicture from '../components/atoms/picture_round'
+import Carousel from '../components/molecules/carousel'
 import Header from '../components/organisms/header'
-
+import './home.scss'
 const Home = () => {
     return (
         <body>
             <Header />
+            <Carousel />
             <section id="section1">
                 <div class="bloc-presentation">
-                    <div class="portrait-id">
-                        <ProfilePicture />
-                    </div>
                     <div class="presentation">
                         <p>
                             Je m'appelle Clément, j'ai 30 ans et je suis

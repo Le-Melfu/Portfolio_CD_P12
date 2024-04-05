@@ -1,6 +1,29 @@
-import profilepict from '../../assets/images/Portrait-01.png'
+import { Link } from 'react-router-dom'
+import './navbar.scss'
 
-const ProfilePicture = () => {
-    return <img src={profilepict} alt="Logo" className="logo"></img>
+const Navbar = () => {
+    return (
+        <nav className="nav-bar">
+            <Link to={'/'} className="nav-btn">
+                Home
+            </Link>
+            <Link to={'/experiences'} className="nav-btn">
+                Expériences & études
+            </Link>
+            <Link to={'/projects'} className="nav-btn">
+                Projets
+            </Link>
+            <Link to={'/music'} className="nav-btn">
+                Musique
+            </Link>
+            <Link to={'/interests'} className="nav-btn">
+                Centres d'intérêts
+            </Link>
+            <Link to={'/contact'} className="nav-btn">
+                Contact
+            </Link>
+        </nav>
+    )
 }
-export default ProfilePicture
+
+export default Navbar

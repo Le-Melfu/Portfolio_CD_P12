@@ -1,0 +1,19 @@
+@import '../../assets/variables';
+
+.logo-band {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 180px;
+}
+
+.colorband {
+    z-index: 2;
+    display: block;
+    width: 100%;
+    padding: 3px;
+    height: 10px;
+    background: $main-gradient;
+}
