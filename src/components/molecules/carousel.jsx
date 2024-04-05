@@ -22,7 +22,7 @@ const Carousel = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
-        }, 6000)
+        }, 12000)
 
         return () => clearInterval(interval)
     }, [slides.length])
@@ -33,7 +33,7 @@ const Carousel = () => {
                 {slides.map((slide) => (
                     <div key={`${slide.id}`}>
                         <img
-                            className={`SlideCard SlideCard--${
+                            className={`slide slide--${
                                 slides[currentSlide].id === slide.id
                                     ? 'display'
                                     : 'hide'

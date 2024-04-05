@@ -9,11 +9,13 @@ import ExperiencePage from './pages/experiencePage'
 import ProjectPage from './pages/projectsPage'
 import InterestsPage from './pages/interestsPage'
 import ContactPage from './pages/contactPage'
+import Header from './components/organisms/header'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
         <BrowserRouter>
+            <Header />
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/experiences" element={<ExperiencePage />} />

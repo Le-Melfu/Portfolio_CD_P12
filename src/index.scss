@@ -133,6 +133,10 @@ table {
 // Imports
 @import './assets/fonts/font-faces.scss';
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: #272727;
     font-family: Comfortaa;

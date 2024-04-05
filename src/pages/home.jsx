@@ -3,8 +3,7 @@ import Header from '../components/organisms/header'
 import './home.scss'
 const Home = () => {
     return (
-        <body>
-            <Header />
+        <div>
             <Carousel />
             <section id="section1">
                 <div class="bloc-presentation">
@@ -20,7 +19,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-        </body>
+        </div>
     )
 }
 
