@@ -13,6 +13,7 @@
     &__content {
         display: flex;
         flex-direction: row;
+        line-height: 24px;
         &--v {
             p {
                 margin-left: 23px;
@@ -20,6 +21,11 @@
                 &:not(:last-child) {
                     margin-bottom: 14px;
                 }
+            }
+            a {
+                margin-left: 23px;
+                font-size: 14px;
+                color: white;
             }
         }
     }
@@ -29,6 +35,6 @@
     display: flex;
     height: inherit;
     width: 10px;
-    padding: inherit 5px;
+    padding: inherit 2px;
     background: $main-gradient-v;
 }

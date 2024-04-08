@@ -1,9 +1,36 @@
 .article-container {
+    position: relative;
     display: flex;
-    width: 70%;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
+
+.slide-in {
+    animation: slideInFromLeft 0.5s ease-in-out both;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .content-container {
     display: flex;
     justify-content: space-around;
     padding-bottom: 115px;
+}
+
+.arrow {
+    display: flex;
+    position: relative;
+    width: 19px;
+    top: 25px;
+    left: -20px;
 }
