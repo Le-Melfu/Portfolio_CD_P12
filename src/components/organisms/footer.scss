@@ -1,0 +1,15 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    p {
+        margin-bottom: 5px;
+    }
+    a {
+        color: white;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}

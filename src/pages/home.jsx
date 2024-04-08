@@ -1,23 +1,32 @@
+import Article from '../components/molecules/article'
+import Aside from '../components/molecules/aside'
 import Carousel from '../components/molecules/carousel'
 import './home.scss'
 const Home = () => {
     return (
         <div>
             <Carousel />
-            <section id="section1">
-                <div className="bloc-presentation">
-                    <div className="presentation">
+            <div className="content-container">
+                <section className="articles-container">
+                    <Article title="Bienvenue">
                         <p>
-                            Je m'appelle Clément, j'ai 30 ans et je suis
-                            passionné de musique depuis l'âge de 11 ans. Du Rock
-                            au Jazz en passant par la Funk et la musique
-                            Electro, tous les styles m'intérèssent et
-                            m'inspirent, aussi bien sur de vrais instruments
-                            qu'en MAO.
+                            Mon nom est Clément Degardenzi, je suis intégrateur
+                            développeur front-end, situé dans le Nord de la
+                            France. Durant ma formation et ma pratique, j’ai pu
+                            expérimenter et m’améliorer sur différents aspects
+                            du front-end, avec des bases en HTML/CSS/JS, mais
+                            également des outils tels que React et Redux
+                            Toolkit.
                         </p>
-                    </div>
-                </div>
-            </section>
+                        <p>
+                            Je suis féru de perfection de précision, tout en
+                            pouvant proposer la meilleure optimisation possible
+                            de vos interfaces.
+                        </p>
+                    </Article>
+                </section>
+                <Aside />
+            </div>
         </div>
     )
 }

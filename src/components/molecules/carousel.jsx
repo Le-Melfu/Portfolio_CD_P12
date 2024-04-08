@@ -1,28 +1,8 @@
 import { useEffect, useState } from 'react'
 import './carousel.scss'
-import slide1 from '../../assets/images/Slideshow-01.jpg'
-import slide2 from '../../assets/images/Slideshow-02.jpg'
-import slide3 from '../../assets/images/MAO-01.jpg'
+import { slides } from '../../assets/datas'
 
 const Carousel = () => {
-    const slides = [
-        {
-            id: 1,
-            image: slide1,
-            alt: 'Clément Degardenzi jouant de la guitare',
-        },
-        {
-            id: 2,
-            image: slide2,
-            alt: 'Scène de concert',
-        },
-        {
-            id: 3,
-            image: slide3,
-            alt: 'Ordinateur affichant un logiciel de MAO',
-        },
-    ]
-
     const [index, setIndex] = useState(0)
 
     const nextSlide = () => {

@@ -141,4 +141,18 @@ body {
     background: #272727;
     font-family: Comfortaa;
     color: white;
+    height: 100vh;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
