@@ -1,12 +1,8 @@
 import React from 'react'
+import ErrorPage from './errorPage'
 
 const MusicPage = () => {
-    return (
-        <div>
-            <h2> Mes Tracks</h2>
-            {/* <MusicList /> */}
-        </div>
-    )
+    return <ErrorPage />
 }
 
 export default MusicPage

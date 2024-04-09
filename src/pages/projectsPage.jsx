@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom'
 import { projects } from '../assets/datas'
 import Article from '../components/molecules/article'
 import './projectsPage.scss'
+import SectionHeader from '../components/molecules/sectionHeader'
 
 const ProjectPage = () => {
     return (
-        <div className="projects">
-            <div>
-                <h1>Mes Realisations</h1>
-                <div className="colorband-fat"></div>
-            </div>
+        <div className="projects page">
+            <SectionHeader
+                title="Mes Réalisations"
+                desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
+            />
 
             {projects
                 .map((project) => (

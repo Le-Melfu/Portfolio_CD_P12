@@ -32,12 +32,13 @@ const Home = () => {
     const resetClass = async () => {
         setTimeout(async () => {
             await setAnimationClass('')
-        }, 500)
+        }, 1000)
     }
 
     useEffect(() => {
         setShowArrow(selectedArticle !== null)
         if (selectedArticle === null) {
+            resetClass()
             setAnimationClass('fade-in')
         } else {
             resetClass()

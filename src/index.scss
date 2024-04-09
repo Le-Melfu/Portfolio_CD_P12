@@ -156,3 +156,23 @@ body {
     flex-direction: column;
     flex: 1;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    display: flex;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 23px;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}

@@ -7,11 +7,11 @@
 }
 
 .slide-in {
-    animation: slideInFromLeft 800ms ease-in-out;
+    animation: slideInFromLeft 800ms ease-in-out forwards;
 }
 
 .fade-in {
-    animation: fadeIn 800ms ease-in-out;
+    animation: fadeIn 800ms ease-in-out forwards;
 }
 
 @keyframes slideInFromLeft {
@@ -47,4 +47,5 @@
     width: 19px;
     top: 25px;
     left: -20px;
+    cursor: pointer;
 }

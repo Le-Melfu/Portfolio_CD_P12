@@ -33,14 +33,24 @@ const Carousel = () => {
 
             <div className="carousel__pagination">
                 {slides.map((slide, radioIdx) => (
-                    <input
-                        className="carousel__pagination__radio"
-                        key={`${slide.alt}`}
-                        type="radio"
-                        name="radio-button"
-                        checked={index === radioIdx}
-                        readOnly
-                    />
+                    <>
+                        <label
+                            for={`radio-btn-${slide.id}`}
+                            className="hidden"
+                            aria-hidden
+                        >
+                            {slide.alt}
+                        </label>
+                        <input
+                            className="carousel__pagination__radio"
+                            key={`${slide.alt}`}
+                            type="radio"
+                            name={`radio-btn-${slide.id}`}
+                            id={`radio-btn-${slide.id}`}
+                            checked={index === radioIdx}
+                            readOnly
+                        />
+                    </>
                 ))}
             </div>
 

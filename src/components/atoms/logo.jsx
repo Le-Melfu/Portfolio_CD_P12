@@ -4,7 +4,7 @@ import './logo.scss'
 const Logo = () => {
     return (
         <>
-            <img src={logo} alt="Logo" className="logo" />
+            <img src={logo} alt="Logo de Clément Degardenzi" className="logo" />
             <h1 className="hidden" aria-hidden>
                 Clément Degardenzi
             </h1>

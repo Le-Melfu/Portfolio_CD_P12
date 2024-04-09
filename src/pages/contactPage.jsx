@@ -1,10 +1,7 @@
+import ErrorPage from './errorPage'
+
 const ContactPage = () => {
-    return (
-        <div>
-            <h2>404</h2>
-            <p>Oups... il semble que cette page n'existe pas !</p>
-        </div>
-    )
+    return <ErrorPage />
 }
 
 export default ContactPage

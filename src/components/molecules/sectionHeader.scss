@@ -1,0 +1,37 @@
+@import '../../assets/variables.scss';
+
+.section {
+    &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 80%;
+        margin-bottom: 40px;
+        font-size: 14px;
+    }
+    &__title {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        font-size: 40px;
+        text-transform: uppercase;
+        h1 {
+            position: relative;
+            top: 0;
+        }
+        &__colorband {
+            z-index: -1;
+            position: relative;
+            top: -43px;
+            display: block;
+            width: 100%;
+            height: 33px;
+            padding: 10px 0;
+            background: $main-gradient;
+        }
+    }
+}
