@@ -2,7 +2,7 @@
 .article {
     display: flex;
     flex-direction: column;
-    width: 515px;
+    width: 70%;
     height: fit-content;
     &__title {
         display: flex;
@@ -29,12 +29,19 @@
             }
         }
     }
+    &__image {
+        display: flex;
+        margin-left: 23px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: 250px;
+    }
 }
 
 .colorband-v {
     display: flex;
     height: inherit;
     width: 10px;
-    padding: inherit 2px;
+    padding: 0 2px;
     background: $main-gradient-v;
 }

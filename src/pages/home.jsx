@@ -29,17 +29,27 @@ const Home = () => {
         ],
     }
 
+    const resetClass = async () => {
+        setTimeout(async () => {
+            await setAnimationClass('')
+        }, 500)
+    }
+
     useEffect(() => {
         setShowArrow(selectedArticle !== null)
-        setAnimationClass('')
-        setAnimationClass('slideInFromLeft')
+        if (selectedArticle === null) {
+            setAnimationClass('fade-in')
+        } else {
+            resetClass()
+            setAnimationClass(`slide-in`)
+        }
     }, [selectedArticle])
 
     return (
         <div>
             <Carousel />
-            <div className={`content-container ${animationClass}`}>
-                <section className={`articles-container`}>
+            <div className="content-container">
+                <section className={`articles-container ${animationClass}`}>
                     {showArrow && (
                         <i
                             className="fa-solid fa-chevron-left arrow"
