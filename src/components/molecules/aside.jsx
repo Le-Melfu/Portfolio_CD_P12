@@ -23,7 +23,7 @@ const Aside = ({ onClick }) => {
                     ))
                     .reverse()}
             </ul>
-            <Link className="aside__showMore" to="/projects">
+            <Link className="link-btn" to="/projects">
                 Voir +
             </Link>
         </aside>

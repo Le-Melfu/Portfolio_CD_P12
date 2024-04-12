@@ -1,0 +1,60 @@
+@import '../../assets/variables.scss';
+
+.card3d {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: auto;
+    aspect-ratio: 1/1;
+    background: $primary-bg-color;
+    padding: 58px;
+    gap: 16px;
+    border: $primary-border-color 2px solid;
+    margin-bottom: 111px;
+    transform: translatez(50px);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-in-out;
+    h3 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+    p {
+        font-size: 14px;
+        line-height: 24px;
+        flex: 1;
+    }
+    &:before,
+    &:after {
+        position: absolute;
+        content: '';
+        border: $primary-border-color 2px solid;
+        transition: all 0.3s ease-in-out;
+    }
+    &:before {
+        width: 100%;
+        top: -13px;
+        left: -1px;
+        height: 8px;
+        transform: skewX(45deg) rotatex(90deg);
+        transform-origin: center bottom;
+    }
+
+    &:after {
+        width: 9px;
+        left: -12px;
+        top: -1px;
+        height: 100%;
+        transform: skewY(45deg) rotateY(90deg);
+        transform-origin: center right;
+    }
+    &:hover {
+        transform: translateX(10px) translateY(10px);
+    }
+    &:hover:before {
+        transform: skewX(45deg) rotatex(0deg);
+    }
+    &:hover:after {
+        transform: skewY(45deg) rotateY(0deg);
+    }
+}

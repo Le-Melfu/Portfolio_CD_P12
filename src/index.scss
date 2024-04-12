@@ -183,4 +183,22 @@ h6 {
     width: 100%;
     height: 100%;
     margin-top: 80px;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.link-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    padding: 5px;
+    color: #1e1e1e;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    width: fit-content;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(0deg, #73cdff 0%, #73cdff 100%);
 }

@@ -21,17 +21,4 @@
         font-size: 14px;
         line-height: 1.2;
     }
-    &__showMore {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-self: flex-end;
-        color: #1e1e1e;
-        font-size: 14px;
-        text-decoration: none;
-        width: 77px;
-        height: 28px;
-        border-radius: 6px;
-        background: linear-gradient(0deg, #73cdff 0%, #73cdff 100%);
-    }
 }
