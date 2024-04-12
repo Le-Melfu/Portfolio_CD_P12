@@ -47,7 +47,7 @@ const Home = () => {
     }, [selectedArticle])
 
     return (
-        <div>
+        <main>
             <Carousel />
             <div className="content-container">
                 <section className={`articles-container ${animationClass}`}>
@@ -84,7 +84,7 @@ const Home = () => {
                 </section>
                 <Aside onClick={openArticle} />
             </div>
-        </div>
+        </main>
     )
 }
 

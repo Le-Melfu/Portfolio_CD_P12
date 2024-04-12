@@ -1,0 +1,53 @@
+@import '../../assets/variables.scss';
+
+.align-right {
+    text-align: end;
+}
+.xp-content {
+    font-size: 14px;
+}
+
+@for $i from 1 through 3 {
+    .banner3d-#{$i} {
+        width: 100%;
+        perspective: 600px;
+        transform-style: preserve-3d;
+        margin-bottom: 70px;
+    }
+
+    .banner3d-#{$i}-front {
+        padding: 60px;
+        background: $primary-bg-color;
+        border: $primary-border-color 1px solid;
+        transform: translatez(50px);
+        transform-style: preserve-3d;
+        li {
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        &:before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            left: -2px;
+            height: 47px;
+            border: $primary-border-color 2px solid;
+            top: -50px;
+            transform-origin: center bottom;
+            transform: rotatex(90deg);
+        }
+
+        &:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            left: -2px;
+            height: 50px;
+            border: $primary-border-color 2px solid;
+            bottom: -50px;
+            transform-origin: center top;
+            transform: rotatex(-90deg);
+        }
+    }
+}

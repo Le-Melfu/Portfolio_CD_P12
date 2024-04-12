@@ -158,13 +158,19 @@ body {
 }
 
 h1,
-h2,
+h2 {
+    display: flex;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 23px;
+}
+
 h3,
 h4,
 h5,
 h6 {
     display: flex;
-    font-size: 40px;
+    font-size: 18px;
     font-weight: 400;
     margin-bottom: 23px;
 }
@@ -174,5 +180,7 @@ h6 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
     margin-top: 80px;
 }

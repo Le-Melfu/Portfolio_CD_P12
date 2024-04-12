@@ -6,7 +6,7 @@ import SectionHeader from '../components/molecules/sectionHeader'
 
 const ProjectPage = () => {
     return (
-        <div className="projects page">
+        <main className="projects page">
             <SectionHeader
                 title="Mes Réalisations"
                 desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
@@ -42,7 +42,7 @@ const ProjectPage = () => {
                     </Article>
                 ))
                 .reverse()}
-        </div>
+        </main>
     )
 }
 

@@ -10,7 +10,7 @@ const Aside = ({ onClick }) => {
     }
     return (
         <aside className="aside">
-            <h2 className="aside__title">Projets</h2>
+            <h2 className="aside__title">Projets récents</h2>
             <ul className="aside__list">
                 {recentProjects
                     .map((project) => (

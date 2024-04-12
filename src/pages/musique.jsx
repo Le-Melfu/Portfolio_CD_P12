@@ -1,8 +1,12 @@
 import React from 'react'
-import ErrorPage from './errorPage'
+import SectionHeader from '../components/molecules/sectionHeader'
 
 const MusicPage = () => {
-    return <ErrorPage />
+    return (
+        <div className="interests page">
+            <SectionHeader title="Musique" />
+        </div>
+    )
 }
 
 export default MusicPage

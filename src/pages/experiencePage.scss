@@ -1,0 +1,9 @@
+.xp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__content {
+        display: flex;
+        width: 100%;
+    }
+}

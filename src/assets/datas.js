@@ -1,7 +1,6 @@
 import slide1 from './images/Slideshow-01.jpg'
 import slide2 from './images/Slideshow-02.jpg'
 import slide3 from './images/MAO-01.jpg'
-import slide4 from './images/test.jpg'
 import ridingPic from './images/riding-cities.jpg'
 
 export const slides = [
@@ -19,11 +18,6 @@ export const slides = [
         id: 3,
         image: slide3,
         alt: 'Ordinateur affichant un logiciel de MAO',
-    },
-    {
-        id: 4,
-        image: slide4,
-        alt: 'Rangement de plusieurs guitares',
     },
 ]
 
