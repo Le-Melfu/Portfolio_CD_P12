@@ -3,7 +3,7 @@ import SectionHeader from '../components/molecules/sectionHeader'
 
 const MusicPage = () => {
     return (
-        <div className="interests page">
+        <div className="music page">
             <SectionHeader title="Musique" />
         </div>
     )
