@@ -1,0 +1,21 @@
+version: 1
+name: portfolio
+
+frontend:
+    builder: cra
+
+build:
+    steps:
+        - name: Install dependencies
+          run: npm install
+
+        - name: Build React app
+          run: npm run build
+
+# Déploiement de l'application
+deploy:
+    steps:
+        - name: Deploy to Ionos
+          run: |
+              # Copier les fichiers construits sur le serveur
+              cp -r build/* /var/www/html
