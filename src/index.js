@@ -11,11 +11,13 @@ import InterestsPage from './pages/interestsPage'
 import ContactPage from './pages/contactPage'
 import Header from './components/organisms/header'
 import Footer from './components/organisms/footer'
+import OpenAnim from './components/organisms/openAnim'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
         <BrowserRouter>
+            <OpenAnim />
             <Header />
             <div className="main-container">
                 <Routes>

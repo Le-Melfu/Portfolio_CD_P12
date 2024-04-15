@@ -19,9 +19,9 @@ const Navbar = () => {
             <Link to={'/interests'} className="nav-btn">
                 Centres d'intérêts
             </Link>
-            <Link to={'/contact'} className="nav-btn">
+            {/* <Link to={'/contact'} className="nav-btn">
                 Contact
-            </Link>
+            </Link> */}
         </nav>
     )
 }

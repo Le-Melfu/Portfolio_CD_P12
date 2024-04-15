@@ -34,7 +34,9 @@ const ProjectPage = () => {
                             </div>
 
                             {project.url ? (
-                                <Link to={project.url}>Voir le site</Link>
+                                <Link className="project-link" to={project.url}>
+                                    Voir le site
+                                </Link>
                             ) : (
                                 ''
                             )}

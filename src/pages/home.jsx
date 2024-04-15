@@ -4,6 +4,7 @@ import Aside from '../components/molecules/aside'
 import Carousel from '../components/molecules/carousel'
 import './home.scss'
 import { Link } from 'react-router-dom'
+import OpenAnim from '../components/organisms/openAnim'
 
 const Home = () => {
     const [selectedArticle, setSelectedArticle] = useState(null)

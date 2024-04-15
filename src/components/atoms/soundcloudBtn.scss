@@ -1,0 +1,16 @@
+@import '../../assets/variables.scss';
+
+.discover-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    width: fit-content;
+    height: 28px;
+    border-radius: 6px;
+    background: $main-gradient;
+}

@@ -1,0 +1,11 @@
+.music-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+}
+
+.music-list iframe {
+    width: 100%;
+}
