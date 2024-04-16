@@ -181,6 +181,11 @@ h6 {
     margin-bottom: 23px;
 }
 
+a {
+    display: flex;
+    height: auto;
+    padding: 10px;
+}
 .page {
     display: flex;
     flex-direction: column;
