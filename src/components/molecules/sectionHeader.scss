@@ -1,4 +1,4 @@
-@import '../../assets/variables.scss';
+@import '../../assets/variables.scss', '../../assets/mixins.scss';
 
 .section {
     &__header {
@@ -17,12 +17,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
         width: 100%;
         font-size: 40px;
         text-transform: uppercase;
         h1 {
+            display: flex;
+            height: fit-content;
+            line-height: 40px;
             position: relative;
-            top: 0;
+            top: 10px;
         }
         &__colorband {
             z-index: -1;
@@ -33,6 +37,14 @@
             height: 33px;
             padding: 10px 0;
             background: $main-gradient;
+        }
+    }
+}
+
+@include mobileQ {
+    .section {
+        &__header {
+            margin-bottom: 50px;
         }
     }
 }

@@ -1,3 +1,5 @@
+@import '../../assets/mixins.scss';
+
 .aside {
     display: flex;
     flex-direction: column;
@@ -23,5 +25,13 @@
     }
     .link-btn {
         align-self: flex-end;
+    }
+}
+
+@include mobileQ {
+    .aside {
+        width: 60%;
+        padding: 25px;
+        min-height: 250px;
     }
 }

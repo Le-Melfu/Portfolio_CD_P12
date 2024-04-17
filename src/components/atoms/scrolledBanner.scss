@@ -1,14 +1,20 @@
-@import '../../assets/variables.scss';
+@import '../../assets/variables.scss', '../../assets/mixins.scss';
 
 .align-right {
     text-align: end;
 }
-.xp-content {
+.xp__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
     font-size: 14px;
 }
 
 @for $i from 1 through 3 {
     .banner3d-#{$i} {
+        display: flex;
         width: 100%;
         perspective: 600px;
         transform-style: preserve-3d;
@@ -16,6 +22,7 @@
     }
 
     .banner3d-#{$i}-front {
+        width: 100%;
         padding: 60px;
         background: $primary-bg-color;
         border: $primary-border-color 1px solid;
@@ -49,5 +56,12 @@
             transform-origin: center top;
             transform: rotatex(-90deg);
         }
+    }
+}
+
+@include mobileQ {
+    .xp__content {
+        width: 80%;
+        margin: auto;
     }
 }

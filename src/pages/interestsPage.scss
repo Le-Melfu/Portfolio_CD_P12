@@ -1,8 +1,21 @@
+@import '../assets/mixins.scss';
+
 .interests {
     &__cards {
         display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         gap: 5%;
+    }
+}
+
+@include mobileQ {
+    .interests__cards {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 25px;
     }
 }
