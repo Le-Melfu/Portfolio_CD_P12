@@ -1,9 +1,12 @@
-.article-container {
+@import '../assets/mixins.scss';
+
+.articles-container {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
+    margin: 0 200px;
 }
 
 .slide-in {
@@ -38,15 +41,27 @@
     display: grid;
     grid-template-columns: 65% 35%;
     padding-bottom: 115px;
-    margin: 0 200px;
 }
 
 .arrow {
     display: flex;
     position: relative;
-    width: 19px;
-    top: 45px;
-    left: -40px;
+    width: 24px;
+    left: -10px;
     cursor: pointer;
     padding: 20px;
+}
+
+@include mobileQ {
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 60px;
+        gap: 60px;
+    }
+    .articles-container {
+        justify-content: center;
+    }
 }

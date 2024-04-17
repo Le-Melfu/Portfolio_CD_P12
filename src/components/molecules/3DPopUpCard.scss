@@ -1,17 +1,16 @@
-@import '../../assets/variables.scss';
+@import '../../assets/variables.scss', '../../assets/mixins.scss';
 
 .card3d {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: auto;
     aspect-ratio: 1/1;
+    width: 254px;
+    height: auto;
     background: $primary-bg-color;
     padding: 58px;
     gap: 16px;
     border: $primary-border-color 2px solid;
-    margin-bottom: 111px;
     transform: translatez(50px);
     transform-style: preserve-3d;
     transition: all 0.3s ease-in-out;
@@ -56,5 +55,11 @@
     }
     &:hover:after {
         transform: skewY(45deg) rotateY(0deg);
+    }
+}
+
+@include mobileQ {
+    .card3d {
+        width: 100%;
     }
 }
