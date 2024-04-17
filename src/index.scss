@@ -1,3 +1,5 @@
+@import './assets/mixins.scss';
+
 //CSS Output
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -188,8 +190,9 @@ h6 {
     width: 100%;
     height: 100%;
     margin-top: 80px;
-    padding-left: 200px;
-    padding-right: 200px;
+    margin-bottom: 100px;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .link-btn {
@@ -205,4 +208,17 @@ h6 {
     height: 28px;
     border-radius: 6px;
     background: linear-gradient(0deg, #73cdff 0%, #73cdff 100%);
+}
+
+@include mobileQ {
+    .page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
 }

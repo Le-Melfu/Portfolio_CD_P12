@@ -1,3 +1,5 @@
+@import '../../assets/mixins.scss';
+
 .nav-bar {
     display: flex;
     flex-direction: row;
@@ -11,4 +13,13 @@
 .nav-btn {
     text-decoration: none;
     color: white;
+}
+
+@include mobileQ {
+    .nav-bar {
+        flex-direction: column;
+        height: auto;
+        gap: 53px;
+        padding: 20px 0;
+    }
 }
