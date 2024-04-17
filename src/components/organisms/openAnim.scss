@@ -75,6 +75,12 @@
     70% {
         opacity: 1;
     }
+    98% {
+        height: 100%;
+    }
+    99% {
+        height: 0;
+    }
     100% {
         opacity: 0;
         display: none;
