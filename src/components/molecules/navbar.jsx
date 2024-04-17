@@ -3,7 +3,7 @@ import './navbar.scss'
 
 const Navbar = () => {
     const navigate = useNavigate()
-    const handleTouchStart = (link) => {
+    const handleTouchEnd = (link) => {
         navigate(link)
     }
 
@@ -12,35 +12,35 @@ const Navbar = () => {
             <Link
                 to={'/'}
                 className="nav-btn"
-                onTouchStart={() => handleTouchStart('/')}
+                onTouchEnd={() => handleTouchEnd('/')}
             >
-                Home
+                Accueil
             </Link>
             <Link
                 to={'/experiences'}
                 className="nav-btn"
-                onTouchStart={() => handleTouchStart('/experiences')}
+                onTouchEnd={() => handleTouchEnd('/experiences')}
             >
                 Expériences & études
             </Link>
             <Link
                 to={'/projects'}
                 className="nav-btn"
-                onTouchStart={() => handleTouchStart('/projects')}
+                onTouchEnd={() => handleTouchEnd('/projects')}
             >
                 Projets
             </Link>
             <Link
                 to={'/music'}
                 className="nav-btn"
-                onTouchStart={() => handleTouchStart('/music')}
+                onTouchEnd={() => handleTouchEnd('/music')}
             >
                 Musique
             </Link>
             <Link
                 to={'/interests'}
                 className="nav-btn"
-                onTouchStart={() => handleTouchStart('/interests')}
+                onTouchEnd={() => handleTouchEnd('/interests')}
             >
                 Centres d'intérêts
             </Link>

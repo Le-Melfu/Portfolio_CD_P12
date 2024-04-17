@@ -19,7 +19,7 @@ const Carousel = () => {
         <div className="carousel-wrapper">
             <div className="carousel">
                 {slides.map((slide, idx) => (
-                    <div key={`${slide.id}`}>
+                    <div key={`slide-${slide.id}`}>
                         <img
                             className={`slide slide--${
                                 index === idx ? 'display' : 'hide'
@@ -35,15 +35,16 @@ const Carousel = () => {
                 {slides.map((slide, radioIdx) => (
                     <>
                         <label
-                            for={`radio-btn-${slide.id}`}
+                            htmlFor={`radio-btn-${slide.id}`}
                             className="hidden"
                             aria-hidden
+                            key={`label-${slide.id}`}
                         >
                             {slide.alt}
                         </label>
                         <input
                             className="carousel__pagination__radio"
-                            key={`${slide.alt}`}
+                            key={`pagination-${slide.id}`}
                             type="radio"
                             name={`radio-btn-${slide.id}`}
                             id={`radio-btn-${slide.id}`}

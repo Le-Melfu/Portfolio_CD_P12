@@ -14,7 +14,7 @@ const ProjectPage = () => {
 
             {projects
                 .map((project) => (
-                    <Article title={project.title}>
+                    <Article title={project.title} key={project.id}>
                         <div>
                             <div className="article__content--v">
                                 <div>

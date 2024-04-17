@@ -5,7 +5,7 @@ import './aside.scss'
 const Aside = ({ onClick }) => {
     const recentProjects = Array.from(projects.slice(-3))
     const navigate = useNavigate()
-    const handleTouchStart = (link) => {
+    const handleTouchEnd = (link) => {
         navigate(link)
     }
     const handleClick = (project, index) => {
@@ -30,7 +30,7 @@ const Aside = ({ onClick }) => {
             <Link
                 className="link-btn"
                 to="/projects"
-                onTouchStart={() => handleTouchStart('/projects')}
+                onTouchEnd={() => handleTouchEnd('/projects')}
             >
                 Voir +
             </Link>
