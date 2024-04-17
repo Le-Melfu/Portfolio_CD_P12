@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 const ScrolledBanner = ({ children, bannerNum, className }) => {
     gsap.registerPlugin(useGSAP)
     gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.normalizeScroll(true)
 
     useGSAP(() => {
         gsap.set('.banner3d-' + bannerNum, {
