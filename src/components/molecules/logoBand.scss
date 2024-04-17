@@ -1,4 +1,4 @@
-@import '../../assets/variables';
+@import '../../assets/variables', '../../assets/mixins.scss';
 
 .logo-band {
     display: flex;
@@ -15,7 +15,7 @@
     justify-content: center;
     width: 100%;
     max-width: 1440px;
-    padding: 3px;
+    padding: 2px;
     height: 10px;
     overflow: hidden;
 }
@@ -36,5 +36,12 @@
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@include mobileQ {
+    .logo-band {
+        width: 100vw;
+        height: 100px;
     }
 }
