@@ -15,7 +15,7 @@ const Home = () => {
         setSelectedArticle(selectedProject)
         articleAnchor.scrollIntoView({
             behavior: 'smooth',
-            block: 'center',
+            block: 'start',
             inline: 'start',
         })
     }
