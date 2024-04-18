@@ -13,6 +13,11 @@ const Home = () => {
 
     const openArticle = (selectedProject) => {
         setSelectedArticle(selectedProject)
+        articleAnchor.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'start',
+        })
     }
 
     const defaultArticle = {
@@ -34,11 +39,6 @@ const Home = () => {
     const resetClass = async () => {
         setTimeout(async () => {
             await setAnimationClass('')
-            articleAnchor.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'start',
-            })
         }, 1000)
     }
 
