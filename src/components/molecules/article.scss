@@ -1,8 +1,10 @@
 @import '../../assets/variables.scss';
+
 .article {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    flex-wrap: wrap;
+    width: 100%;
     height: fit-content;
     &__title {
         display: flex;

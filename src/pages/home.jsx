@@ -9,10 +9,17 @@ const Home = () => {
     const [selectedArticle, setSelectedArticle] = useState(null)
     const [showArrow, setShowArrow] = useState(false)
     const [animationClass, setAnimationClass] = useState('')
+    const articleAnchor = document.getElementById('article-anchor')
 
     const openArticle = (selectedProject) => {
         setSelectedArticle(selectedProject)
+        articleAnchor.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'start',
+        })
     }
+
     const defaultArticle = {
         title: 'Bienvenue',
         desc: [
@@ -50,7 +57,10 @@ const Home = () => {
         <main>
             <Carousel />
             <div className="content-container">
-                <section className={`articles-container ${animationClass}`}>
+                <section
+                    className={`articles-container ${animationClass}`}
+                    id="article-anchor"
+                >
                     {showArrow && (
                         <i
                             className="fa-solid fa-chevron-left arrow"
@@ -82,7 +92,7 @@ const Home = () => {
                         </div>
                     </Article>
                 </section>
-                <Aside onClick={openArticle} />
+                <Aside onSelectProject={openArticle} />
             </div>
         </main>
     )
