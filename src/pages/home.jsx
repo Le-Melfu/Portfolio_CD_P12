@@ -13,11 +13,6 @@ const Home = () => {
 
     const openArticle = (selectedProject) => {
         setSelectedArticle(selectedProject)
-        articleAnchor.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'start',
-        })
     }
 
     const defaultArticle = {
@@ -51,7 +46,14 @@ const Home = () => {
             resetClass()
             setAnimationClass(`slide-in`)
         }
-    }, [selectedArticle])
+        window.scrollTo({
+            behavior: 'smooth',
+            top:
+                articleAnchor.getBoundingClientRect().top -
+                document.body.getBoundingClientRect().top -
+                50,
+        })
+    }, [selectedArticle, articleAnchor])
 
     return (
         <main>
