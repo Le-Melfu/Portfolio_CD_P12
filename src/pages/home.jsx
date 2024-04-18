@@ -15,6 +15,13 @@ const Home = () => {
         setSelectedArticle(selectedProject)
     }
 
+    const handleAnchor = () => {
+        articleAnchor.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        })
+    }
+
     const defaultArticle = {
         title: 'Bienvenue',
         desc: [
@@ -46,12 +53,7 @@ const Home = () => {
             resetClass()
             setAnimationClass(`slide-in`)
         }
-        articleAnchor.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'start',
-        })
-    }, [selectedArticle, articleAnchor])
+    }, [selectedArticle])
 
     return (
         <main>
@@ -89,7 +91,10 @@ const Home = () => {
                         </div>
                     </Article>
                 </section>
-                <Aside onSelectProject={openArticle} />
+                <Aside
+                    onSelectProject={openArticle}
+                    onClick={() => handleAnchor()}
+                />
             </div>
         </main>
     )
