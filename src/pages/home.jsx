@@ -53,7 +53,7 @@ const Home = () => {
                 document.body.getBoundingClientRect().top -
                 50,
         })
-    }, [selectedArticle, articleAnchor])
+    }, [selectedArticle])
 
     return (
         <main>
