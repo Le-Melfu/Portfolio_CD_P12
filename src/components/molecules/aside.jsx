@@ -1,16 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { projects } from '../../assets/datas'
 import './aside.scss'
 
 const Aside = ({ onClick }) => {
     const recentProjects = Array.from(projects.slice(-3))
-    const navigate = useNavigate()
-    const handleTouchEnd = (link) => {
-        navigate(link)
-    }
     const handleClick = (project, index) => {
         onClick(project, index)
     }
+
     return (
         <aside className="aside">
             <h2 className="aside__title">Projets récents</h2>
@@ -20,18 +17,13 @@ const Aside = ({ onClick }) => {
                         <li
                             key={project.id}
                             onClick={() => handleClick(project)}
-                            onTouchStart={() => handleClick(project)}
                         >
                             {project.title}
                         </li>
                     ))
                     .reverse()}
             </ul>
-            <Link
-                className="link-btn"
-                to="/projects"
-                onTouchEnd={() => handleTouchEnd('/projects')}
-            >
+            <Link className="link-btn" to="/projects">
                 Voir +
             </Link>
         </aside>
