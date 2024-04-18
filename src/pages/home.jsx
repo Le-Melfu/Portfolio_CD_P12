@@ -17,7 +17,6 @@ const Home = () => {
 
     const handleAnchor = () => {
         articleAnchor.scrollIntoView({
-            behavior: 'smooth',
             block: 'start',
         })
     }
@@ -58,8 +57,11 @@ const Home = () => {
     return (
         <main>
             <Carousel />
-            <div className="content-container" id="article-anchor">
-                <section className={`articles-container ${animationClass}`}>
+            <div className="content-container">
+                <section
+                    className={`articles-container ${animationClass}`}
+                    id="article-anchor"
+                >
                     {showArrow && (
                         <i
                             className="fa-solid fa-chevron-left arrow"

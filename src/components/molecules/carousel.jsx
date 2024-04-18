@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './carousel.scss'
 import { slides } from '../../assets/datas'
 
@@ -21,6 +21,7 @@ const Carousel = () => {
                 {slides.map((slide, idx) => (
                     <div key={`slide-${slide.id}`}>
                         <img
+                            key={`slide-image-${slide.id}`}
                             className={`slide slide--${
                                 index === idx ? 'display' : 'hide'
                             }`}
@@ -33,7 +34,7 @@ const Carousel = () => {
 
             <div className="carousel__pagination">
                 {slides.map((slide, radioIdx) => (
-                    <>
+                    <React.Fragment key={`pagination-${slide.id}`}>
                         <label
                             htmlFor={`radio-btn-${slide.id}`}
                             className="hidden"
@@ -51,7 +52,7 @@ const Carousel = () => {
                             checked={index === radioIdx}
                             readOnly
                         />
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
 
