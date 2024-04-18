@@ -46,14 +46,12 @@ const Home = () => {
             resetClass()
             setAnimationClass(`slide-in`)
         }
-        window.scrollTo({
+        articleAnchor.scrollIntoView({
             behavior: 'smooth',
-            top:
-                articleAnchor.getBoundingClientRect().top -
-                document.body.getBoundingClientRect().top -
-                50,
+            block: 'start',
+            inline: 'start',
         })
-    }, [selectedArticle])
+    }, [selectedArticle, articleAnchor])
 
     return (
         <main>
