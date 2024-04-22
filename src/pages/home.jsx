@@ -9,16 +9,17 @@ const Home = () => {
     const [selectedArticle, setSelectedArticle] = useState(null)
     const [showArrow, setShowArrow] = useState(false)
     const [animationClass, setAnimationClass] = useState('')
+
     const articleAnchor = document.getElementById('article-anchor')
-
-    const openArticle = (selectedProject) => {
-        setSelectedArticle(selectedProject)
-    }
-
     const handleAnchor = () => {
         articleAnchor.scrollIntoView({
             block: 'start',
         })
+    }
+
+    const openArticle = (selectedProject) => {
+        setSelectedArticle(selectedProject)
+        handleAnchor()
     }
 
     const defaultArticle = {
@@ -93,10 +94,7 @@ const Home = () => {
                         </div>
                     </Article>
                 </section>
-                <Aside
-                    onSelectProject={openArticle}
-                    onClick={() => handleAnchor()}
-                />
+                <Aside onSelectProject={openArticle} />
             </div>
         </main>
     )
