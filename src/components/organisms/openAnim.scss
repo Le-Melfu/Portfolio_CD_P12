@@ -1,7 +1,7 @@
 @import '../../assets/variables.scss';
 .open-animation {
     &__wrapper {
-        z-index: 2;
+        z-index: 3;
         position: fixed;
         top: 0;
         left: 0;
@@ -71,6 +71,8 @@
     0% {
         display: flex;
         opacity: 1;
+        height: 100%;
+        width: 100%;
     }
     70% {
         opacity: 1;
