@@ -1,6 +1,7 @@
 @import '../assets/mixins.scss';
 
 .interests {
+    display: flex;
     &__cards {
         display: flex;
         flex-direction: row;
@@ -10,12 +11,20 @@
     }
 }
 
+@include tabletQ {
+    .interests__cards {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+}
+
 @include mobileQ {
     .interests__cards {
         flex-direction: column;
         flex-wrap: nowrap;
         justify-content: flex-start;
-        align-items: center;
         gap: 25px;
     }
 }

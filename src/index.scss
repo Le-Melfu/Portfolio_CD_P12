@@ -148,6 +148,10 @@ body {
     flex-direction: column;
     align-items: center;
 }
+header,
+footer {
+    width: 100%;
+}
 
 #root {
     display: flex;
@@ -196,8 +200,8 @@ a {
     height: 100%;
     margin-top: 80px;
     margin-bottom: 100px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 
 .link-btn {
@@ -215,12 +219,16 @@ a {
     background: linear-gradient(0deg, #73cdff 0%, #73cdff 100%);
 }
 
+@include tabletQ {
+    .page {
+        margin-top: 40px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
 @include mobileQ {
     .page {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         margin-top: 40px;
         margin-bottom: 40px;
         padding-left: 25px;

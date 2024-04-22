@@ -27,7 +27,7 @@
     border-radius: 100%;
     padding: 100%;
     background: $main-gradient;
-    animation: rotate 7000ms infinite forwards;
+    animation: rotate 6000ms infinite forwards;
 }
 
 @keyframes rotate {
@@ -41,7 +41,7 @@
 
 @include mobileQ {
     .logo-band {
-        width: 100vw;
+        width: 100%;
         height: 100px;
     }
 }

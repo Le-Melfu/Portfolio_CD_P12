@@ -58,6 +58,13 @@
     }
 }
 
+@include tabletQ {
+    .card3d {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
 @include mobileQ {
     .card3d {
         width: 100%;
