@@ -1,4 +1,4 @@
-@import './assets/mixins.scss';
+@import './assets/mixins.scss', './assets/keyframes.scss';
 
 //CSS Output
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -202,6 +202,7 @@ a {
     margin-bottom: 100px;
     padding-left: 200px;
     padding-right: 200px;
+    animation: fadeIn 600ms ease-in-out forwards;
 }
 
 .link-btn {

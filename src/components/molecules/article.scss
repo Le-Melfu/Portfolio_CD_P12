@@ -1,6 +1,7 @@
 @import '../../assets/variables.scss';
 
 .article {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -39,6 +40,15 @@
         margin-bottom: 20px;
         height: 250px;
     }
+}
+
+.pin {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0px;
+    bottom: 0;
 }
 
 .colorband-v {

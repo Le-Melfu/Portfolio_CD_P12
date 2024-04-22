@@ -2,6 +2,7 @@ import slide1 from '../assets/images/Slideshow-01.jpg'
 import slide2 from '../assets/images/Slideshow-02.jpg'
 import slide3 from '../assets/images/MAO-01.jpg'
 import ridingPic from '../assets/images/riding-cities.jpg'
+import ocProject from '../assets/icons/Logo_OpenClassrooms.png'
 
 export const slides = [
     {
@@ -28,6 +29,8 @@ export const projects = [
         desc: ['Ce projet était une initiation aux bases du HTML et du CSS'],
         image: ridingPic,
         imageAlt: 'Visuel du site',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 2,
@@ -36,6 +39,8 @@ export const projects = [
             `Ce projet consistait en l'élaboration de la page d'accueil d'une agence de location immobilère en utilisant HTML et CSS avec les grid et les flexbox`,
         ],
         url: 'https://github.com/Le-Melfu/booki-starter-code',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 3,
@@ -44,6 +49,8 @@ export const projects = [
             `Ce projet consistait en l'élaboration d'animations simple afin de dynamiser la page d'une application de restauration`,
         ],
         url: 'https://github.com/Le-Melfu/Site_OhMyFood',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 4,
@@ -52,6 +59,8 @@ export const projects = [
             `Ce projet m'a permis d'appréhender les bases de JAVASCRIPT dans la réalisation d'un carousel dynamique`,
         ],
         url: 'https://github.com/Le-Melfu/Print-it-JS',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 5,
@@ -61,6 +70,8 @@ export const projects = [
             `,
         ],
         url: 'https://github.com/Le-Melfu/Portfolio-architecte-sophie-bluel',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 6,
@@ -70,6 +81,8 @@ export const projects = [
             `,
         ],
         url: 'https://github.com/Le-Melfu/Kasa',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 7,
@@ -79,6 +92,8 @@ export const projects = [
             `,
         ],
         url: 'https://github.com/Le-Melfu/ninacarducci.github.io',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
     {
         id: 8,
@@ -89,5 +104,7 @@ export const projects = [
             `J'ai également dù écrire plusieurs tests unitaire et aborder cet aspect du travail de développeur WEB`,
         ],
         url: 'https://github.com/Le-Melfu/Debuggez-une-application-React.JS',
+        pin: ocProject,
+        pinAlt: 'Logo OpenClassRooms',
     },
 ]

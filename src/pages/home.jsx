@@ -56,7 +56,7 @@ const Home = () => {
     }, [selectedArticle])
 
     return (
-        <main>
+        <main className="fade-in">
             <Carousel />
             <div className="content-container">
                 <section

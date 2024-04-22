@@ -28,6 +28,12 @@
     }
 }
 
+@include tabletQ {
+    .aside {
+        width: 60%;
+    }
+}
+
 @include mobileQ {
     .aside {
         width: 60%;

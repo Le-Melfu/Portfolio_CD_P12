@@ -28,10 +28,8 @@
         border: $primary-border-color 1px solid;
         transform: translatez(50px);
         transform-style: preserve-3d;
-        li {
-            font-size: 14px;
-            line-height: 24px;
-        }
+        font-size: 14px;
+        line-height: 24px;
 
         &:before {
             position: absolute;
@@ -63,5 +61,10 @@
     .xp__content {
         width: 80%;
         margin: auto;
+    }
+    @for $i from 1 through 3 {
+        .banner3d-#{$i}-front {
+            padding: 30px;
+        }
     }
 }
