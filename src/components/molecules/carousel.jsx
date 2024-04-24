@@ -34,8 +34,8 @@ const Carousel = () => {
                                     ? 'left'
                                     : 'hide'
                             }`}
-                            srcSet={`${slide.image} 1024w, ${slide.imageMobile} 600w`}
-                            sizes="(max-width: 600px) 600px, 1024px"
+                            srcSet={`${slide.image} 1024w, ${slide.imageTablet} 768w, ${slide.imageMobile} 480w`}
+                            sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 1024px"
                             alt={slide.alt}
                             fetchpriority={idx > 0 ? 'low' : 'high'}
                             loading={idx > 0 ? 'lazy' : ''}
