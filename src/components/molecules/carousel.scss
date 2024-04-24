@@ -35,6 +35,14 @@
         opacity: 1;
         left: 0;
     }
+    &--right {
+        opacity: 0;
+        left: -100%;
+    }
+    &--left {
+        opacity: 0;
+        left: 100%;
+    }
     &--hide {
         opacity: 0;
         left: 100%;

@@ -4,12 +4,15 @@ import { slides } from '../../assets/datas'
 
 const Carousel = () => {
     const [index, setIndex] = useState(0)
+    const [prevIndex, setPrevIndex] = useState(slides.length)
+    const [nextIndex, setNextIndex] = useState(1)
 
     const nextSlide = () => {
-        setTimeout(
-            () => setIndex(index < slides.length - 1 ? index + 1 : 0),
-            7000
-        )
+        setTimeout(() => {
+            setPrevIndex(prevIndex < slides.length - 1 ? prevIndex + 1 : 0)
+            setIndex(index < slides.length - 1 ? index + 1 : 0)
+            setNextIndex(nextIndex < slides.length - 1 ? nextIndex + 1 : 0)
+        }, 9000)
     }
     useEffect(() => {
         nextSlide()
@@ -23,10 +26,19 @@ const Carousel = () => {
                         <img
                             key={`slide-image-${slide.id}`}
                             className={`slide slide--${
-                                index === idx ? 'display' : 'hide'
+                                index === idx
+                                    ? 'display'
+                                    : nextIndex === idx
+                                    ? 'right'
+                                    : prevIndex === idx
+                                    ? 'left'
+                                    : 'hide'
                             }`}
-                            src={slide.image}
+                            srcSet={`${slide.image} 1024w, ${slide.imageMobile} 600w`}
+                            sizes="(max-width: 600px) 600px, 1024px"
                             alt={slide.alt}
+                            fetchpriority={idx > 0 ? 'low' : 'high'}
+                            loading={idx > 0 ? 'lazy' : ''}
                         />
                     </div>
                 ))}

@@ -1,23 +1,29 @@
-import slide1 from '../assets/images/Slideshow-01.jpg'
-import slide2 from '../assets/images/Slideshow-02.jpg'
-import slide3 from '../assets/images/MAO-01.jpg'
-import ridingPic from '../assets/images/riding-cities.jpg'
+import slide1 from '../assets/images/Slideshow-01.webp'
+import slide1Mobile from '../assets/images/mobile/Slideshow-01-mobile.webp'
+import slide2 from '../assets/images/Slideshow-02.webp'
+import slide2Mobile from '../assets/images/mobile/Slideshow-02-mobile.webp'
+import slide3 from '../assets/images/MAO-01.webp'
+import slide3Mobile from '../assets/images/mobile/MAO-01-mobile.webp'
+import ridingPic from '../assets/images/riding-cities.webp'
 import ocProject from '../assets/icons/Logo_OpenClassrooms.png'
 
 export const slides = [
     {
         id: 1,
         image: slide1,
+        imageMobile: slide1Mobile,
         alt: 'Clément Degardenzi jouant de la guitare',
     },
     {
         id: 2,
         image: slide2,
+        imageMobile: slide2Mobile,
         alt: 'Scène de concert',
     },
     {
         id: 3,
         image: slide3,
+        imageMobile: slide3Mobile,
         alt: 'Ordinateur affichant un logiciel de MAO',
     },
 ]
