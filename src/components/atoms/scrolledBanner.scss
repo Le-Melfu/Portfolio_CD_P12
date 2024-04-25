@@ -16,7 +16,7 @@
     .banner3d-#{$i} {
         display: flex;
         width: 100%;
-        perspective: 600px;
+        perspective: 100vh;
         transform-style: preserve-3d;
         margin-bottom: 70px;
     }
@@ -24,7 +24,7 @@
     .banner3d-#{$i}-front {
         width: 100%;
         padding: 60px;
-        background: $primary-bg-color;
+        background: $primary-bg-color fixed;
         border: $primary-border-color 1px solid;
         transform: translatez(50px);
         transform-style: preserve-3d;
@@ -34,11 +34,12 @@
         &:before {
             position: absolute;
             content: '';
+            overflow: hidden;
             width: 100%;
             left: -2px;
-            height: 47px;
+            height: 50px;
             border: $primary-border-color 2px solid;
-            top: -50px;
+            top: -55px;
             transform-origin: center bottom;
             transform: rotatex(90deg);
         }
@@ -50,7 +51,7 @@
             left: -2px;
             height: 50px;
             border: $primary-border-color 2px solid;
-            bottom: -50px;
+            bottom: -55px;
             transform-origin: center top;
             transform: rotatex(-90deg);
         }
