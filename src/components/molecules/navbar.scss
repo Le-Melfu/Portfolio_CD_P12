@@ -35,6 +35,9 @@
             border-bottom: 1px solid $primary-bg-color-light;
         }
     }
+    &-toggle {
+        width: 100%;
+    }
 }
 
 .active {
