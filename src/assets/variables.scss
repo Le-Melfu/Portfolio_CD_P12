@@ -5,7 +5,8 @@ $primary-font-color: white;
 $primary-border-color: #73cdff;
 
 $main-gradient: linear-gradient(90deg, #4b00ea 40%, #73cdff 100%);
-$main-gradient-v: linear-gradient(0deg, #4b00ea 0%, #73cdff 100%);
+$main-gradient-v: linear-gradient(180deg, #4b00ea 0%, #73cdff 100%);
+$main-gradient-reverse: linear-gradient(10deg, #4b00ea 40%, #73cdff 100%);
 
 $mobile-width: 769px;
 $tablet-width: 950px;
