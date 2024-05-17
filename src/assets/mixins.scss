@@ -5,3 +5,9 @@
         @content;
     }
 }
+
+@mixin tabletQ {
+    @media (max-width: $tablet-width) {
+        @content;
+    }
+}

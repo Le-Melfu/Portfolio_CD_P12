@@ -14,7 +14,12 @@ const ProjectPage = () => {
 
             {projects
                 .map((project) => (
-                    <Article title={project.title}>
+                    <Article
+                        title={project.title}
+                        key={project.id}
+                        pin={project.pin}
+                        pinAlt={project.pinAlt}
+                    >
                         <div>
                             <div className="article__content--v">
                                 <div>

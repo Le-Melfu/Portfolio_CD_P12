@@ -35,6 +35,14 @@
         opacity: 1;
         left: 0;
     }
+    &--right {
+        opacity: 0;
+        left: -100%;
+    }
+    &--left {
+        opacity: 0;
+        left: 100%;
+    }
     &--hide {
         opacity: 0;
         left: 100%;
@@ -53,18 +61,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     height: auto;
     padding: 20px;
     font-family: Comfortaa;
     font-size: 35px;
+    line-height: 40px;
     text-transform: uppercase;
     background: $main-gradient;
 }
 
 @include mobileQ {
     .carousel-wrapper {
-        height: 200px;
+        height: 250px;
+        margin-bottom: 0px;
+    }
+    .carousel__pagination {
+        height: 5px;
+        input[type='radio'] {
+            width: 8px;
+        }
     }
     .catch {
         text-align: center;

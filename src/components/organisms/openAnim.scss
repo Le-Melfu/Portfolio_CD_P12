@@ -1,7 +1,7 @@
 @import '../../assets/variables.scss';
 .open-animation {
     &__wrapper {
-        z-index: 2;
+        z-index: 3;
         position: fixed;
         top: 0;
         left: 0;
@@ -11,7 +11,7 @@
         width: 100%;
         height: 100%;
         background: $primary-bg-color;
-        animation: openAnimDisplay 6s forwards;
+        animation: openAnimDisplay 4s forwards;
     }
     &__content {
         position: relative;
@@ -21,7 +21,7 @@
         width: 100%;
         flex-direction: column;
         overflow: hidden;
-        animation: spreadWide 6s forwards;
+        animation: spreadWide 4s forwards;
     }
     &__logo {
         display: flex;
@@ -71,12 +71,19 @@
     0% {
         display: flex;
         opacity: 1;
+        height: 100%;
+        width: 100%;
     }
     70% {
         opacity: 1;
     }
+    99% {
+        height: 100%;
+        width: 100%;
+    }
     100% {
         opacity: 0;
-        display: none;
+        height: 0;
+        width: 0;
     }
 }

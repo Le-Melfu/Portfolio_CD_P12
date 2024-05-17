@@ -1,12 +1,19 @@
-@import '../assets/mixins.scss';
+@import '../assets/mixins.scss', '../assets/keyframes.scss';
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 115px;
+    gap: 50px;
+    margin: 0 100px;
+}
 
 .articles-container {
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 100%;
-    margin: 0 200px;
+    width: 65%;
 }
 
 .slide-in {
@@ -17,51 +24,34 @@
     animation: fadeIn 800ms ease-in-out forwards;
 }
 
-@keyframes slideInFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.content-container {
-    display: grid;
-    grid-template-columns: 65% 35%;
-    padding-bottom: 115px;
-}
-
 .arrow {
     display: flex;
     position: relative;
     width: 24px;
+    height: 24px;
+    top: 50px;
     left: -10px;
     cursor: pointer;
     padding: 20px;
 }
 
-@include mobileQ {
+@include tabletQ {
     .content-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+}
+
+@include mobileQ {
+    .content-container {
+        margin: 0 20px;
         padding-bottom: 60px;
         gap: 60px;
     }
     .articles-container {
+        width: 100%;
         justify-content: center;
     }
 }
