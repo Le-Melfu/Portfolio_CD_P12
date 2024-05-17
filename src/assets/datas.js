@@ -2,6 +2,10 @@ import slide1 from './images/Slideshow-01.jpg'
 import slide2 from './images/Slideshow-02.jpg'
 import slide3 from './images/MAO-01.jpg'
 import ridingPic from './images/riding-cities.jpg'
+import jazzdelune from './music/Au Jazz de Lune (court métrage).mp3'
+import waves from './music/Waves.mp3'
+import looh from './music/locked out of heaven.mp3'
+import summon from './music/Summon the Megalodon.mp3'
 
 export const slides = [
     {
@@ -89,5 +93,32 @@ export const projects = [
             `J'ai également dù écrire plusieurs tests unitaire et aborder cet aspect du travail de développeur WEB`,
         ],
         url: 'https://github.com/Le-Melfu/Debuggez-une-application-React.JS',
+    },
+]
+
+export const musicData = [
+    {
+        id: 1,
+        title: 'Au Jazz de Lune (composition court-métrage)',
+        audioSrc: jazzdelune,
+        duration: '03:21',
+    },
+    {
+        id: 2,
+        title: 'Waves (cover guitare)',
+        audioSrc: waves,
+        duration: '05:11',
+    },
+    {
+        id: 3,
+        title: 'Locked out of heaven (cover basse)',
+        audioSrc: looh,
+        duration: '04:06',
+    },
+    {
+        id: 4,
+        title: 'Summon the Megalodon (cover MAO)',
+        audioSrc: summon,
+        duration: '02:07',
     },
 ]
