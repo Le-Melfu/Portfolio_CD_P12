@@ -1,6 +1,7 @@
 import './player.scss'
 import { musicData } from '../../assets/datas.js'
 import { useEffect, useRef, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 const AudioPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false)
@@ -9,6 +10,8 @@ const AudioPlayer = () => {
     const [selectedSong, setSelectedSong] = useState(null)
     const [volume, setVolume] = useState(1)
     const [volumeCollapsed, setVolumeCollapsed] = useState(true)
+
+    const isMobile = useMediaQuery({ maxWidth: 769 })
 
     const audioRef = useRef(null)
 
@@ -112,28 +115,30 @@ const AudioPlayer = () => {
                     <p>{formatDuration(duration)}</p>
                 </div>
 
-                <div className="audio-player__volume-wrapper">
-                    <input
-                        className={
-                            volumeCollapsed
-                                ? 'audio-player__volume--collapsed'
-                                : 'audio-player__volume'
-                        }
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={volume}
-                        onChange={handleVolumeChange}
-                    />
+                {!isMobile && (
+                    <div className="audio-player__volume-wrapper">
+                        <input
+                            className={
+                                volumeCollapsed
+                                    ? 'audio-player__volume--collapsed'
+                                    : 'audio-player__volume'
+                            }
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={handleVolumeChange}
+                        />
 
-                    <button
-                        onClick={() => handleVolumeCollapsed()}
-                        className="volume-toggle"
-                    >
-                        <i className="fa-solid fa-volume-high audio-player__volume--icon" />
-                    </button>
-                </div>
+                        <button
+                            onClick={() => handleVolumeCollapsed()}
+                            className="volume-toggle"
+                        >
+                            <i className="fa-solid fa-volume-high audio-player__volume--icon" />
+                        </button>
+                    </div>
+                )}
             </div>
 
             <div className="audio-player__selection">
