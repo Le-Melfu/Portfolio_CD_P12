@@ -69,7 +69,9 @@
     }
     &__title {
         display: flex;
-        text-align: left;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 10px 0;
         font-size: 18px;
     }
