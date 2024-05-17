@@ -7,8 +7,14 @@ const AudioPlayer = () => {
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
     const [selectedSong, setSelectedSong] = useState(null)
+    const [volume, setVolume] = useState(1)
+    const [volumeCollapsed, setVolumeCollapsed] = useState(true)
 
     const audioRef = useRef(null)
+
+    const handleVolumeCollapsed = () => {
+        setVolumeCollapsed(!volumeCollapsed)
+    }
 
     const handleSeek = (e) => {
         audioRef.current.currentTime = e.target.value
@@ -18,6 +24,12 @@ const AudioPlayer = () => {
     const handleTimeUpdate = () => {
         setCurrentTime(audioRef.current.currentTime)
         setDuration(audioRef.current.duration)
+    }
+
+    const handleVolumeChange = (e) => {
+        const newVolume = e.target.value
+        audioRef.current.volume = newVolume
+        setVolume(newVolume)
     }
 
     const handlePlay = () => {
@@ -40,6 +52,9 @@ const AudioPlayer = () => {
         handlePause()
         setSelectedSong(value)
         setCurrentTime(0)
+        setTimeout(() => {
+            handlePlay()
+        }, 300)
     }
 
     function formatDuration(durationSeconds) {
@@ -66,11 +81,11 @@ const AudioPlayer = () => {
     return (
         <div className="audio-player">
             <div className="audio-player__current-play">
-                <button onClick={() => handlePlayPause()}>
+                <button className="playbtn" onClick={() => handlePlayPause()}>
                     {isPlaying ? (
-                        <i class="fa-solid fa-pause" />
+                        <i className="fa-solid fa-pause playbtn-i" />
                     ) : (
-                        <i class="fa-solid fa-play" />
+                        <i className="fa-solid fa-play playbtn-i" />
                     )}
                 </button>
                 <span className="audio-player__title">
@@ -96,11 +111,35 @@ const AudioPlayer = () => {
                     <p>{formatDuration(currentTime)}</p>
                     <p>{formatDuration(duration)}</p>
                 </div>
+
+                <div className="audio-player__volume-wrapper">
+                    <input
+                        className={
+                            volumeCollapsed
+                                ? 'audio-player__volume--collapsed'
+                                : 'audio-player__volume'
+                        }
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={volume}
+                        onChange={handleVolumeChange}
+                    />
+
+                    <button
+                        onClick={() => handleVolumeCollapsed()}
+                        className="volume-toggle"
+                    >
+                        <i className="fa-solid fa-volume-high audio-player__volume--icon" />
+                    </button>
+                </div>
             </div>
 
             <div className="audio-player__selection">
                 {musicData.map((song) => (
                     <div
+                        key={song.id}
                         className="audio-player__selection__song"
                         onClick={() => handleSelection(song)}
                     >
