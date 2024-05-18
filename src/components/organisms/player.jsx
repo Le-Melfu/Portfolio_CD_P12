@@ -84,7 +84,11 @@ const AudioPlayer = () => {
     return (
         <div className="audio-player">
             <div className="audio-player__current-play">
-                <button className="playbtn" onClick={() => handlePlayPause()}>
+                <button
+                    aria-label={isPlaying ? 'bouton pause' : 'bouton play'}
+                    className="playbtn"
+                    onClick={() => handlePlayPause()}
+                >
                     {isPlaying ? (
                         <i className="fa-solid fa-pause playbtn-i" />
                     ) : (
@@ -103,6 +107,7 @@ const AudioPlayer = () => {
                     }
                 />
                 <input
+                    aria-label="barre de lecture"
                     className="audio-player__bar"
                     type="range"
                     min="0"
@@ -118,6 +123,7 @@ const AudioPlayer = () => {
                 {!isMobile && (
                     <div className="audio-player__volume-wrapper">
                         <input
+                            aria-label="barre de volume"
                             className={
                                 volumeCollapsed
                                     ? 'audio-player__volume--collapsed'
@@ -134,6 +140,7 @@ const AudioPlayer = () => {
                         <button
                             onClick={() => handleVolumeCollapsed()}
                             className="volume-toggle"
+                            aria-label="Bouton du slider de volume"
                         >
                             <i className="fa-solid fa-volume-high audio-player__volume--icon" />
                         </button>
