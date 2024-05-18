@@ -2,6 +2,8 @@ import jazzdelune from './music/Au Jazz de Lune (court métrage).mp3'
 import waves from './music/Waves.mp3'
 import looh from './music/locked out of heaven.mp3'
 import summon from './music/Summon the Megalodon.mp3'
+import nemo from './music/nemo.mp3'
+import silvera from './music/gojira - silvera.mp3'
 
 import slide1 from '../assets/images/Slideshow-01.webp'
 import slide2 from '../assets/images/Slideshow-02.webp'
@@ -15,7 +17,6 @@ import slide3Mobile from '../assets/images/mobile/MAO-01-mobile.webp'
 
 import ridingPic from '../assets/images/riding-cities.webp'
 import ocProject from '../assets/icons/Logo_OpenClassrooms.png'
-
 
 export const slides = [
     {
@@ -131,26 +132,32 @@ export const projects = [
 export const musicData = [
     {
         id: 1,
-        title: 'Au Jazz de Lune (composition court-métrage)',
+        title: 'Au Jazz de Lune - Clément Degardenzi (composition court-métrage)',
         audioSrc: jazzdelune,
-        duration: '03:21',
     },
     {
         id: 2,
-        title: 'Waves (cover guitare)',
+        title: 'Waves - Guthrie Govan (cover guitare)',
         audioSrc: waves,
-        duration: '05:11',
     },
     {
         id: 3,
-        title: 'Locked out of heaven (cover basse)',
+        title: 'Locked out of heaven - Bruno Mars (cover basse)',
         audioSrc: looh,
-        duration: '04:06',
     },
     {
         id: 4,
-        title: 'Summon the Megalodon (cover MAO)',
+        title: 'Summon the Megalodon - Sea of Thieves (cover MAO)',
         audioSrc: summon,
-        duration: '02:07',
+    },
+    {
+        id: 5,
+        title: 'Nemo - Nightwish (cover guitare)',
+        audioSrc: nemo,
+    },
+    {
+        id: 6,
+        title: 'Silvera - Gojira (cover guitare)',
+        audioSrc: silvera,
     },
 ]
