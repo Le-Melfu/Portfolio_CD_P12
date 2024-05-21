@@ -1,10 +1,28 @@
 import { Link } from 'react-router-dom'
-import { projects } from '../assets/datas'
+// import { projects } from '../assets/datas'
 import Article from '../components/molecules/article'
 import './projectsPage.scss'
 import SectionHeader from '../components/molecules/sectionHeader'
+import { useEffect, useState } from 'react'
 
 const ProjectPage = () => {
+    const [projects, setProjects] = useState([])
+    useEffect(() => {
+        const fetchProjectsData = async () => {
+            try {
+                const response = await fetch(
+                    'http://127.0.0.1:8000/api/projects'
+                )
+                const data = await response.json()
+                setProjects(data)
+            } catch (error) {
+                console.error('Error fetching music data:', error)
+            }
+        }
+
+        fetchProjectsData()
+    }, [])
+
     return (
         <main className="projects page">
             <SectionHeader

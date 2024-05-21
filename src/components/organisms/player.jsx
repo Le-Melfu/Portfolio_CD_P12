@@ -1,5 +1,4 @@
 import './player.scss'
-import { musicData } from '../../assets/datas.js'
 import { useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
@@ -10,6 +9,8 @@ const AudioPlayer = () => {
     const [selectedSong, setSelectedSong] = useState(null)
     const [volume, setVolume] = useState(1)
     const [volumeCollapsed, setVolumeCollapsed] = useState(true)
+    const [musicData, setMusicData] = useState([])
+    const [loading, setLoading] = useState()
 
     const isMobile = useMediaQuery({ maxWidth: 769 })
 
@@ -20,7 +21,7 @@ const AudioPlayer = () => {
     }
 
     const handleSeek = (e) => {
-        audioRef.current.currentTime = e.target.value
+        audioRef.current.currentTime = parseFloat(e.target.value)
         setCurrentTime(e.target.value)
     }
 
@@ -67,100 +68,117 @@ const AudioPlayer = () => {
         return `${minutes}:${formattedSeconds}`
     }
 
+    const handleLoadedMetadata = () => {
+        setDuration(audioRef.current.duration)
+    }
+
     useEffect(() => {
         const currentAudioRef = audioRef.current
         currentAudioRef.addEventListener('timeupdate', handleTimeUpdate)
-        currentAudioRef.addEventListener('loadedmetadata', () => {
-            setDuration(audioRef.current.duration)
-        })
+        currentAudioRef.addEventListener('loadedmetadata', handleLoadedMetadata)
         return () => {
             currentAudioRef.removeEventListener('timeupdate', handleTimeUpdate)
-            currentAudioRef.removeEventListener('loadedmetadata', () => {
-                setDuration(currentAudioRef.duration)
-            })
+            currentAudioRef.removeEventListener(
+                'loadedmetadata',
+                handleLoadedMetadata
+            )
         }
     }, [selectedSong])
 
-    return (
-        <div className="audio-player">
-            <div className="audio-player__current-play">
-                <button
-                    aria-label={isPlaying ? 'bouton pause' : 'bouton play'}
-                    className="playbtn"
-                    onClick={() => handlePlayPause()}
-                >
-                    {isPlaying ? (
-                        <i className="fa-solid fa-pause playbtn-i" />
-                    ) : (
-                        <i className="fa-solid fa-play playbtn-i" />
+    useEffect(() => {
+        const fetchMusicData = async () => {
+            try {
+                setLoading(true)
+                const response = await fetch('http://127.0.0.1:8000/api/music')
+                const data = await response.json()
+                setLoading(false)
+                setMusicData(data)
+                setSelectedSong(data[0])
+            } catch (error) {
+                console.error('Error fetching music data:', error)
+            }
+        }
+
+        fetchMusicData()
+    }, [])
+
+    if (loading) {
+        return <div className="audio-player">Chargement en cours...</div>
+    } else {
+        return (
+            <div className="audio-player">
+                <div className="audio-player__current-play">
+                    <button
+                        aria-label={isPlaying ? 'bouton pause' : 'bouton play'}
+                        className="playbtn"
+                        onClick={() => handlePlayPause()}
+                    >
+                        {isPlaying ? (
+                            <i className="fa-solid fa-pause playbtn-i" />
+                        ) : (
+                            <i className="fa-solid fa-play playbtn-i" />
+                        )}
+                    </button>
+                    <span className="audio-player__title">
+                        {selectedSong?.title}
+                    </span>
+                    <audio ref={audioRef} src={selectedSong?.audioSrc} />
+                    <input
+                        aria-label="barre de lecture"
+                        className="audio-player__bar"
+                        type="range"
+                        min="0"
+                        max={duration}
+                        value={currentTime}
+                        onChange={handleSeek}
+                    />
+                    <div className="audio-player__duration">
+                        <p>{formatDuration(currentTime)}</p>
+                        <p>{formatDuration(duration)}</p>
+                    </div>
+
+                    {!isMobile && (
+                        <div className="audio-player__volume-wrapper">
+                            <input
+                                aria-label="barre de volume"
+                                className={
+                                    volumeCollapsed
+                                        ? 'audio-player__volume--collapsed'
+                                        : 'audio-player__volume'
+                                }
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                value={volume}
+                                onChange={handleVolumeChange}
+                            />
+
+                            <button
+                                onClick={() => handleVolumeCollapsed()}
+                                className="volume-toggle"
+                                aria-label="Bouton du slider de volume"
+                            >
+                                <i className="fa-solid fa-volume-high audio-player__volume--icon" />
+                            </button>
+                        </div>
                     )}
-                </button>
-                <span className="audio-player__title">
-                    {selectedSong ? selectedSong.title : musicData[0].title}
-                </span>
-                <audio
-                    ref={audioRef}
-                    src={
-                        selectedSong
-                            ? selectedSong.audioSrc
-                            : musicData[0].audioSrc
-                    }
-                />
-                <input
-                    aria-label="barre de lecture"
-                    className="audio-player__bar"
-                    type="range"
-                    min="0"
-                    max={duration}
-                    value={currentTime}
-                    onChange={handleSeek}
-                />
-                <div className="audio-player__duration">
-                    <p>{formatDuration(currentTime)}</p>
-                    <p>{formatDuration(duration)}</p>
                 </div>
 
-                {!isMobile && (
-                    <div className="audio-player__volume-wrapper">
-                        <input
-                            aria-label="barre de volume"
-                            className={
-                                volumeCollapsed
-                                    ? 'audio-player__volume--collapsed'
-                                    : 'audio-player__volume'
-                            }
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            value={volume}
-                            onChange={handleVolumeChange}
-                        />
-
-                        <button
-                            onClick={() => handleVolumeCollapsed()}
-                            className="volume-toggle"
-                            aria-label="Bouton du slider de volume"
+                <div className="audio-player__selection">
+                    {musicData.map((song) => (
+                        <div
+                            key={song.id}
+                            className="audio-player__selection__song"
+                            onClick={() => handleSelection(song)}
                         >
-                            <i className="fa-solid fa-volume-high audio-player__volume--icon" />
-                        </button>
-                    </div>
-                )}
+                            <p>{song.title}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-
-            <div className="audio-player__selection">
-                {musicData.map((song) => (
-                    <div
-                        key={song.id}
-                        className="audio-player__selection__song"
-                        onClick={() => handleSelection(song)}
-                    >
-                        <p>{song.title}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default AudioPlayer
