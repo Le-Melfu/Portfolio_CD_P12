@@ -105,6 +105,7 @@ const AudioPlayer = () => {
     useEffect(() => {
         const fetchMusicData = async () => {
             try {
+                setSongLoading(true)
                 setLoading(true)
                 const response = await fetch(URL_API + '/music')
                 const data = await response.json()
@@ -112,6 +113,7 @@ const AudioPlayer = () => {
                 await setMusicData(data)
                 setSelectedSong(data[0])
                 handleAudio(data[0])
+                setSongLoading(false)
             } catch (error) {
                 console.error('Error fetching music data:', error)
             }
