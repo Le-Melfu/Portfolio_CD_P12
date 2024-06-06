@@ -61,9 +61,7 @@ const AudioPlayer = () => {
             const blob = await response.blob()
             const url = URL.createObjectURL(blob)
             setAudioSrc(url)
-        } catch (error) {
-            console.error('Error fetching audio file:', error)
-        }
+        } catch (error) {}
     }
 
     const handleSelection = async (value) => {
@@ -73,9 +71,11 @@ const AudioPlayer = () => {
         setCurrentTime(0)
         await handleAudio(value)
         setSongLoading(false)
-        setTimeout(() => {
-            handlePlay()
-        }, 300)
+        if (!isMobile) {
+            setTimeout(() => {
+                handlePlay()
+            }, 300)
+        }
     }
 
     function formatDuration(durationSeconds) {
