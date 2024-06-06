@@ -16,7 +16,7 @@ const AudioPlayer = () => {
 
     const URL_API = 'https://api.clementdegardenzi.fr/api'
 
-    const isMobile = useMediaQuery({ maxWidth: 769 })
+    const isMobile = useMediaQuery({ maxWidth: 992 })
 
     const audioRef = useRef(null)
 
