@@ -30,9 +30,7 @@
                 transition: all ease-in-out 200ms;
             }
             &:hover {
-                p {
-                    transform: scale(1.05) translateX(20px);
-                }
+                transform: scale(1.03);
             }
         }
     }
