@@ -126,7 +126,11 @@ const AudioPlayer = () => {
                     </span>
                     <audio
                         ref={audioRef}
-                        src={`${URL_API}/audio/${selectedSong?.filename}`}
+                        src={
+                            selectedSong
+                                ? `${URL_API}/audio/${selectedSong?.filename}`
+                                : ''
+                        }
                     />
                     <input
                         aria-label="barre de lecture"
