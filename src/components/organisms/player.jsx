@@ -93,8 +93,8 @@ const AudioPlayer = () => {
                 setLoading(true)
                 const response = await fetch(URL_API + '/music')
                 const data = await response.json()
-                setLoading(false)
-                setMusicData(data)
+                await setLoading(false)
+                await setMusicData(data)
                 setSelectedSong(data[0])
             } catch (error) {
                 console.error('Error fetching music data:', error)
