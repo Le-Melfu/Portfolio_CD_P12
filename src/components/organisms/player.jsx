@@ -12,6 +12,8 @@ const AudioPlayer = () => {
     const [musicData, setMusicData] = useState([])
     const [loading, setLoading] = useState()
 
+    const URL_API = 'https://api.clementdegardenzi.fr/api'
+
     const isMobile = useMediaQuery({ maxWidth: 769 })
 
     const audioRef = useRef(null)
@@ -89,7 +91,7 @@ const AudioPlayer = () => {
         const fetchMusicData = async () => {
             try {
                 setLoading(true)
-                const response = await fetch('http://127.0.0.1:8000/api/music')
+                const response = await fetch(URL_API + '/music')
                 const data = await response.json()
                 setLoading(false)
                 setMusicData(data)
@@ -122,7 +124,10 @@ const AudioPlayer = () => {
                     <span className="audio-player__title">
                         {selectedSong?.title}
                     </span>
-                    <audio ref={audioRef} src={selectedSong?.audioSrc} />
+                    <audio
+                        ref={audioRef}
+                        src={`${URL_API}/audio/${selectedSong?.filename}`}
+                    />
                     <input
                         aria-label="barre de lecture"
                         className="audio-player__bar"
