@@ -7,10 +7,12 @@ const AudioPlayer = () => {
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
     const [selectedSong, setSelectedSong] = useState(null)
+    const [audioSrc, setAudioSrc] = useState(null)
     const [volume, setVolume] = useState(1)
     const [volumeCollapsed, setVolumeCollapsed] = useState(true)
     const [musicData, setMusicData] = useState([])
     const [loading, setLoading] = useState()
+    const [songLoading, setSongLoading] = useState()
 
     const URL_API = 'https://api.clementdegardenzi.fr/api'
 
@@ -53,11 +55,24 @@ const AudioPlayer = () => {
             handlePlay()
         }
     }
+    const handleAudio = async (value) => {
+        try {
+            const response = await fetch(`${URL_API}/audio/${value.filename}`)
+            const blob = await response.blob()
+            const url = URL.createObjectURL(blob)
+            setAudioSrc(url)
+        } catch (error) {
+            console.error('Error fetching audio file:', error)
+        }
+    }
 
-    const handleSelection = (value) => {
+    const handleSelection = async (value) => {
+        setSongLoading(true)
         handlePause()
         setSelectedSong(value)
         setCurrentTime(0)
+        await handleAudio(value)
+        setSongLoading(false)
         setTimeout(() => {
             handlePlay()
         }, 300)
@@ -85,7 +100,7 @@ const AudioPlayer = () => {
                 handleLoadedMetadata
             )
         }
-    }, [selectedSong])
+    }, [audioSrc])
 
     useEffect(() => {
         const fetchMusicData = async () => {
@@ -96,6 +111,7 @@ const AudioPlayer = () => {
                 await setLoading(false)
                 await setMusicData(data)
                 setSelectedSong(data[0])
+                handleAudio(data[0])
             } catch (error) {
                 console.error('Error fetching music data:', error)
             }
@@ -124,14 +140,7 @@ const AudioPlayer = () => {
                     <span className="audio-player__title">
                         {selectedSong?.title}
                     </span>
-                    <audio
-                        ref={audioRef}
-                        src={
-                            selectedSong
-                                ? `${URL_API}/audio/${selectedSong?.filename}`
-                                : ''
-                        }
-                    />
+                    <audio ref={audioRef} src={audioSrc} preload="auto" />
                     <input
                         aria-label="barre de lecture"
                         className="audio-player__bar"
@@ -143,7 +152,11 @@ const AudioPlayer = () => {
                     />
                     <div className="audio-player__duration">
                         <p>{formatDuration(currentTime)}</p>
-                        <p>{formatDuration(duration)}</p>
+                        {songLoading ? (
+                            '...'
+                        ) : (
+                            <p>{formatDuration(duration)}</p>
+                        )}
                     </div>
 
                     {!isMobile && (

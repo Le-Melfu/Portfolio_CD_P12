@@ -1,8 +1,25 @@
 import { Link } from 'react-router-dom'
-import { projects } from '../../assets/datas'
 import './aside.scss'
+import { useEffect, useState } from 'react'
 
 const Aside = ({ onSelectProject }) => {
+    const [projects, setProjects] = useState([])
+    useEffect(() => {
+        const fetchProjectsData = async () => {
+            try {
+                const response = await fetch(
+                    'https://api.clementdegardenzi.fr/api/projects'
+                )
+                const data = await response.json()
+                setProjects(data)
+            } catch (error) {
+                console.error('Error fetching music data:', error)
+            }
+        }
+
+        fetchProjectsData()
+    }, [])
+
     const recentProjects = Array.from(projects.slice(-3))
 
     return (

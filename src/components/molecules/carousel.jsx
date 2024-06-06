@@ -47,14 +47,6 @@ const Carousel = () => {
             <div className="carousel__pagination">
                 {slides.map((slide, radioIdx) => (
                     <React.Fragment key={`pagination-${slide.id}`}>
-                        <label
-                            htmlFor={`radio-btn-${slide.id}`}
-                            className="hidden"
-                            aria-hidden
-                            key={`label-${slide.id}`}
-                        >
-                            {slide.alt}
-                        </label>
                         <input
                             className="carousel__pagination__radio"
                             key={`pagination-${slide.id}`}
@@ -63,6 +55,7 @@ const Carousel = () => {
                             id={`radio-btn-${slide.id}`}
                             checked={index === radioIdx}
                             readOnly
+                            aria-label={slide.alt}
                         />
                     </React.Fragment>
                 ))}
