@@ -3,3 +3,22 @@
         margin-bottom: 50px;
     }
 }
+
+.tech {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.tech-picto {
+    &__container {
+        margin-left: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+    }
+}

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-// import { projects } from '../assets/datas'
 import Article from '../components/molecules/article'
 import './projectsPage.scss'
 import SectionHeader from '../components/molecules/sectionHeader'
@@ -22,7 +21,6 @@ const ProjectPage = () => {
 
         fetchProjectsData()
     }, [])
-
     return (
         <main className="projects page">
             <SectionHeader
@@ -55,14 +53,30 @@ const ProjectPage = () => {
                                     ''
                                 )}
                             </div>
-
-                            {project.url ? (
-                                <Link className="project-link" to={project.url}>
-                                    Voir le site
-                                </Link>
-                            ) : (
-                                ''
-                            )}
+                            <div className="tech">
+                                {project.url ? (
+                                    <Link
+                                        className="project-link"
+                                        to={project.url}
+                                    >
+                                        Voir le site
+                                    </Link>
+                                ) : (
+                                    ''
+                                )}
+                                <div className="tech-picto__container">
+                                    {project.tech
+                                        ? project.tech.map((tech, index) => (
+                                              <img
+                                                  key={index}
+                                                  src={tech.img}
+                                                  alt={tech.alt}
+                                                  className="tech-picto"
+                                              />
+                                          ))
+                                        : ''}
+                                </div>
+                            </div>
                         </div>
                     </Article>
                 ))
