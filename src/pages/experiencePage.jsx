@@ -13,6 +13,7 @@ const ExperiencePage = () => {
                 <ScrolledBanner bannerNum="1">
                     <h3>Formations et diplômes</h3>
                     <ul>
+                        <li>Intégrateur web - OpenClassrooms</li>
                         <li>
                             Musicien Interprète des Musiques Actuelles - EF2M
                             Tourcoing
