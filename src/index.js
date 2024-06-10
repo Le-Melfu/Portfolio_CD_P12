@@ -26,7 +26,7 @@ root.render(
                     <Route path="/projects" element={<ProjectPage />} />
                     <Route path="/music" element={<MusicPage />} />
                     <Route path="/interests" element={<InterestsPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
+                    {/* <Route path="/contact" element={<ContactPage />} /> */}
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </div>
