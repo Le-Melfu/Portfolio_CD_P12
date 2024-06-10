@@ -59,7 +59,7 @@ const ProjectPage = () => {
                                         className="project-link"
                                         to={project.url}
                                     >
-                                        Voir le site
+                                        {project.urlText}
                                     </Link>
                                 ) : (
                                     ''
