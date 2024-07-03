@@ -71,11 +71,11 @@ const AudioPlayer = () => {
         setCurrentTime(0)
         await handleAudio(value)
         setSongLoading(false)
-        if (!isMobile) {
-            setTimeout(() => {
-                handlePlay()
-            }, 300)
-        }
+
+        // Autoplay
+        setTimeout(() => {
+            handlePlay()
+        }, 300)
     }
 
     function formatDuration(durationSeconds) {
