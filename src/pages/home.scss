@@ -1,5 +1,9 @@
 @import '../assets/mixins.scss', '../assets/keyframes.scss';
 
+.home {
+    padding-bottom: 100px;
+    transition: all ease-in-out 300ms;
+}
 .content-container {
     display: flex;
     flex-direction: row;
@@ -17,11 +21,11 @@
 }
 
 .slide-in {
-    animation: slideInFromLeft 800ms ease-in-out forwards;
+    animation: slideInFromLeft 1000ms ease-in-out forwards;
 }
 
 .fade-in {
-    animation: fadeIn 800ms ease-in-out forwards;
+    animation: fadeIn 1000ms ease-in-out forwards;
 }
 
 .arrow {

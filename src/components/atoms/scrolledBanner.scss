@@ -11,6 +11,16 @@
     width: 100%;
     font-size: 14px;
 }
+.banner {
+    &-dark {
+        background: $primary-bg-color;
+        color: white;
+    }
+    &-light {
+        background: white;
+        color: black;
+    }
+}
 
 @for $i from 1 through 3 {
     .banner3d-#{$i} {
@@ -24,7 +34,6 @@
     .banner3d-#{$i}-front {
         width: 100%;
         padding: 60px;
-        background: $primary-bg-color fixed;
         border: $primary-border-color 1px solid;
         transform: translatez(50px);
         transform-style: preserve-3d;

@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './navbar.scss'
 import { useEffect, useState } from 'react'
+import DarkModeBtn from '../atoms/switchModeBtn'
 
 const NavbarMobile = () => {
     const navigate = useNavigate()
@@ -126,6 +127,7 @@ const NavbarMobile = () => {
                         >
                             Centres d'intérêts
                         </li>
+                        <DarkModeBtn />
                         {/* <li
                             onClick={() =>
                                 handleOptionChange({

@@ -3,10 +3,14 @@ import { projects } from '../assets/datas'
 import Article from '../components/molecules/article'
 import './projectsPage.scss'
 import SectionHeader from '../components/molecules/sectionHeader'
+import { useContext } from 'react'
+import { ThemeContext } from '../assets/ThemeContext'
 
 const ProjectPage = () => {
+    const { isDark } = useContext(ThemeContext)
+
     return (
-        <main className="projects page">
+        <main className={`projects page ${isDark ? '' : 'light'}`}>
             <SectionHeader
                 title="Mes Réalisations"
                 desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"

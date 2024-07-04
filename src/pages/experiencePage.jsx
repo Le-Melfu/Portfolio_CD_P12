@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import ScrolledBanner from '../components/atoms/scrolledBanner'
 import SectionHeader from '../components/molecules/sectionHeader'
+import { ThemeContext } from '../assets/ThemeContext'
 
 const ExperiencePage = () => {
+    const { isDark } = useContext(ThemeContext)
+
     return (
-        <main className="xp page">
+        <main className={`xp page ${isDark ? '' : 'light'}`}>
             <SectionHeader
                 title="expériences & études"
                 desc="Organisation, Adaptation, Indépendance, Anglais bilingue, Permis B"
