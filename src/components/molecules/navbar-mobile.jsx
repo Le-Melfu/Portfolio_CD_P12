@@ -49,8 +49,10 @@ const NavbarMobile = () => {
                 >
                     {selectedOption}
                 </div>
+
                 {!isCollapsed && (
                     <ul className="nav-dropdown-menu">
+                        <DarkModeBtn className="slider-mobile" />
                         <li onClick={() => setIsCollapsed(true)}>
                             <i class="fa-solid fa-xmark"></i>
                         </li>
@@ -127,7 +129,7 @@ const NavbarMobile = () => {
                         >
                             Centres d'intérêts
                         </li>
-                        <DarkModeBtn />
+
                         {/* <li
                             onClick={() =>
                                 handleOptionChange({

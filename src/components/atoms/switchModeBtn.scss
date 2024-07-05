@@ -1,11 +1,24 @@
 @import '../../assets/variables.scss';
 
-.toggle-slider {
-    display: flex;
+.slider-desktop {
+    justify-self: flex-end;
+    align-self: center;
+    margin-right: 25px;
+}
+
+.slider-mobile {
     position: absolute;
+    left: calc(50% - 30px);
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 5px;
+}
+
+.toggle-slider {
+    display: block;
+    position: relative;
     width: 60px;
     height: 34px;
-    right: 25px;
     &--center {
         display: flex;
         position: relative;

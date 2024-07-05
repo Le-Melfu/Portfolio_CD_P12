@@ -23,19 +23,21 @@
 .colorband {
     display: flex;
     position: relative;
+    width: 100%;
     top: -300px;
     border-radius: 100%;
     padding: 100%;
-    background: $main-gradient;
-    animation: rotate 6000ms infinite forwards;
+    background: $main-gradient-looped;
+    background-size: 400% 100%;
+    animation: gradientMove 6s linear infinite both;
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
     }
-    to {
-        transform: rotate(360deg);
+    100% {
+        background-position: 88% 50%;
     }
 }
 

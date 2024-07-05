@@ -50,7 +50,7 @@ const Navbar = () => {
                 Contact
             </Link> */}
             </nav>
-            <DarkModeBtn />
+            <DarkModeBtn className="slider-desktop" />
         </div>
     )
 }
