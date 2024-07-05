@@ -7,10 +7,11 @@ const ThemeProvider = ({ children }) => {
 
     useEffect(() => {
         const savedMode = localStorage.getItem('mode')
+        if (savedMode === 'light') {
+            setIsDark(false)
+        }
         if (savedMode === 'dark') {
             setIsDark(true)
-        } else {
-            setIsDark(false)
         }
     }, [])
 
