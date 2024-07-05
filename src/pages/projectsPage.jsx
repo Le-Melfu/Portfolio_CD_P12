@@ -23,6 +23,9 @@ const ProjectPage = () => {
 
         fetchProjectsData()
     }, [])
+
+    const { isDark } = useContext(ThemeContext)
+
     return (
         <main className={`projects page ${isDark ? '' : 'light'}`}>
             <SectionHeader
