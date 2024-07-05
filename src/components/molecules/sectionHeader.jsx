@@ -5,7 +5,7 @@ const SectionHeader = ({ title, desc }) => {
     return (
         <div className="section__header">
             <div className="section__title">
-                <h1>{title}</h1>
+                <h2>{title}</h2>
                 <div className="section__title__colorband"></div>
             </div>
 

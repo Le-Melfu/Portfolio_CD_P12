@@ -3,3 +3,27 @@
         margin-bottom: 50px;
     }
 }
+
+.tech {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    margin: 20px 0;
+}
+
+.tech-picto {
+    transition: all ease-in-out 200ms;
+    &:hover {
+        transform: scale(1.4);
+    }
+    &__container {
+        margin-left: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+    }
+}
