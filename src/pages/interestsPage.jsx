@@ -1,10 +1,14 @@
+import { useContext } from 'react'
 import PopUpCard3D from '../components/molecules/3DPopUpCard'
 import SectionHeader from '../components/molecules/sectionHeader'
 import './interestsPage.scss'
+import { ThemeContext } from '../assets/ThemeContext'
 
 const InterestsPage = () => {
+    const { isDark } = useContext(ThemeContext)
+
     return (
-        <main className="interests page">
+        <main className={`interests page ${isDark ? '' : 'light'}`}>
             <SectionHeader title={`centres d'intérêts`} />
             <div className="interests__cards">
                 <PopUpCard3D

@@ -6,7 +6,7 @@ const OpenAnim = () => {
         <div className="open-animation__wrapper">
             <div className="open-animation__content">
                 <div className="open-animation__logo">
-                    <Logo />
+                    <Logo force="dark" />
                 </div>
                 <div className="open-animation__colorband"></div>
             </div>

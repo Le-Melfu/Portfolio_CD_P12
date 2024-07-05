@@ -4,9 +4,16 @@ $primary-bg-color-light: lighten($primary-bg-color, 5%);
 $primary-font-color: white;
 $primary-border-color: #73cdff;
 
-$main-gradient: linear-gradient(90deg, #4b00ea 40%, #73cdff 100%);
+$main-gradient: linear-gradient(90deg, #4b00ea 40%, #9bdcff 100%);
 $main-gradient-v: linear-gradient(180deg, #4b00ea 0%, #73cdff 100%);
-$main-gradient-reverse: linear-gradient(10deg, #4b00ea 40%, #73cdff 100%);
+$main-gradient-reverse: linear-gradient(90deg, #73cdff 100%, #4b00ea 40%);
+$main-gradient-looped: linear-gradient(
+    90deg,
+    rgba(115, 205, 255, 1) 0%,
+    rgba(75, 0, 234, 1) 33%,
+    rgba(115, 205, 255, 1) 66%,
+    rgba(75, 0, 234, 1) 100%
+);
 
 $mobile-width: 769px;
 $tablet-width: 950px;

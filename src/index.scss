@@ -147,7 +147,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all ease-in-out 300ms;
 }
+
+.light {
+    background: white;
+    font-family: Comfortaa;
+    color: black;
+    animation-name: fadeIn 300ms both;
+
+    a {
+        color: black;
+    }
+}
+
 header,
 footer {
     width: 100%;
@@ -192,17 +205,18 @@ a {
     height: auto;
     padding: 10px;
 }
+
 .page {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-top: 80px;
-    margin-bottom: 100px;
+    padding-top: 80px;
+    padding-bottom: 100px;
     padding-left: 200px;
     padding-right: 200px;
-    animation: fadeIn 600ms ease-in-out forwards;
+    transition: all ease-in-out 300ms;
 }
 
 .link-btn {
@@ -222,7 +236,7 @@ a {
 
 @include tabletQ {
     .page {
-        margin-top: 40px;
+        padding-top: 40px;
         padding-left: 100px;
         padding-right: 100px;
     }
@@ -230,8 +244,8 @@ a {
 
 @include mobileQ {
     .page {
-        margin-top: 40px;
-        margin-bottom: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
         padding-left: 25px;
         padding-right: 25px;
     }

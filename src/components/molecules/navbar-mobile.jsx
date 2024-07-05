@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './navbar.scss'
 import { useEffect, useState } from 'react'
+import DarkModeBtn from '../atoms/switchModeBtn'
 
 const NavbarMobile = () => {
     const navigate = useNavigate()
@@ -48,8 +49,10 @@ const NavbarMobile = () => {
                 >
                     {selectedOption}
                 </div>
+
                 {!isCollapsed && (
                     <ul className="nav-dropdown-menu">
+                        <DarkModeBtn className="slider-mobile" />
                         <li onClick={() => setIsCollapsed(true)}>
                             <i class="fa-solid fa-xmark"></i>
                         </li>
@@ -126,6 +129,7 @@ const NavbarMobile = () => {
                         >
                             Centres d'intérêts
                         </li>
+
                         {/* <li
                             onClick={() =>
                                 handleOptionChange({

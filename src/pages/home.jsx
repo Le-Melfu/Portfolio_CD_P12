@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Article from '../components/molecules/article'
 import Aside from '../components/molecules/aside'
 import Carousel from '../components/molecules/carousel'
 import './home.scss'
 import { Link } from 'react-router-dom'
+import { ThemeContext } from '../assets/ThemeContext'
 
 const Home = () => {
     const [selectedArticle, setSelectedArticle] = useState(null)
     const [showArrow, setShowArrow] = useState(false)
     const [animationClass, setAnimationClass] = useState('')
+    const { isDark } = useContext(ThemeContext)
 
     const articleAnchor = document.getElementById('article-anchor')
     const handleAnchor = () => {
@@ -56,7 +58,7 @@ const Home = () => {
     }, [selectedArticle])
 
     return (
-        <main className="fade-in">
+        <main className={`home fade-in ${isDark ? '' : 'light'}`}>
             <Carousel />
             <div className="content-container">
                 <section
