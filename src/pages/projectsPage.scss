@@ -15,9 +15,7 @@
 
 .tech-picto {
     transition: all ease-in-out 200ms;
-    &:hover {
-        transform: scale(1.4);
-    }
+
     &__container {
         margin-left: 10px;
         display: flex;
