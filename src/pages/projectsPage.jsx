@@ -5,9 +5,11 @@ import SectionHeader from '../components/molecules/sectionHeader'
 import { useContext } from 'react'
 import { ThemeContext } from '../assets/ThemeContext'
 import { useEffect, useState } from 'react'
+import ArticleCarousel from '../components/molecules/articleCarousel'
 
 const ProjectPage = () => {
     const [projects, setProjects] = useState([])
+
     useEffect(() => {
         const fetchProjectsData = async () => {
             try {
@@ -16,6 +18,7 @@ const ProjectPage = () => {
                 )
                 const data = await response.json()
                 setProjects(data)
+                console.log(data)
             } catch (error) {
                 console.error('Error fetching music data:', error)
             }
@@ -48,14 +51,9 @@ const ProjectPage = () => {
                                         <p key={index}>{p}</p>
                                     ))}
                                 </div>
-                                {project.image ? (
-                                    <img
-                                        className="article__image"
-                                        src={project.image}
-                                        alt={project.imageAlt}
-                                    />
-                                ) : (
-                                    ''
+
+                                {project.medias && (
+                                    <ArticleCarousel project={project} />
                                 )}
                             </div>
                             <div className="tech">
