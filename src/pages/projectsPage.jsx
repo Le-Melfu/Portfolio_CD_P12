@@ -9,7 +9,8 @@ import ArticleCarousel from '../components/molecules/articleCarousel'
 
 const ProjectPage = () => {
     const [projects, setProjects] = useState([])
-
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [currentModalContent, setCurrentModalContant] = useState()
     useEffect(() => {
         const fetchProjectsData = async () => {
             try {
@@ -29,8 +30,43 @@ const ProjectPage = () => {
 
     const { isDark } = useContext(ThemeContext)
 
+    const openModal = () => {
+        setModalIsOpen(true)
+    }
+    const closeModal = () => {
+        setModalIsOpen(false)
+    }
+    const modalContentSelection = (project) => {
+        setCurrentModalContant(project)
+    }
+    const modalContentClear = () => {
+        setCurrentModalContant({})
+    }
     return (
         <main className={`projects page ${isDark ? '' : 'light'}`}>
+            {modalIsOpen && (
+                <div className="article__image-modal">
+                    <div
+                        className="article__image-modal-bg"
+                        onClick={closeModal}
+                    ></div>
+                    <div className="article__image-modal-content">
+                        {currentModalContent && (
+                            <>
+                                <i
+                                    class="fa-solid fa-circle-xmark modal-close-btn"
+                                    onClick={closeModal}
+                                ></i>
+                                <ArticleCarousel
+                                    project={currentModalContent}
+                                    openModal={closeModal}
+                                    modalContentSelection={modalContentClear}
+                                />
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
             <SectionHeader
                 title="Mes Réalisations"
                 desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
@@ -53,7 +89,13 @@ const ProjectPage = () => {
                                 </div>
 
                                 {project.medias && (
-                                    <ArticleCarousel project={project} />
+                                    <ArticleCarousel
+                                        project={project}
+                                        openModal={openModal}
+                                        modalContentSelection={
+                                            modalContentSelection
+                                        }
+                                    />
                                 )}
                             </div>
                             <div className="tech">

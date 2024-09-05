@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './article.scss'
 
-const ArticleCarousel = ({ project }) => {
+const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const totalImages = project.medias?.images?.length || 0
 
@@ -16,6 +16,11 @@ const ArticleCarousel = ({ project }) => {
 
     const handlePrevImage = () => {
         setCurrentImageIndex(getPreviousImageIndex())
+    }
+
+    const openModalWithContent = async (project) => {
+        await modalContentSelection(project)
+        openModal()
     }
 
     return (
@@ -50,10 +55,11 @@ const ArticleCarousel = ({ project }) => {
                             ? 'article__image-previous'
                             : index === getNextImageIndex()
                             ? 'article__image-next'
-                            : ''
+                            : 'article__image-unselected'
                     }`}
                     src={image.image}
                     alt={image.alternativeText}
+                    onClick={() => openModalWithContent(project)}
                 />
             ))}
         </div>
