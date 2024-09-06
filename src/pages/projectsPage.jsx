@@ -53,7 +53,7 @@ const ProjectPage = () => {
                     ></div>
                     <div className="article__image-modal-content">
                         {currentModalContent && (
-                            <div>
+                            <>
                                 <i
                                     class="fa-solid fa-circle-xmark modal-close-btn"
                                     onClick={closeModal}
@@ -63,7 +63,7 @@ const ProjectPage = () => {
                                     openModal={closeModal}
                                     modalContentSelection={modalContentClear}
                                 />
-                            </div>
+                            </>
                         )}
                     </div>
                 </div>
