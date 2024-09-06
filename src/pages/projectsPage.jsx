@@ -43,6 +43,7 @@ const ProjectPage = () => {
         setCurrentModalContant({})
     }
     const modalLimit = useMediaQuery({ maxWidth: 768 })
+
     return (
         <main className={`projects page ${isDark ? '' : 'light'}`}>
             {modalIsOpen && !modalLimit && (

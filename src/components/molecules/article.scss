@@ -1,4 +1,4 @@
-@import '../../assets/variables.scss';
+@import '../../assets/variables.scss', '../../assets/mixins.scss';
 
 .article {
     position: relative;
@@ -44,7 +44,7 @@
         height: 250px;
         width: 80%;
         overflow: hidden;
-        margin: 0 auto; /* Centrer la div du carousel */
+        margin: 0 auto;
 
         .carousel-button {
             position: absolute;
@@ -226,4 +226,49 @@
     width: 5px;
     padding: 0 2px;
     background: $main-gradient-v;
+}
+
+@include mobileQ {
+    .article {
+        &__image-container {
+            margin-top: 20px;
+            aspect-ratio: 1/1;
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        &__image {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            position: absolute;
+            margin: 20px 0;
+
+            max-height: 100%;
+            max-width: 100%;
+            &-center {
+                top: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 1;
+                z-index: 2;
+            }
+            &-previous {
+                top: 0;
+                left: 0;
+                transform: translate(-50%, -50%) scale(0.4);
+                opacity: 0;
+            }
+            &-next {
+                top: 0;
+                left: 100%;
+                transform: translate(-50%, -50%) scale(0.4);
+                opacity: 0;
+            }
+            &-unselected {
+                bottom: -400%;
+                opacity: 0;
+            }
+        }
+    }
 }
