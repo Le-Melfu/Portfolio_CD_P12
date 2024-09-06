@@ -45,7 +45,14 @@
         width: 80%;
         overflow: hidden;
         margin: 0 auto;
-
+        video {
+            display: flex;
+            justify-self: center;
+            align-self: center;
+            max-width: 100%;
+            height: auto;
+            margin: 40px auto;
+        }
         .carousel-button {
             position: absolute;
             bottom: 50%;
@@ -80,6 +87,7 @@
         object-fit: fill;
         transition: all 0.3s ease-in;
         opacity: 0;
+
         &-center {
             top: -25px;
             opacity: 1;
@@ -237,6 +245,14 @@
             width: 100%;
             overflow: hidden;
             margin: 0 auto;
+            video {
+                display: flex;
+                justify-self: center;
+                align-self: center;
+                width: 100%;
+                height: auto;
+                margin: 40px auto;
+            }
         }
         &__image {
             top: 0;
@@ -244,7 +260,6 @@
             transform: translateX(-50%);
             position: absolute;
             margin: 20px 0;
-
             max-height: 100%;
             max-width: 100%;
             &-center {

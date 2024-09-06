@@ -2,21 +2,21 @@ import { useState } from 'react'
 import './article.scss'
 
 const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
-    const totalImages = project.medias?.images?.length || 0
+    const [currentIndex, setCurrentIndex] = useState(0)
 
-    // Calculate indices for the current, previous, and next images
-    const getPreviousImageIndex = () =>
-        (currentImageIndex - 1 + totalImages) % totalImages
-    const getNextImageIndex = () => (currentImageIndex + 1) % totalImages
+    // Combine videos and images, placing videos first
+    const mediaItems = [
+        ...(project.medias?.videos || []),
+        ...(project.medias?.images || []),
+    ]
 
-    const handleNextImage = () => {
-        setCurrentImageIndex(getNextImageIndex())
-    }
+    const totalItems = mediaItems.length
 
-    const handlePrevImage = () => {
-        setCurrentImageIndex(getPreviousImageIndex())
-    }
+    const getPreviousIndex = () => (currentIndex - 1 + totalItems) % totalItems
+    const getNextIndex = () => (currentIndex + 1) % totalItems
+
+    const handleNext = () => setCurrentIndex(getNextIndex())
+    const handlePrev = () => setCurrentIndex(getPreviousIndex())
 
     const openModalWithContent = async (project) => {
         await modalContentSelection(project)
@@ -25,43 +25,63 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
 
     return (
         <div className="article__image-container">
-            {project.medias?.images?.length > 1 && (
+            {totalItems > 1 && (
                 <>
                     <button
                         className="carousel-button left"
-                        onClick={() =>
-                            handlePrevImage(project.medias.images.length)
-                        }
+                        onClick={handlePrev}
                     >
                         &#8249;
                     </button>
                     <button
                         className="carousel-button right"
-                        onClick={() =>
-                            handleNextImage(project.medias.images.length)
-                        }
+                        onClick={handleNext}
                     >
                         &#8250;
                     </button>
                 </>
             )}
-            {project.medias?.images?.map((image, index) => (
-                <img
-                    key={index}
-                    className={`article__image ${
-                        index === currentImageIndex
-                            ? 'article__image-center'
-                            : index === getPreviousImageIndex()
-                            ? 'article__image-previous'
-                            : index === getNextImageIndex()
-                            ? 'article__image-next'
-                            : 'article__image-unselected'
-                    }`}
-                    src={image.image}
-                    alt={image.alternativeText}
-                    onClick={() => openModalWithContent(project)}
-                />
-            ))}
+
+            {mediaItems.map((item, index) =>
+                item.image ? (
+                    // Render image if it's an image
+                    <img
+                        key={index}
+                        className={`article__image ${
+                            index === currentIndex
+                                ? 'article__image-center'
+                                : index === getPreviousIndex()
+                                ? 'article__image-previous'
+                                : index === getNextIndex()
+                                ? 'article__image-next'
+                                : 'article__image-unselected'
+                        }`}
+                        src={item.image}
+                        alt={item.alternativeText}
+                        onClick={() => openModalWithContent(project)}
+                    />
+                ) : (
+                    // Render video if it's a video
+                    <video
+                        key={index}
+                        className={`article__image ${
+                            index === currentIndex
+                                ? 'article__image-center'
+                                : index === getPreviousIndex()
+                                ? 'article__image-previous'
+                                : index === getNextIndex()
+                                ? 'article__image-next'
+                                : 'article__image-unselected'
+                        }`}
+                        controls
+                        controlsList="nodownload nofullscreen"
+                        muted
+                        onClick={() => openModalWithContent(project)}
+                    >
+                        <source src={item.url} type="video/mp4" />
+                    </video>
+                )
+            )}
         </div>
     )
 }
