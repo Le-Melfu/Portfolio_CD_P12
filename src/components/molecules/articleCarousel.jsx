@@ -44,7 +44,6 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
 
             {mediaItems.map((item, index) =>
                 item.image ? (
-                    // Render image if it's an image
                     <img
                         key={index}
                         className={`article__image ${
@@ -61,7 +60,6 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                         onClick={() => openModalWithContent(project)}
                     />
                 ) : (
-                    // Render video if it's a video
                     <video
                         key={index}
                         className={`article__image ${

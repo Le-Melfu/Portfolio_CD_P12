@@ -45,6 +45,7 @@
         width: 80%;
         overflow: hidden;
         margin: 0 auto;
+
         video {
             display: flex;
             justify-self: center;
@@ -52,6 +53,7 @@
             max-width: 100%;
             height: auto;
             margin: 40px auto;
+            background-color: $primary-bg-color-light;
         }
         .carousel-button {
             position: absolute;
@@ -80,14 +82,15 @@
         left: 50%;
         transform: translateX(-50%);
         position: absolute;
-        margin-top: 50px;
-        margin-bottom: 20px;
+        margin: 30px auto;
         max-height: 100%;
         max-width: 500px;
         object-fit: fill;
         transition: all 0.3s ease-in;
         opacity: 0;
-
+        &:hover {
+            cursor: url('../../assets/icons/cursor/fullscreen.png'), auto;
+        }
         &-center {
             top: -25px;
             opacity: 1;
@@ -140,7 +143,7 @@
             }
             .article__image {
                 position: absolute;
-                top: 20%;
+                top: 0;
                 left: 50%;
                 transform: translateX(-50%);
                 max-height: 90%;
@@ -149,18 +152,15 @@
                 transition: all 0.5s ease-in-out;
                 opacity: 0;
                 &-center {
-                    top: -25px;
                     opacity: 1;
                     z-index: 2;
                 }
                 &-previous {
-                    top: 0;
                     left: 0;
                     transform: translateX(-50%) scale(0.4);
                     opacity: 0.5;
                 }
                 &-next {
-                    top: 0;
                     left: 100%;
                     transform: translateX(-50%) scale(0.4);
                     opacity: 0.5;
@@ -168,6 +168,9 @@
                 &-unselected {
                     bottom: -400%;
                     opacity: 0;
+                }
+                &:hover {
+                    cursor: default;
                 }
             }
             .article__image-container {

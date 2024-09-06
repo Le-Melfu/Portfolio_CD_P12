@@ -164,7 +164,10 @@ a {
     color: white;
 }
 
-header,
+header {
+    width: 100%;
+}
+
 footer {
     width: 100%;
 }
@@ -246,6 +249,28 @@ a {
 }
 
 @include mobileQ {
+    header {
+        position: fixed;
+        top: 0;
+        z-index: 8;
+        width: 100%;
+        background: $primary-bg-color;
+        color: white;
+    }
+
+    .light {
+        header {
+            position: fixed;
+            top: 0;
+            z-index: 8;
+            width: 100%;
+            background: white;
+            color: black;
+        }
+    }
+    .main-container {
+        margin-top: 164px;
+    }
     .page {
         padding-top: 40px;
         padding-bottom: 40px;
