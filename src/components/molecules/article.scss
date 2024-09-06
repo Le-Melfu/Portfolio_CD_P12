@@ -55,7 +55,7 @@
             border: none;
             padding: 10px;
             cursor: pointer;
-            z-index: 2;
+            z-index: 3;
         }
 
         .carousel-button.left {
@@ -75,7 +75,7 @@
         position: absolute;
         margin-top: 50px;
         margin-bottom: 20px;
-        max-height: 300px;
+        max-height: 100%;
         max-width: 500px;
         object-fit: fill;
         transition: all 0.3s ease-in;
@@ -102,7 +102,7 @@
             opacity: 0;
         }
         &-modal {
-            z-index: 3;
+            z-index: 4;
             position: fixed;
             display: flex;
             justify-content: center;
@@ -118,8 +118,8 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background-color: white;
-                opacity: 0.3;
+                background-color: black;
+                opacity: 0.4;
             }
             &-content {
                 display: flex;
@@ -169,7 +169,7 @@
                 justify-self: center;
                 align-items: center;
                 margin-top: 0px;
-                height: 90vh;
+                min-height: 600px;
                 max-height: 800px;
                 width: 100%;
                 overflow: hidden;

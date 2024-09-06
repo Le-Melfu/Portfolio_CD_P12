@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '../assets/ThemeContext'
 import { useEffect, useState } from 'react'
 import ArticleCarousel from '../components/molecules/articleCarousel'
+import { useMediaQuery } from 'react-responsive'
 
 const ProjectPage = () => {
     const [projects, setProjects] = useState([])
@@ -19,7 +20,6 @@ const ProjectPage = () => {
                 )
                 const data = await response.json()
                 setProjects(data)
-                console.log(data)
             } catch (error) {
                 console.error('Error fetching music data:', error)
             }
@@ -42,9 +42,10 @@ const ProjectPage = () => {
     const modalContentClear = () => {
         setCurrentModalContant({})
     }
+    const modalLimit = useMediaQuery({ maxWidth: 768 })
     return (
         <main className={`projects page ${isDark ? '' : 'light'}`}>
-            {modalIsOpen && (
+            {modalIsOpen & !modalLimit && (
                 <div className="article__image-modal">
                     <div
                         className="article__image-modal-bg"
@@ -52,7 +53,7 @@ const ProjectPage = () => {
                     ></div>
                     <div className="article__image-modal-content">
                         {currentModalContent && (
-                            <>
+                            <div>
                                 <i
                                     class="fa-solid fa-circle-xmark modal-close-btn"
                                     onClick={closeModal}
@@ -62,7 +63,7 @@ const ProjectPage = () => {
                                     openModal={closeModal}
                                     modalContentSelection={modalContentClear}
                                 />
-                            </>
+                            </div>
                         )}
                     </div>
                 </div>
