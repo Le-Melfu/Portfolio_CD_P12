@@ -97,16 +97,16 @@
         }
         &-previous {
             left: 0;
-            transform: translateX(-50%) scale(0.4);
+            transform: translateX(-50%) translateY(-20%) scale(0.4);
             opacity: 0.5;
         }
         &-next {
             left: 100%;
-            transform: translateX(-50%) scale(0.4);
+            transform: translateX(-50%) translateY(-20%) scale(0.4);
             opacity: 0.5;
         }
         &-unselected {
-            top: 400%;
+            top: 200%;
             opacity: 0;
         }
         &-modal {
@@ -155,12 +155,12 @@
                 }
                 &-previous {
                     left: 0;
-                    transform: translateX(-50%) scale(0.4);
+                    transform: translateX(-50%) translateY(-20%) scale(0.3);
                     opacity: 0.5;
                 }
                 &-next {
                     left: 100%;
-                    transform: translateX(-50%) scale(0.4);
+                    transform: translateX(-50%) translateY(-20%) scale(0.3);
                     opacity: 0.5;
                 }
                 &-unselected {
