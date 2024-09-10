@@ -10,19 +10,20 @@ import { useMediaQuery } from 'react-responsive'
 
 const ProjectPage = () => {
     const [projects, setProjects] = useState([])
+    const [loading, setLoading] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [currentModalContent, setCurrentModalContant] = useState()
     useEffect(() => {
         const fetchProjectsData = async () => {
             try {
+                setLoading(true)
                 const response = await fetch(
                     'https://api.clementdegardenzi.fr/api/projects'
                 )
                 const data = await response.json()
                 setProjects(data)
-            } catch (error) {
-                console.error('Error fetching music data:', error)
-            }
+                setLoading(false)
+            } catch (error) {}
         }
 
         fetchProjectsData()
@@ -73,7 +74,7 @@ const ProjectPage = () => {
                 title="Mes Réalisations"
                 desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
             />
-
+            {loading ? <p>Chargement en cours...</p> : ''}
             {projects
                 .map((project) => (
                     <Article

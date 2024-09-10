@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react'
 
 const Aside = ({ onSelectProject }) => {
     const [projects, setProjects] = useState([])
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const fetchProjectsData = async () => {
             try {
+                setLoading(true)
                 const response = await fetch(
                     'https://api.clementdegardenzi.fr/api/projects'
                 )
                 const data = await response.json()
                 setProjects(data)
+                setLoading(false)
             } catch (error) {
                 console.error('Error fetching music data:', error)
             }
@@ -26,6 +29,7 @@ const Aside = ({ onSelectProject }) => {
         <aside className="aside">
             <h2 className="aside__title">Projets récents</h2>
             <ul className="aside__list">
+                {loading ? <p>Chargement...</p> : ''}
                 {recentProjects
                     .map((project) => (
                         <li
