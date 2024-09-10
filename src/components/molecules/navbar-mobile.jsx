@@ -48,6 +48,9 @@ const NavbarMobile = () => {
                     onClick={() => setIsCollapsed(!isCollapsed)}
                 >
                     {selectedOption}
+                    {isCollapsed && (
+                        <i className="fa-solid fa-chevron-down"></i>
+                    )}
                 </div>
 
                 {!isCollapsed && (
