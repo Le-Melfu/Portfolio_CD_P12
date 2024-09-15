@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import ScrolledBanner from '../components/atoms/scrolledBanner'
 import SectionHeader from '../components/molecules/sectionHeader'
 import { ThemeContext } from '../assets/ThemeContext'
+import './experiencePage.scss'
+import { Link } from 'react-router-dom'
 
 const ExperiencePage = () => {
     const { isDark } = useContext(ThemeContext)
@@ -33,25 +35,50 @@ const ExperiencePage = () => {
                 <ScrolledBanner bannerNum="2" className="align-right">
                     <h3>Compétences</h3>
                     <ul>
-                        <li>HTML/CSS</li>
-                        <li>JAVASCRIPT</li>
-                        <li>REACT</li>
-                        <li>REDUX</li>
+                        <h4 className="skill-list-title">Hard Skills</h4>
+                        <li>HTML, CSS, JAVASCRIPT</li>
+                        <li>REACT, REDUX</li>
+                        <li>SCSS, Animations CSS</li>
+                        <li>Rédaction de tests unitaires</li>
+                        <li>Rédaction de spécifications techniques</li>
                         <li>
-                            Musique (Guitare, chant, batterie, basse, piano,
-                            MAO)
+                            Musique (Guitare, chant, batterie, basse, piano,MAO)
                         </li>
+                        <li>Gestion de projet agile</li>
+                    </ul>
+                    <ul>
+                        <h4 className="skill-list-title">Soft Skills</h4>
+                        <li>Autonomie</li>
+                        <li>Travail d'équipe</li>
+                        <li>Communication</li>
+                        <li>Sens de l'organisation</li>
+                        <li>Prise d'initiative</li>
+                        <li>Soif d'apprendre</li>
+                        <li>Pensée en arborescence (Mind Mapping)</li>
                     </ul>
                 </ScrolledBanner>
                 <ScrolledBanner bannerNum="3">
                     <h3>Expériences</h3>
                     <ul>
+                        <li>Mes Projets de formation, 2023-2024</li>
                         <li>
-                            Guitariste/Soliste pour FIREFLIES, BRAVE THE LIGHT,
-                            BEEZTOFLY
+                            Musicien Professionel (Plusieurs formations dans le
+                            Nord), 2010-2023
                         </li>
-                        <li>Assistant d’éducation - Lycée Colbert Tourcoing</li>
-                        <li>Employé polyvalent - NOZ Cournon-d’Auvergne</li>
+                        <li>
+                            Cuisinier Préparateur, OhCanada Foodtruck, 2020-2021
+                        </li>
+                        <li>
+                            Assistant d’éducation - Lycée Colbert, Tourcoing,
+                            2017-2019
+                        </li>
+                        <li>
+                            Employé polyvalent - NOZ, Cournon-d’Auvergne, 2015
+                        </li>
+
+                        <li>
+                            Serveur - Le Bistrot du Coin, Tournai, 2010-2012
+                        </li>
                     </ul>
                 </ScrolledBanner>
             </div>

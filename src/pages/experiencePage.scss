@@ -7,3 +7,29 @@
         width: 100%;
     }
 }
+.banner ul {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.banner li {
+    margin-bottom: 5px;
+}
+
+.link-btn-li {
+    margin-left: 20px;
+}
+
+.banner h3 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.skill-list-title {
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    justify-self: flex-end;
+    text-align: end;
+}
