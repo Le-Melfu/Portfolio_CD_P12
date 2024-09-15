@@ -3,7 +3,6 @@ import ScrolledBanner from '../components/atoms/scrolledBanner'
 import SectionHeader from '../components/molecules/sectionHeader'
 import { ThemeContext } from '../assets/ThemeContext'
 import './experiencePage.scss'
-import { Link } from 'react-router-dom'
 
 const ExperiencePage = () => {
     const { isDark } = useContext(ThemeContext)
