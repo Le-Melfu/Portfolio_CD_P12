@@ -1,28 +1,10 @@
 import { Link } from 'react-router-dom'
 import './aside.scss'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { ProjectsContext } from '../../assets/projectContext'
 
 const Aside = ({ onSelectProject }) => {
-    const [projects, setProjects] = useState([])
-    const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        const fetchProjectsData = async () => {
-            try {
-                setLoading(true)
-                const response = await fetch(
-                    'https://api.clementdegardenzi.fr/api/projects'
-                )
-                const data = await response.json()
-                setProjects(data)
-                setLoading(false)
-            } catch (error) {
-                console.error('Error fetching music data:', error)
-            }
-        }
-
-        fetchProjectsData()
-    }, [])
-
+    const { projects, loading } = useContext(ProjectsContext)
     const recentProjects = Array.from(projects.slice(-3))
 
     return (

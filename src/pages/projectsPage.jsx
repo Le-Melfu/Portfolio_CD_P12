@@ -3,30 +3,15 @@ import './projectsPage.scss'
 import SectionHeader from '../components/molecules/sectionHeader'
 import { useContext } from 'react'
 import { ThemeContext } from '../assets/ThemeContext'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ArticleCarousel from '../components/molecules/articleCarousel'
 import { useMediaQuery } from 'react-responsive'
+import { ProjectsContext } from '../assets/projectContext'
 
 const ProjectPage = () => {
-    const [projects, setProjects] = useState([])
-    const [loading, setLoading] = useState(false)
+    const { projects, loading } = useContext(ProjectsContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [currentModalContent, setCurrentModalContant] = useState()
-    useEffect(() => {
-        const fetchProjectsData = async () => {
-            try {
-                setLoading(true)
-                const response = await fetch(
-                    'https://api.clementdegardenzi.fr/api/projects'
-                )
-                const data = await response.json()
-                setProjects(data)
-                setLoading(false)
-            } catch (error) {}
-        }
-
-        fetchProjectsData()
-    }, [])
 
     const { isDark } = useContext(ThemeContext)
 
