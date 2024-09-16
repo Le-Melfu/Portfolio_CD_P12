@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Article from '../components/molecules/article'
 import './projectsPage.scss'
 import SectionHeader from '../components/molecules/sectionHeader'
@@ -103,12 +102,14 @@ const ProjectPage = () => {
                             </div>
                             <div className="tech">
                                 {project.url ? (
-                                    <Link
+                                    <a
                                         className="project-link"
-                                        to={project.url}
+                                        href={project.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {project.urlText}
-                                    </Link>
+                                    </a>
                                 ) : (
                                     ''
                                 )}

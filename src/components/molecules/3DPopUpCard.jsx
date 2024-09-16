@@ -15,13 +15,15 @@ const PopUpCard3D = (props) => {
             <h3>{props.title}</h3>
             <p>{props.content}</p>
             {props.link ? (
-                <Link
+                <a
                     className="link-btn"
-                    to={props.link}
+                    href={props.link}
                     onTouchStart={() => handleTouchStart(props.link)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                     Voir la page
-                </Link>
+                </a>
             ) : (
                 ''
             )}

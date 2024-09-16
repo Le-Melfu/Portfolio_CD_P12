@@ -11,7 +11,7 @@ const ScrolledBanner = ({ children, bannerNum, className }) => {
 
     useGSAP(() => {
         gsap.set('.banner3d-' + bannerNum, {
-            perspectiveOrigin: 'center -200vh',
+            perspectiveOrigin: 'center -150vh',
         })
         gsap.to('.banner3d-' + bannerNum, {
             scrollTrigger: {
@@ -20,7 +20,7 @@ const ScrolledBanner = ({ children, bannerNum, className }) => {
                 start: 'top bottom',
                 end: 'bottom top',
             },
-            perspectiveOrigin: 'center 200vh',
+            perspectiveOrigin: 'center 150vh',
             ease: 'none',
         })
     }, [])
