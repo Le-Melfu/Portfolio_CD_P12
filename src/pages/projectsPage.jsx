@@ -45,7 +45,7 @@ const ProjectPage = () => {
     const modalLimit = useMediaQuery({ maxWidth: 768 })
 
     return (
-        <main className={`projects page ${isDark ? '' : 'light'}`}>
+        <main className={`projects page fade-in ${isDark ? '' : 'light'}`}>
             {modalIsOpen && !modalLimit && (
                 <div className="article__image-modal">
                     <div

@@ -8,7 +8,7 @@ const InterestsPage = () => {
     const { isDark } = useContext(ThemeContext)
 
     return (
-        <main className={`interests page ${isDark ? '' : 'light'}`}>
+        <main className={`interests page fade-in ${isDark ? '' : 'light'}`}>
             <SectionHeader title={`centres d'intérêts`} />
             <div className="interests__cards">
                 <PopUpCard3D

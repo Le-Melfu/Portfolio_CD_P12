@@ -8,7 +8,7 @@ const ExperiencePage = () => {
     const { isDark } = useContext(ThemeContext)
 
     return (
-        <main className={`xp page ${isDark ? '' : 'light'}`}>
+        <main className={`xp page fade-in ${isDark ? '' : 'light'}`}>
             <SectionHeader
                 title="expériences & études"
                 desc="Organisation, Adaptation, Indépendance, Anglais bilingue, Permis B"
