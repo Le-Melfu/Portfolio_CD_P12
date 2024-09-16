@@ -42,8 +42,9 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                 </>
             )}
 
-            {mediaItems.map((item, index) =>
-                item.image ? (
+            {mediaItems.map((item, index) => {
+                const isFirstIndex = index === 0
+                return item.image ? (
                     <img
                         key={index}
                         className={`article__image ${
@@ -57,6 +58,7 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                         }`}
                         src={item.image}
                         alt={item.alternativeText}
+                        loading={isFirstIndex ? 'eager' : 'lazy'}
                         onClick={() => openModalWithContent(project)}
                     />
                 ) : (
@@ -79,7 +81,7 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                         <source src={item.url} type="video/mp4" />
                     </video>
                 )
-            )}
+            })}
         </div>
     )
 }
