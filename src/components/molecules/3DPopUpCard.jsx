@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './3DPopUpCard.scss'
 import { useContext } from 'react'
 import { ThemeContext } from '../../assets/ThemeContext'
