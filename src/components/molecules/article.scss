@@ -47,7 +47,32 @@
         margin: 0 auto;
         margin-top: 20px;
         padding: 20px 0;
+        border: 2px solid $primary-border-color;
         background: $primary-bg-color-light;
+        &::before {
+            content: '';
+            z-index: 1;
+            display: block;
+            width: 50px;
+            height: 100%;
+            background-color: $primary-bg-color;
+            border: 2px solid $primary-border-color;
+            position: absolute;
+            left: -5px;
+            transform: skew(0, 50deg) translateY(30px);
+        }
+        &::after {
+            content: '';
+            z-index: 1;
+            display: block;
+            width: 50px;
+            height: 100%;
+            background-color: $primary-bg-color;
+            border: 2px solid $primary-border-color;
+            position: absolute;
+            left: calc(100% - 50px);
+            transform: skew(0, -50deg) translateY(33px);
+        }
         video {
             display: flex;
             justify-self: center;
@@ -59,12 +84,17 @@
         .carousel-button {
             position: absolute;
             transform: translateY(-50%);
+            transition: all ease-in-out 300ms;
+            opacity: 0.7;
             background-color: $primary-bg-color-dark;
-            color: white;
-            border: none;
+            color: $primary-border-color;
+            border: 1px solid $primary-border-color;
             padding: 10px;
             cursor: pointer;
-            z-index: 3;
+            z-index: 4;
+            &:hover {
+                opacity: 1;
+            }
         }
 
         .carousel-button.left {
@@ -96,21 +126,23 @@
             z-index: 2;
         }
         &-previous {
+            z-index: 0;
             left: 0;
             transform: translateX(-50%) translateY(-20%) scale(0.4);
-            opacity: 0.5;
+            opacity: 1;
         }
         &-next {
+            z-index: 0;
             left: 100%;
             transform: translateX(-50%) translateY(-20%) scale(0.4);
-            opacity: 0.5;
+            opacity: 1;
         }
         &-unselected {
             top: 400%;
             opacity: 0;
         }
         &-modal {
-            z-index: 4;
+            z-index: 6;
             position: fixed;
             display: flex;
             justify-content: center;
@@ -120,7 +152,7 @@
             width: 100vw;
             height: 100vh;
             &-bg {
-                z-index: 4;
+                z-index: 6;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -132,11 +164,12 @@
             &-content {
                 display: flex;
                 position: absolute;
-                width: 90%;
+                width: 80%;
+                max-height: 80%;
                 background: $primary-bg-color;
                 border-radius: 25px;
                 margin: auto;
-                z-index: 5;
+                z-index: 7;
             }
             .article__image {
                 position: absolute;
@@ -151,17 +184,19 @@
                 opacity: 0;
                 &-center {
                     opacity: 1;
-                    z-index: 2;
+                    z-index: 8;
                 }
                 &-previous {
+                    z-index: 1;
                     left: 0;
                     transform: translateX(-50%) translateY(-20%) scale(0.3);
-                    opacity: 0.5;
+                    opacity: 0.7;
                 }
                 &-next {
+                    z-index: 1;
                     left: 100%;
                     transform: translateX(-50%) translateY(-20%) scale(0.3);
-                    opacity: 0.5;
+                    opacity: 0.7;
                 }
                 &-unselected {
                     top: 300%;
@@ -184,25 +219,34 @@
                 overflow: hidden;
                 margin: 0 auto;
             }
+            &::before {
+                width: 73px;
+            }
+            &::after {
+                width: 73px;
+            }
             .carousel-button {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
                 background-color: rgba(0, 0, 0, 0.5);
-                color: white;
-                border: none;
+                color: $primary-border-color;
+
                 padding: 10px;
                 cursor: pointer;
                 z-index: 5;
             }
             .carousel-button.left {
-                left: 20px;
-                transform: scale(3);
+                left: 10px;
+                transform: scale(2);
             }
 
             .carousel-button.right {
-                right: 20px;
-                transform: scale(3);
+                right: 10px;
+                transform: scale(2);
+            }
+            .fullscreen-btn {
+                display: none;
             }
             .modal-close-btn {
                 cursor: pointer;
@@ -219,6 +263,35 @@
                 height: 40px;
                 font-size: 40px;
             }
+        }
+    }
+}
+
+.fullscreen-btn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0px;
+    height: 0px;
+    z-index: 2;
+    position: absolute;
+    bottom: -10px;
+    right: 17px;
+    background: none;
+    border: none;
+    .fa-expand {
+        width: 50px;
+        height: 50px;
+        color: $primary-border-color;
+        transition: all ease-in-out 300ms;
+        transform-origin: center;
+        transform: scale(1.8);
+    }
+    &:hover {
+        .fa-expand {
+            transform-origin: center;
+            transform: scale(2.3);
         }
     }
 }
@@ -250,20 +323,25 @@
             overflow: hidden;
             margin: 0 auto;
             video {
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-70%);
+                position: absolute;
                 display: flex;
                 justify-self: center;
                 align-self: center;
                 width: 100%;
                 height: auto;
                 margin: 40px auto;
+                border: 1px solid $primary-border-color;
             }
         }
         &__image {
             top: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(-50%);
             position: absolute;
-            margin: 20px 0;
+            margin: 0;
             max-height: 100%;
             max-width: 100%;
             &-center {

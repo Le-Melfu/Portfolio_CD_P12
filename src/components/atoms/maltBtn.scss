@@ -1,0 +1,16 @@
+@import '../../assets/variables', '../../assets/fonts/font-faces';
+
+#malt-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: $main-gradient;
+    color: white;
+    font-family: Comfortaa;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all ease-in-out 200ms;
+    &:hover {
+        opacity: 0.7;
+    }
+}

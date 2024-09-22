@@ -1,6 +1,7 @@
 import slide1 from '../assets/images/Slideshow-01.webp'
 import slide2 from '../assets/images/Slideshow-02.webp'
 import slide3 from '../assets/images/MAO-01.webp'
+import slide4 from '../assets/images/banner_LinkedIn_final.png'
 import slide1Tablet from '../assets/images/tablet/Slideshow-01-tablet.webp'
 import slide2Tablet from '../assets/images/tablet/Slideshow-02-tablet.webp'
 import slide3Tablet from '../assets/images/tablet/MAO-01-tablet.webp'
@@ -22,6 +23,13 @@ export const slides = [
         imageTablet: slide2Tablet,
         imageMobile: slide2Mobile,
         alt: 'Scène de concert',
+    },
+    {
+        id: 3,
+        image: slide4,
+        imageTablet: slide4,
+        imageMobile: slide4,
+        alt: 'Ordinateur affichant un logiciel de MAO',
     },
     {
         id: 3,
