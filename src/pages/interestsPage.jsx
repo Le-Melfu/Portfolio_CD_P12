@@ -34,7 +34,7 @@ const InterestsPage = () => {
                 <PopUpCard3D
                     title="Figurines"
                     content="J'aime peindre et passer du temps pour affiner mes compétences et ma précision sur mes figurines."
-                    link="https://www.instagram.com/melfus_paints?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    link="https://www.instagram.com/melfus_paints/"
                 />
             </div>
         </main>
