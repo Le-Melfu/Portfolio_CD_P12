@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './article.scss'
+import { useMediaQuery } from 'react-responsive'
 
 const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -22,6 +23,8 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
         await modalContentSelection(project)
         openModal()
     }
+
+    const isMobile = useMediaQuery({ maxWidth: 768 })
 
     return (
         <div className="article__image-container">
@@ -59,7 +62,6 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                         src={item.image}
                         alt={item.alternativeText}
                         loading={isFirstIndex ? 'eager' : 'lazy'}
-                        onClick={() => openModalWithContent(project)}
                     />
                 ) : (
                     <video
@@ -82,6 +84,14 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                     </video>
                 )
             })}
+            {!isMobile && (
+                <button
+                    className="fullscreen-btn"
+                    onClick={() => openModalWithContent(project)}
+                >
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            )}
         </div>
     )
 }

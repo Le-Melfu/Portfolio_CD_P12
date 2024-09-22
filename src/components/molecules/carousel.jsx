@@ -12,7 +12,7 @@ const Carousel = () => {
             setPrevIndex(prevIndex < slides.length - 1 ? prevIndex + 1 : 0)
             setIndex(index < slides.length - 1 ? index + 1 : 0)
             setNextIndex(nextIndex < slides.length - 1 ? nextIndex + 1 : 0)
-        }, 9000)
+        }, 6000)
     }
     useEffect(() => {
         nextSlide()

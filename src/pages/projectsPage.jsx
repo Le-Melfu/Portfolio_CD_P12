@@ -7,9 +7,10 @@ import { useState } from 'react'
 import ArticleCarousel from '../components/molecules/articleCarousel'
 import { useMediaQuery } from 'react-responsive'
 import { ProjectsContext } from '../assets/projectContext'
+import LoadingCircle from '../components/atoms/loadingCircle'
 
 const ProjectPage = () => {
-    const { projects, loading } = useContext(ProjectsContext)
+    const { projects, loading, error } = useContext(ProjectsContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [currentModalContent, setCurrentModalContant] = useState()
 
@@ -58,7 +59,13 @@ const ProjectPage = () => {
                 title="Mes Réalisations"
                 desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
             />
-            {loading ? <p>Chargement en cours...</p> : ''}
+            {loading ? (
+                <LoadingCircle />
+            ) : error ? (
+                <p>Erreur de chargement</p>
+            ) : (
+                ''
+            )}
             {projects
                 .map((project) => (
                     <Article

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import './aside.scss'
 import { useContext } from 'react'
 import { ProjectsContext } from '../../assets/projectContext'
+import LoadingCircle from '../atoms/loadingCircle'
 
 const Aside = ({ onSelectProject }) => {
     const { projects, loading } = useContext(ProjectsContext)
@@ -11,7 +12,7 @@ const Aside = ({ onSelectProject }) => {
         <aside className="aside">
             <h2 className="aside__title">Projets récents</h2>
             <ul className="aside__list">
-                {loading ? <p>Chargement...</p> : ''}
+                {loading ? <LoadingCircle /> : ''}
                 {recentProjects
                     .map((project) => (
                         <li

@@ -30,7 +30,7 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: 50% 0%;
+    object-position: 50% 50%;
     transition: all ease-in-out 1000ms;
     &--display {
         opacity: 1;
@@ -84,6 +84,10 @@
         input[type='radio'] {
             width: 8px;
         }
+    }
+    .slide {
+        object-fit: contain;
+        object-position: 50% 25%;
     }
     .catch {
         text-align: center;

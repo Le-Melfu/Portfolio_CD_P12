@@ -4,6 +4,7 @@ import Navbar from '../molecules/navbar'
 import NavbarMobile from '../molecules/navbar-mobile'
 import { useContext } from 'react'
 import { ThemeContext } from '../../assets/ThemeContext'
+import MaltBtn from '../atoms/maltBtn'
 
 const Header = () => {
     const isMobile = useMediaQuery({ maxWidth: 769 })
@@ -18,7 +19,9 @@ const Header = () => {
     return (
         <header>
             <LogoBand />
+
             {isMobile ? <NavbarMobile /> : <Navbar />}
+            <MaltBtn />
         </header>
     )
 }
