@@ -2,15 +2,18 @@
 
 .card {
     &--dark {
+        z-index: 0;
         background: $primary-bg-color;
         color: white;
     }
     &--light {
+        z-index: 0;
         background: white;
         color: black;
     }
 }
 .card3d {
+    z-index: 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -20,7 +23,7 @@
     padding: 58px;
     gap: 16px;
     border: $primary-border-color 2px solid;
-    transform: translatez(50px);
+
     transform-style: preserve-3d;
     transition: all 0.3s ease-in-out;
     h3 {

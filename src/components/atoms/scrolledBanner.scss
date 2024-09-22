@@ -35,12 +35,13 @@
         width: 100%;
         padding: 60px;
         border: $primary-border-color 1px solid;
-        transform: translatez(50px);
+        z-index: 2;
         transform-style: preserve-3d;
         font-size: 14px;
         line-height: 24px;
 
         &:before {
+            z-index: -1;
             position: absolute;
             content: '';
             overflow: hidden;
@@ -54,6 +55,7 @@
         }
 
         &:after {
+            z-index: -1;
             position: absolute;
             content: '';
             width: 100%;
