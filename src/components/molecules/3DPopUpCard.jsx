@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import './3DPopUpCard.scss'
 import { useContext } from 'react'
 import { ThemeContext } from '../../assets/ThemeContext'
@@ -15,15 +15,21 @@ const PopUpCard3D = (props) => {
             <h3>{props.title}</h3>
             <p>{props.content}</p>
             {props.link ? (
-                <a
-                    className="link-btn"
-                    href={props.link}
-                    onTouchStart={() => handleTouchStart(props.link)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Voir la page
-                </a>
+                props.link === '/music' ? (
+                    <NavLink className="link-btn" to={props.link}>
+                        Voir la page
+                    </NavLink>
+                ) : (
+                    <a
+                        className="link-btn"
+                        href={props.link}
+                        onTouchStart={() => handleTouchStart(props.link)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Voir la page
+                    </a>
+                )
             ) : (
                 ''
             )}
