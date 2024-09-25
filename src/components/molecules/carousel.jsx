@@ -12,7 +12,7 @@ const Carousel = () => {
             setPrevIndex(prevIndex < slides.length - 1 ? prevIndex + 1 : 0)
             setIndex(index < slides.length - 1 ? index + 1 : 0)
             setNextIndex(nextIndex < slides.length - 1 ? nextIndex + 1 : 0)
-        }, 6000)
+        }, 7000)
     }
     useEffect(() => {
         nextSlide()
@@ -41,23 +41,6 @@ const Carousel = () => {
                             loading={idx > 0 ? 'lazy' : ''}
                         />
                     </div>
-                ))}
-            </div>
-
-            <div className="carousel__pagination">
-                {slides.map((slide, radioIdx) => (
-                    <React.Fragment key={`pagination-${slide.id}`}>
-                        <input
-                            className="carousel__pagination__radio"
-                            key={`pagination-${slide.id}`}
-                            type="radio"
-                            name={`radio-btn-${slide.id}`}
-                            id={`radio-btn-${slide.id}`}
-                            checked={index === radioIdx}
-                            readOnly
-                            aria-label={slide.alt}
-                        />
-                    </React.Fragment>
                 ))}
             </div>
 
