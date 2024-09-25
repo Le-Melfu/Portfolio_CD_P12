@@ -8,7 +8,7 @@ const MaltBtn = () => {
             target="_blank"
             rel="noopener noreferrer"
         >
-            Je suis disponible sur Malt !
+            Un Projet ? Je suis disponible sur Malt !
         </a>
     )
 }
