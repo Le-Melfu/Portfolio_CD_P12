@@ -146,7 +146,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: top center;
-    background-blend-mode: darken;
+    background-blend-mode: normal;
     font-family: Comfortaa;
     color: white;
     height: 100vh;
@@ -243,6 +243,10 @@ a {
 }
 
 @include tabletQ {
+    body {
+        background-size: cover;
+        background-position: top center;
+    }
     .page {
         padding-top: 40px;
         padding-left: 100px;
