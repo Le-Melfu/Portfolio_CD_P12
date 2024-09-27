@@ -10,6 +10,9 @@
     font-size: 16px;
     text-decoration: none;
     transition: all ease-in-out 200ms;
+    background: $main-gradient-looped;
+    background-size: 400% 100%;
+    animation: gradientMove 6s linear infinite both;
     &:hover {
         opacity: 0.7;
     }

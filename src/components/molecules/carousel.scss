@@ -67,7 +67,9 @@
     font-size: 35px;
     line-height: 40px;
     text-transform: uppercase;
-    background: $main-gradient;
+    background: $main-gradient-looped;
+    background-size: 400% 100%;
+    animation: gradientMove 6s linear infinite both;
 }
 
 @include mobileQ {

@@ -32,15 +32,6 @@
     animation: gradientMove 6s linear infinite both;
 }
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 88% 50%;
-    }
-}
-
 @include mobileQ {
     .logo-band {
         width: 100%;
