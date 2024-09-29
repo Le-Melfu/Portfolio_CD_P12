@@ -49,7 +49,7 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                 const isFirstIndex = index === 0
                 return item.image ? (
                     <img
-                        key={index}
+                        key={item.title + index}
                         className={`article__image ${
                             index === currentIndex
                                 ? 'article__image-center'
@@ -65,7 +65,7 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                     />
                 ) : (
                     <video
-                        key={index}
+                        key={item.title + index}
                         className={`article__image ${
                             index === currentIndex
                                 ? 'article__image-center'

@@ -22,7 +22,7 @@ const Carousel = () => {
         <div className="carousel-wrapper">
             <div className="carousel">
                 {slides.map((slide, idx) => (
-                    <div key={`slide-${slide.id}`}>
+                    <div key={`slide-${slide.id + slide.alt}`}>
                         <img
                             key={`slide-image-${slide.id}`}
                             className={`slide slide--${

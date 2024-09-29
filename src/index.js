@@ -13,6 +13,7 @@ import Footer from './components/organisms/footer'
 import OpenAnim from './components/organisms/openAnim'
 import { ThemeProvider } from './assets/ThemeContext'
 import { ProjectsProvider } from './assets/projectContext'
+import BackgroundVideo from './components/atoms/backgroundVideo'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -20,6 +21,7 @@ root.render(
         <BrowserRouter>
             <ProjectsProvider>
                 <ThemeProvider>
+                    <BackgroundVideo />
                     <OpenAnim />
                     <Header />
                     <div className="main-container">

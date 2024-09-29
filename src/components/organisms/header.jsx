@@ -7,6 +7,7 @@ import { ThemeContext } from '../../assets/ThemeContext'
 import MaltBtn from '../atoms/maltBtn'
 import './header.scss'
 import backgroundGif from '../../assets/videos/3.gif'
+import mobileLogo from '../../assets/icons/logo_mobile_replacement.png'
 
 const Header = () => {
     const isMobile = useMediaQuery({ maxWidth: 769 })
@@ -20,16 +21,18 @@ const Header = () => {
 
     return (
         <header>
-            <LogoBand />
+            {isMobile ? (
+                <img
+                    className="mobile-logo-replacer"
+                    src={mobileLogo}
+                    alt="Logo"
+                />
+            ) : (
+                <LogoBand />
+            )}
 
             {isMobile ? <NavbarMobile /> : <Navbar />}
             <MaltBtn />
-            <div className="background-animation background-animation--left">
-                <img src={backgroundGif} alt="Animation"></img>
-            </div>
-            <div className="background-animation background-animation--right">
-                <img src={backgroundGif} alt="Animation"></img>
-            </div>
         </header>
     )
 }

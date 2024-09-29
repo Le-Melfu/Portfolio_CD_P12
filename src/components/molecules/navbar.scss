@@ -40,6 +40,13 @@
             width: 100%;
             border-top: 1px solid $primary-bg-color-dark;
             border-bottom: 1px solid $primary-bg-color-light;
+            i {
+                position: relative;
+                left: 40%;
+                font-size: 24px;
+                justify-self: flex-end;
+                text-align: end;
+            }
         }
     }
     &-toggle {
