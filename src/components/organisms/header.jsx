@@ -5,6 +5,8 @@ import NavbarMobile from '../molecules/navbar-mobile'
 import { useContext } from 'react'
 import { ThemeContext } from '../../assets/ThemeContext'
 import MaltBtn from '../atoms/maltBtn'
+import './header.scss'
+import mobileLogo from '../../assets/icons/logo_mobile_replacement.png'
 
 const Header = () => {
     const isMobile = useMediaQuery({ maxWidth: 769 })
@@ -18,7 +20,15 @@ const Header = () => {
 
     return (
         <header>
-            <LogoBand />
+            {isMobile ? (
+                <img
+                    className="mobile-logo-replacer"
+                    src={mobileLogo}
+                    alt="Logo"
+                />
+            ) : (
+                <LogoBand />
+            )}
 
             {isMobile ? <NavbarMobile /> : <Navbar />}
             <MaltBtn />

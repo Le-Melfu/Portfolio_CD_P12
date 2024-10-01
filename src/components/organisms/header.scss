@@ -1,0 +1,62 @@
+@import '../../assets/mixins';
+
+header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.mobile-logo-replacer {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+@keyframes blobby {
+    0% {
+        transform: scale(1) translate(-50%);
+    }
+    20% {
+        transform: scale(0.8) translate(-50%);
+    }
+    40% {
+        transform: scale(1.4) translate(-50%);
+    }
+    60% {
+        transform: scale(0.5) translate(-50%);
+    }
+    80% {
+        transform: scale(0.8) translate(-50%);
+    }
+    100% {
+        transform: scale(1) translate(-50%);
+    }
+}
+
+@include tabletQ {
+    .light {
+        header {
+            position: fixed;
+            top: 0;
+            z-index: 8;
+            width: 100%;
+            background: $primary-bg-color;
+            color: white;
+        }
+    }
+}
+
+@include mobileQ {
+    header {
+        position: fixed;
+        top: 0;
+        z-index: 8;
+        width: 100%;
+        background: $primary-bg-color;
+        color: white;
+    }
+}

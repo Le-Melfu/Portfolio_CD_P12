@@ -140,7 +140,7 @@ table {
 }
 
 body {
-    background: #272727;
+    background: $primary-bg-color;
     font-family: Comfortaa;
     color: white;
     height: 100vh;
@@ -151,23 +151,14 @@ body {
 }
 
 .light {
-    background: white;
+    background: none;
     font-family: Comfortaa;
     color: black;
     animation-name: fadeIn 300ms both;
-    a {
-        color: black;
-    }
 }
 
 a {
     color: white;
-}
-
-header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 }
 
 footer {
@@ -243,21 +234,14 @@ a {
 }
 
 @include tabletQ {
+    body {
+        background-size: cover;
+        background-position: top center;
+    }
     .page {
         padding-top: 40px;
         padding-left: 100px;
         padding-right: 100px;
-    }
-}
-
-@include mobileQ {
-    header {
-        position: fixed;
-        top: 0;
-        z-index: 8;
-        width: 100%;
-        background: $primary-bg-color;
-        color: white;
     }
 
     .light {
@@ -266,12 +250,12 @@ a {
             top: 0;
             z-index: 8;
             width: 100%;
-            background: white;
+            background: none;
             color: black;
         }
     }
     .main-container {
-        margin-top: 164px;
+        margin-top: 70px;
     }
     .page {
         padding-top: 40px;

@@ -44,52 +44,52 @@ const ArticleCarousel = ({ project, openModal, modalContentSelection }) => {
                     </button>
                 </>
             )}
-
-            {mediaItems.map((item, index) => {
-                const isFirstIndex = index === 0
-                return item.image ? (
-                    <img
-                        key={index}
-                        className={`article__image ${
-                            index === currentIndex
-                                ? 'article__image-center'
-                                : index === getPreviousIndex()
-                                ? 'article__image-previous'
-                                : index === getNextIndex()
-                                ? 'article__image-next'
-                                : 'article__image-unselected'
-                        }`}
-                        src={item.image}
-                        alt={item.alternativeText}
-                        loading={isFirstIndex ? 'eager' : 'lazy'}
-                    />
-                ) : (
-                    <video
-                        key={index}
-                        className={`article__image ${
-                            index === currentIndex
-                                ? 'article__image-center'
-                                : index === getPreviousIndex()
-                                ? 'article__image-previous'
-                                : index === getNextIndex()
-                                ? 'article__image-next'
-                                : 'article__image-unselected'
-                        }`}
-                        controls
-                        controlsList="nodownload nofullscreen"
-                        muted
-                        onClick={() => openModalWithContent(project)}
-                    >
-                        <source src={item.url} type="video/mp4" />
-                    </video>
-                )
-            })}
+            <>
+                {mediaItems.map((item, index) => {
+                    const isFirstIndex = index === 0
+                    return item.image ? (
+                        <img
+                            key={index}
+                            className={`article__image ${
+                                index === currentIndex
+                                    ? 'article__image-center'
+                                    : index === getPreviousIndex()
+                                    ? 'article__image-previous'
+                                    : index === getNextIndex()
+                                    ? 'article__image-next'
+                                    : 'article__image-unselected'
+                            }`}
+                            src={item.image}
+                            alt={item.alternativeText}
+                            loading={isFirstIndex ? 'eager' : 'lazy'}
+                        />
+                    ) : (
+                        <video
+                            key={index}
+                            className={`article__image ${
+                                index === currentIndex
+                                    ? 'article__image-center'
+                                    : index === getPreviousIndex()
+                                    ? 'article__image-previous'
+                                    : index === getNextIndex()
+                                    ? 'article__image-next'
+                                    : 'article__image-unselected'
+                            }`}
+                            controls
+                            controlsList="nodownload nofullscreen"
+                            muted
+                        >
+                            <source src={item.url} type="video/mp4" />
+                        </video>
+                    )
+                })}
+            </>
             {!isMobile && (
                 <button
                     className="fullscreen-btn"
                     onClick={() => openModalWithContent(project)}
                 >
-                    <i class="fa-solid fa-expand"></i>
+                    <i className="fa-solid fa-expand"></i>
                 </button>
             )}
         </div>

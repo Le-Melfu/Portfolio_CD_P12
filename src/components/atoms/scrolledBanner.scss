@@ -13,11 +13,11 @@
 }
 .banner {
     &-dark {
-        background: $primary-bg-color;
+        background: none;
         color: white;
     }
     &-light {
-        background: white;
+        background: none;
         color: black;
     }
 }

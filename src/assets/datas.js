@@ -26,16 +26,17 @@ export const slides = [
     },
     {
         id: 3,
-        image: slide4,
-        imageTablet: slide4,
-        imageMobile: slide4,
-        alt: 'Ordinateur affichant un logiciel de MAO',
-    },
-    {
-        id: 3,
         image: slide3,
         imageTablet: slide3Tablet,
         imageMobile: slide3Mobile,
         alt: 'Ordinateur affichant un logiciel de MAO',
+    },
+
+    {
+        id: 4,
+        image: slide4,
+        imageTablet: slide4,
+        imageMobile: slide4,
+        alt: 'Bannière',
     },
 ]
