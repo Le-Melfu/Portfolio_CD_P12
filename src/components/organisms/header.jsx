@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import { ThemeContext } from '../../assets/ThemeContext'
 import MaltBtn from '../atoms/maltBtn'
 import './header.scss'
-import backgroundGif from '../../assets/videos/3.gif'
 import mobileLogo from '../../assets/icons/logo_mobile_replacement.png'
 
 const Header = () => {
