@@ -1,5 +1,7 @@
 import './backgroundVideo.scss'
-import imageBackground from '../../assets/videos/18458403-hd_1920_1080_24fps_000.jpg'
+import imageBackground from '../../assets/videos/blue-waves.webp'
+import imageBackgroundInvert from '../../assets/videos/blue-waves-negate.webp'
+
 import video from '../../assets/videos/blue-waves.webm'
 import videoInvert from '../../assets/videos/blue-waves-negate.webm'
 import { useContext, useEffect, useRef } from 'react'
@@ -7,10 +9,12 @@ import { ThemeContext } from '../../assets/ThemeContext'
 import { useMediaQuery } from 'react-responsive'
 
 const BackgroundVideo = () => {
-    const isMobile = useMediaQuery({ maxWidth: '450px' })
+    const isMobile = useMediaQuery({ maxWidth: '969px' })
     const { isDark } = useContext(ThemeContext)
     const videoSource = isDark ? video : videoInvert
     const videoElementRef = useRef(null)
+
+    const imageSource = isDark ? imageBackground : imageBackgroundInvert
 
     useEffect(() => {
         const videoElement = videoElementRef.current
@@ -37,7 +41,7 @@ const BackgroundVideo = () => {
     if (isMobile) {
         return (
             <div className="bg-v">
-                <img src={imageBackground} alt="Vague polygonales bleu" />
+                <img src={imageSource} alt="Vague polygonales bleu" />
             </div>
         ) // Ne pas rendre la vidéo du tout si on est sur mobile
     }
