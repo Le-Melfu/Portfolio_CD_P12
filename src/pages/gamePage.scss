@@ -1,3 +1,5 @@
+@import '../assets/variables';
+
 .player {
     position: absolute;
     width: 70px;
@@ -9,5 +11,43 @@
 }
 
 .game {
-    overflow: hidden;
+    position: absolute;
+    display: flex;
+    top: 0;
+    width: 100%;
+    max-width: 1440px; /* Limiter la largeur à 1440px */
+    margin: 0 auto; /* Centrer le conteneur */
+    overflow: hidden; /* Empêcher le débordement */
+    button {
+        background-color: $primary-border-color;
+        width: 150px;
+        height: 50px;
+        font-family: Comfortaa;
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+    }
+}
+.start-screen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.health {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
+.game-over-screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
