@@ -1,0 +1,13 @@
+.player {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    img {
+        width: inherit;
+        height: inherit;
+    }
+}
+
+.game {
+    overflow: hidden;
+}
