@@ -1,29 +1,32 @@
 import React, { useEffect, useState, useContext } from 'react'
 import './gamePage.scss'
 import { ThemeContext } from '../assets/ThemeContext'
-import spaceshipAsset from '../assets/images/gamePageAssets/vecteezy_spaceship-3d-rendering-icon-illustration_28567053.png'
+import spaceshipAsset from '../assets/images/gamePageAssets/playerShip.png'
 import Projectile from '../components/atoms/gameProjectile'
 import Enemy from '../components/atoms/gameEnnemy'
 import shootMP3 from '../assets/music/shoot.mp3'
 import hitMP3 from '../assets/music/hit.mp3'
+import gameMusicMP3 from '../assets/music/portfoliogamu.mp3'
 
 const GamePage = () => {
     const { isDark } = useContext(ThemeContext)
     const [hitSound, setHitSound] = useState(null)
-
+    const [gameMusic, setGameMusic] = useState(null)
     const [inputs, setInputs] = useState({
         left: false,
         right: false,
         up: false,
         down: false,
     })
-    const gameWidth = 1440
+    const gameWidth = window.innerWidth < 1440 ? window.innerWidth : 1440
     const gameHeight = window.innerHeight
 
     const [isGameRunning, setIsGameRunning] = useState(false)
+    const [score, setScore] = useState(0)
     const [playerLost, setPlayerLost] = useState(false)
     const startGame = () => {
         setPlayerLost(false)
+        setScore(0)
         setIsGameRunning(true)
         setEnemies([]) // Réinitialiser les ennemis
         setProjectiles([]) // Réinitialiser les projectiles
@@ -53,22 +56,7 @@ const GamePage = () => {
         'Cross-Browser Compatibility',
     ]
     const [enemies, setEnemies] = useState([])
-    const checkCollision = (proj, enemy) => {
-        const isCollision =
-            proj.x < enemy.x + 50 &&
-            proj.x + 4 > enemy.x &&
-            proj.y < enemy.y + 50 &&
-            proj.y + 4 > enemy.y
-        if (isCollision) {
-            hitSound.currentTime = 0 // Réinitialise le son pour le rejouer
-            hitSound
-                .play()
-                .catch((error) =>
-                    console.error('Erreur de lecture du son:', error)
-                )
-        }
-        return isCollision
-    }
+    const [destroyingEnemies, setDestroyingEnemies] = useState([])
 
     // Gérer les inputs de mouvement
     useEffect(() => {
@@ -122,16 +110,40 @@ const GamePage = () => {
     }, [isGameRunning])
 
     useEffect(() => {
+        const music = new Audio(gameMusicMP3)
+        music.loop = true // La musique se répète en boucle
+        music.preload = 'auto'
+        music.volume = 0.7
+
+        setGameMusic(music)
+
         const sound2 = new Audio(hitMP3)
 
         setHitSound(sound2)
 
         return () => {
             // Optionnel : Libération des ressources audio si nécessaire
-
+            music.pause()
+            music.currentTime = 0
             sound2.pause()
         }
     }, [])
+
+    useEffect(() => {
+        if (gameMusic) {
+            if (isGameRunning) {
+                gameMusic
+                    .play()
+                    .catch((error) =>
+                        console.error('Erreur de lecture de la musique:', error)
+                    )
+            } else {
+                gameMusic.pause()
+                gameMusic.currentTime = 0 // Réinitialiser au début
+            }
+        }
+    }, [isGameRunning, gameMusic])
+
     // Gérer l'entrée de tir séparément
     useEffect(() => {
         const handleSpaceDown = (event) => {
@@ -146,12 +158,13 @@ const GamePage = () => {
                 setProjectiles((prevProjectiles) => [
                     ...prevProjectiles,
                     {
+                        id: 'proj-' + Date.now(),
                         x: playerPosition.x + 25,
                         y: playerPosition.y,
                         speed: 10,
                     },
                 ])
-                setTimeout(() => setCanShoot(true), 50) // Délai de 300 ms
+                setTimeout(() => setCanShoot(true), 50)
             }
         }
         if (isGameRunning) {
@@ -186,34 +199,124 @@ const GamePage = () => {
         const interval = setInterval(movePlayer, 16) // approx. 60 FPS
 
         return () => clearInterval(interval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputs])
+
+    const checkCollision = (proj, enemy) => {
+        const enemyWidth = 50 // Set to your enemy width
+        const enemyHeight = 50 // Set to your enemy height
+        const isCollision =
+            proj.x < enemy.x + enemyWidth &&
+            proj.x + 4 > enemy.x &&
+            proj.y < enemy.y + enemyHeight &&
+            proj.y + 4 > enemy.y
+        if (isCollision) {
+            hitSound.currentTime = 0
+            hitSound
+                .play()
+                .catch((error) =>
+                    console.error('Erreur de lecture du son:', error)
+                )
+
+            // Start the destruction animation
+            setDestroyingEnemies((prev) => [...prev, enemy.id])
+
+            // Handle enemy destruction after a delay
+            setTimeout(() => {
+                handleEnemyDestruction(enemy.id)
+            }, 1500)
+
+            return true
+        }
+        return false
+    }
+
+    const handleEnemyDestruction = async (enemyId) => {
+        // You may want to add a delay before proceeding to remove the enemy from the state
+        setTimeout(() => {
+            setDestroyingEnemies((prev) => prev.filter((id) => id !== enemyId)) // Remove from destroyingEnemies
+            setEnemies((prev) => prev.filter((enemy) => enemy.id !== enemyId))
+        }, 1000)
+    }
 
     // Mettre à jour les projectiles
     useEffect(() => {
-        const update = () => {
+        const projectilesToRemove = []
+        const update = async () => {
             setProjectiles((prevProjectiles) => {
                 const updatedProjectiles = prevProjectiles
                     .map((proj) => ({ ...proj, y: proj.y - proj.speed }))
-                    .filter((proj) => proj.y > 0)
+                    .filter((proj) => proj.y > 0) // Keep projectiles on screen
 
-                // Vérification des collisions
+                // Collision check
                 setEnemies((prevEnemies) => {
-                    return prevEnemies.filter((enemy) => {
-                        const hit = updatedProjectiles.some((proj) =>
-                            checkCollision(proj, enemy)
-                        )
+                    const enemiesToDestroy = []
 
-                        return !hit // Retire les ennemis touchés
+                    const remainingEnemies = prevEnemies
+                        .map((enemy) => {
+                            const hit = updatedProjectiles.some((proj) => {
+                                if (checkCollision(proj, enemy)) {
+                                    projectilesToRemove.push(proj.id) // Marque le projectile pour suppression
+                                    return true
+                                }
+                                return false
+                            })
+
+                            if (hit && !enemy.shield) {
+                                enemiesToDestroy.push(enemy.id) // Marque l'ennemi pour destruction
+                                return enemiesToDestroy // Renvoie null pour que ce soit filtré plus tard
+                            }
+
+                            if (hit && enemy.shield) {
+                                console.log(
+                                    `Enemy shield hit: ${enemy.id}, shield will deactivate.`
+                                )
+                                setTimeout(() => {
+                                    setEnemies((prevEnemies) =>
+                                        prevEnemies.map((e) =>
+                                            e.id === enemy.id
+                                                ? { ...e, shield: false }
+                                                : e
+                                        )
+                                    )
+                                }, 500) // 500 ms d'invulnérabilité
+
+                                return {
+                                    ...enemy,
+                                    health: 1, // Fixe la santé après désactivation du bouclier
+                                }
+                            }
+
+                            return enemy // Garde l'ennemi s'il n'est pas touché
+                        })
+                        .filter(Boolean) // Filtre les ennemis détruits // Filter out destroyed enemies (null)
+
+                    // Handle enemy destruction
+                    enemiesToDestroy.forEach((enemyId) => {
+                        if (!destroyingEnemies.includes(enemyId)) {
+                            setScore((prevScore) => prevScore + 1)
+                            setDestroyingEnemies((prev) => [...prev, enemyId])
+
+                            setTimeout(() => {
+                                handleEnemyDestruction(enemyId)
+                            }, 500)
+                        }
                     })
+
+                    return remainingEnemies
                 })
 
-                return updatedProjectiles // Retourne les projectiles mis à jour
+                // Remove projectiles that hit an enemy
+                return updatedProjectiles.filter(
+                    (proj) => !projectilesToRemove.includes(proj.id)
+                )
             })
         }
 
         const animationFrameId = requestAnimationFrame(update)
 
         return () => cancelAnimationFrame(animationFrameId)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [projectiles, isGameRunning])
 
     // Gérer les ennemis
@@ -223,25 +326,28 @@ const GamePage = () => {
                 challenges[Math.floor(Math.random() * challenges.length)]
             const enemyX = Math.random() * (gameWidth - 50) // Position X aléatoire
             const enemySpeed = Math.random() * 2 + 1
+            const enemyId = Date.now()
+            const shield = Math.random() < 0.5
+            const enemyHealth = shield ? 2 : 1
 
-            setEnemies((prevEnemies) => [
-                ...prevEnemies,
-                {
-                    x: enemyX,
-                    y: 0,
-                    type: randomChallenge,
-                    speed: enemySpeed,
-                }, // Ajout de la direction
-            ])
+            const newEnemy = {
+                id: enemyId,
+                x: enemyX,
+                y: 0,
+                type: randomChallenge,
+                shield: shield,
+                health: enemyHealth,
+                speed: enemySpeed,
+            }
+
+            setEnemies((prevEnemies) => [...prevEnemies, newEnemy])
+        }
+        if (isGameRunning) {
+            const enemyInterval = setInterval(spawnEnemy, 2000) // Spawn every 2 seconds
+
+            return () => clearInterval(enemyInterval)
         }
 
-        const enemyInterval = setInterval(() => {
-            if (isGameRunning) {
-                spawnEnemy()
-            }
-        }, 2000) // Générer un ennemi toutes les 3 secondes // Générer un ennemi toutes les 3 secondes
-
-        return () => clearInterval(enemyInterval)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGameRunning])
 
@@ -294,21 +400,6 @@ const GamePage = () => {
         return () => clearInterval(enemyMovementInterval)
     }, [isGameRunning])
 
-    const changeEnemyDirection = (enemy) => {
-        return {
-            ...enemy,
-            direction: Math.random() < 0.5 ? 1 : -1, // Changer la direction aléatoirement
-        }
-    }
-    // Gérer la direction des ennemis
-    useEffect(() => {
-        const changeDirectionsInterval = setInterval(() => {
-            setEnemies((prevEnemies) => prevEnemies.map(changeEnemyDirection))
-        }, 1000) // Change la direction toutes les 1 seconde
-
-        return () => clearInterval(changeDirectionsInterval)
-    }, [])
-
     return (
         <main className={`game page fade-in ${isDark ? '' : 'light'}`}>
             {!isGameRunning &&
@@ -320,7 +411,7 @@ const GamePage = () => {
             {playerLost && ( // Écran de Game Over
                 <div className="game-over-screen">
                     <h2>Game Over</h2>
-                    <h3>Points de vie restants: {healthPoints}</h3>
+                    <p>Score: {score}</p>
                     <button onClick={startGame}>Rejouer</button>
                 </div>
             )}
@@ -336,20 +427,27 @@ const GamePage = () => {
                         >
                             <img src={spaceshipAsset} alt="vaisseau spatial" />
                         </div>
-
-                        {projectiles.map((proj, index) => (
-                            <Projectile key={index} x={proj.x} y={proj.y} />
-                        ))}
-                        {enemies.map((enemy, index) => (
-                            <Enemy
-                                key={index}
-                                x={enemy.x}
-                                y={enemy.y}
-                                type={enemy.type}
-                            />
-                        ))}
+                        <>
+                            {projectiles.map((proj, index) => (
+                                <Projectile key={index} x={proj.x} y={proj.y} />
+                            ))}
+                            {enemies.map((enemy, index) => (
+                                <Enemy
+                                    key={enemy.id}
+                                    id={enemy.id}
+                                    x={enemy.x}
+                                    y={enemy.y}
+                                    type={enemy.type}
+                                    isDestroyed={destroyingEnemies.includes(
+                                        enemy.id
+                                    )}
+                                    shield={enemy.shield}
+                                />
+                            ))}
+                        </>
                         <div className="health">
-                            <h2>Health Points: {healthPoints}</h2>
+                            <p>Health Points: {healthPoints}</p>
+                            <p>Score: {score}</p>
                         </div>
                     </>
                 )}
