@@ -24,15 +24,39 @@
     opacity: 0.7;
     width: 80;
     height: 80;
+
+    &--destroyed {
+        animation: shield-despawn 150ms forwards;
+    }
 }
 
-.enemy-destroyed {
+@keyframes shield-despawn {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    66% {
+        opacity: 0.5;
+        transform: scale(2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(4);
+    }
+}
+
+.enemy-destruction {
     width: 70px; /* taille de ton sprite */
     height: 70px;
     position: absolute;
     background-size: cover;
     opacity: 0;
-    animation: sprite-animation 400ms steps(6) forwards; /* 6 frames, et l'animation dure 1 seconde */
+    animation: sprite-animation 600ms forwards ease-in-out;
 }
 
 @keyframes sprite-animation {
@@ -49,11 +73,11 @@
         transform: scale(1.5);
     }
     50% {
-        opacity: 1;
+        opacity: 0.5;
         transform: scale(1);
     }
     66% {
-        opacity: 0.7;
+        opacity: 0;
         transform: scale(1);
     }
     100% {
@@ -61,6 +85,7 @@
         transform: scale(1);
     }
 }
+
 @keyframes spawn-animation {
     0% {
         opacity: 0;

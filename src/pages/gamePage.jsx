@@ -18,7 +18,7 @@ const GamePage = () => {
         up: false,
         down: false,
     })
-    const gameWidth = window.innerWidth < 1440 ? window.innerWidth : 1440
+    const gameWidth = window.innerWidth < 1440 ? window.innerWidth * 0.8 : 1440
     const gameHeight = window.innerHeight
 
     const [isGameRunning, setIsGameRunning] = useState(false)
@@ -48,12 +48,28 @@ const GamePage = () => {
     const [projectiles, setProjectiles] = useState([])
     const [canShoot, setCanShoot] = useState(true) // État pour contrôler le tir
     const challenges = [
-        'Debugging',
-        'Unit Testing',
-        'Optimization',
-        'Code Review',
-        'Performance Issues',
-        'Cross-Browser Compatibility',
+        'HTML',
+        'CSS',
+        'JavaScript',
+        'React',
+        'SASS',
+        'Responsive Design',
+        'Accessibilité',
+        'Performances',
+        'Optimisation',
+        'Gestion des images',
+        'Compatibilité entre navigateurs',
+        'Gestion de version',
+        'Débogage',
+        'Résolution de problèmes',
+        'Intégration API',
+        'Gestion des états',
+        "Travail d'équipe",
+        'Sécurité',
+        'Déploiement',
+        'Veille technologique',
+        'Communication',
+        'Méthodes agiles',
     ]
     const [enemies, setEnemies] = useState([])
     const [destroyingEnemies, setDestroyingEnemies] = useState([])
@@ -203,8 +219,8 @@ const GamePage = () => {
     }, [inputs])
 
     const checkCollision = (proj, enemy) => {
-        const enemyWidth = 50 // Set to your enemy width
-        const enemyHeight = 50 // Set to your enemy height
+        const enemyWidth = 70 // Set to your enemy width
+        const enemyHeight = 70 // Set to your enemy height
         const isCollision =
             proj.x < enemy.x + enemyWidth &&
             proj.x + 4 > enemy.x &&
@@ -217,26 +233,21 @@ const GamePage = () => {
                 .catch((error) =>
                     console.error('Erreur de lecture du son:', error)
                 )
-
-            // Start the destruction animation
-            setDestroyingEnemies((prev) => [...prev, enemy.id])
-
-            // Handle enemy destruction after a delay
-            setTimeout(() => {
-                handleEnemyDestruction(enemy.id)
-            }, 1500)
-
             return true
         }
         return false
     }
 
+    const destructionTimer = 600
     const handleEnemyDestruction = async (enemyId) => {
         // You may want to add a delay before proceeding to remove the enemy from the state
+
+        setTimeout(() => {
+            setEnemies((prev) => prev.filter((enemy) => enemy.id !== enemyId))
+        }, destructionTimer)
         setTimeout(() => {
             setDestroyingEnemies((prev) => prev.filter((id) => id !== enemyId)) // Remove from destroyingEnemies
-            setEnemies((prev) => prev.filter((enemy) => enemy.id !== enemyId))
-        }, 1000)
+        }, destructionTimer)
     }
 
     // Mettre à jour les projectiles
@@ -252,54 +263,51 @@ const GamePage = () => {
                 setEnemies((prevEnemies) => {
                     const enemiesToDestroy = []
 
-                    const remainingEnemies = prevEnemies
-                        .map((enemy) => {
-                            const hit = updatedProjectiles.some((proj) => {
-                                if (checkCollision(proj, enemy)) {
-                                    projectilesToRemove.push(proj.id) // Marque le projectile pour suppression
-                                    return true
-                                }
-                                return false
-                            })
-
-                            if (hit && !enemy.shield) {
-                                enemiesToDestroy.push(enemy.id) // Marque l'ennemi pour destruction
-                                return enemiesToDestroy // Renvoie null pour que ce soit filtré plus tard
+                    const remainingEnemies = prevEnemies.map((enemy) => {
+                        const hit = updatedProjectiles.some((proj) => {
+                            if (checkCollision(proj, enemy)) {
+                                projectilesToRemove.push(proj.id) // Marque le projectile pour suppression
+                                return true
                             }
-
-                            if (hit && enemy.shield) {
-                                console.log(
-                                    `Enemy shield hit: ${enemy.id}, shield will deactivate.`
-                                )
-                                setTimeout(() => {
-                                    setEnemies((prevEnemies) =>
-                                        prevEnemies.map((e) =>
-                                            e.id === enemy.id
-                                                ? { ...e, shield: false }
-                                                : e
-                                        )
-                                    )
-                                }, 500) // 500 ms d'invulnérabilité
-
-                                return {
-                                    ...enemy,
-                                    health: 1, // Fixe la santé après désactivation du bouclier
-                                }
-                            }
-
-                            return enemy // Garde l'ennemi s'il n'est pas touché
+                            return false
                         })
-                        .filter(Boolean) // Filtre les ennemis détruits // Filter out destroyed enemies (null)
+
+                        if (hit && !enemy.shield) {
+                            enemiesToDestroy.push(enemy.id)
+                            return enemy
+                        }
+
+                        if (hit && enemy.shield) {
+                            console.log('Avant mise à jour:', enemy)
+                            setEnemies((prevEnemies) =>
+                                prevEnemies.map((e) => {
+                                    if (e.id === enemy.id) {
+                                        // État avant mise à jour
+                                        const updatedEnemy = {
+                                            ...e,
+                                            shield: false,
+                                            health: 1,
+                                        }
+                                        console.log(
+                                            'Après mise à jour:',
+                                            updatedEnemy
+                                        ) // État après mise à jour
+                                        return updatedEnemy // Désactiver le bouclier
+                                    }
+                                    return e
+                                })
+                            )
+                        }
+
+                        return enemy // Garde l'ennemi s'il n'est pas touché
+                    }) // Filtre les ennemis détruits // Filter out destroyed enemies (null)
 
                     // Handle enemy destruction
                     enemiesToDestroy.forEach((enemyId) => {
                         if (!destroyingEnemies.includes(enemyId)) {
                             setScore((prevScore) => prevScore + 1)
                             setDestroyingEnemies((prev) => [...prev, enemyId])
-
-                            setTimeout(() => {
-                                handleEnemyDestruction(enemyId)
-                            }, 500)
+                            handleEnemyDestruction(enemyId)
                         }
                     })
 
@@ -327,11 +335,11 @@ const GamePage = () => {
             const enemyX = Math.random() * (gameWidth - 50) // Position X aléatoire
             const enemySpeed = Math.random() * 2 + 1
             const enemyId = Date.now()
-            const shield = Math.random() < 0.5
+            const shield = Math.random() < 0.3
             const enemyHealth = shield ? 2 : 1
 
             const newEnemy = {
-                id: enemyId,
+                id: 'ennemy-' + enemyId,
                 x: enemyX,
                 y: 0,
                 type: randomChallenge,
@@ -381,9 +389,9 @@ const GamePage = () => {
                                 const newHealth = prevHealth - 1
                                 if (newHealth <= 0) {
                                     // Logique si les points de vie atteignent zéro (fin du jeu par exemple)
-                                    setPlayerLost(true) // Alerte pour le Game Over
-                                    setIsGameRunning(false) // Arrête le jeu
-                                    return 0 // Pour éviter d'avoir des points de vie négatifs
+                                    setPlayerLost(true)
+                                    setIsGameRunning(false)
+                                    return 0
                                 }
 
                                 return newHealth
@@ -428,12 +436,18 @@ const GamePage = () => {
                             <img src={spaceshipAsset} alt="vaisseau spatial" />
                         </div>
                         <>
-                            {projectiles.map((proj, index) => (
-                                <Projectile key={index} x={proj.x} y={proj.y} />
+                            {projectiles.map((proj) => (
+                                <Projectile
+                                    key={proj.id}
+                                    x={proj.x}
+                                    y={proj.y}
+                                />
                             ))}
-                            {enemies.map((enemy, index) => (
+                        </>
+                        <>
+                            {enemies.map((enemy) => (
                                 <Enemy
-                                    key={enemy.id}
+                                    key={`key-${enemy.id}`}
                                     id={enemy.id}
                                     x={enemy.x}
                                     y={enemy.y}
@@ -441,6 +455,7 @@ const GamePage = () => {
                                     isDestroyed={destroyingEnemies.includes(
                                         enemy.id
                                     )}
+                                    destructionTimer={destructionTimer}
                                     shield={enemy.shield}
                                 />
                             ))}

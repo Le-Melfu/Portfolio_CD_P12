@@ -8,7 +8,7 @@ import explosion4 from '../../assets/images/gamePageAssets/explosion-4.png'
 import explosion5 from '../../assets/images/gamePageAssets/explosion-5.png'
 import explosion6 from '../../assets/images/gamePageAssets/explosion-6.png'
 import enemyShield from '../../assets/images/gamePageAssets/shield.png'
-const Enemy = ({ id, x, y, type, isDestroyed, shield }) => {
+const Enemy = ({ id, x, y, type, isDestroyed, destructionTimer, shield }) => {
     const animationSprites = [
         explosion1,
         explosion2,
@@ -19,47 +19,68 @@ const Enemy = ({ id, x, y, type, isDestroyed, shield }) => {
     ]
     const [currentSprite, setCurrentSprite] = useState(ennemyShip)
     const [isAnimating, setIsAnimating] = useState(false)
+    const [currentFrame, setCurrentFrame] = useState(0)
+    const [shieldState, setShieldState] = useState(shield)
+    const [shieldAnim, setShieldAnim] = useState(false)
+    useEffect(() => {
+        if (!shield) {
+            setShieldAnim(true)
+        }
+        const timer = setTimeout(() => {
+            setShieldState(shield)
+            setShieldAnim(false)
+        }, 300)
+
+        // Nettoyage du timer lorsque le composant se démonte ou lorsque 'shield' change
+        return () => clearTimeout(timer)
+    }, [shield])
 
     useEffect(() => {
         if (isDestroyed) {
             setIsAnimating(true)
-            setCurrentSprite(animationSprites[0]) // Start animation with the first sprite
-            let frameIndex = 0
+            setCurrentFrame(0) // Commencer l'animation à la première frame
+            const interval = setInterval(() => {
+                setCurrentFrame((prevFrame) => {
+                    // Vérifie si nous avons atteint la fin de l'animation
+                    if (prevFrame + 1 >= animationSprites.length) {
+                        setTimeout(() => {
+                            setIsAnimating(false)
+                        }, destructionTimer) // Stop l'animation
+                        clearInterval(interval) // Nettoie l'intervalle
+                        return prevFrame // Ne met pas à jour le frame
+                    } else {
+                        // Met à jour le sprite pour la frame actuelle
+                        setCurrentSprite(animationSprites[prevFrame + 1]) // Passe à la frame suivante
+                        return prevFrame + 1 // Met à jour le frame
+                    }
+                })
+            }, 50) // Change sprite toutes les 50ms
 
-            const intervalId = setInterval(() => {
-                frameIndex += 1
-                if (frameIndex < animationSprites.length) {
-                    setCurrentSprite(animationSprites[frameIndex])
-                } else {
-                    setIsAnimating(false)
-                    clearInterval(intervalId) // Stop the animation after last sprite
-                    // Optionally reset state
-                }
-            }, 100) // Adjust this duration for speed of animation
-
-            return () => clearInterval(intervalId) // Cleanup on unmount or when isDestroyed changes
-        } else {
-            setCurrentSprite(ennemyShip) // Reset to enemy ship if not destroyed
+            return () => clearInterval(interval) // Nettoyage de l'intervalle
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isDestroyed, shield])
+    }, [isDestroyed])
 
     return (
         <div
-            className={`enemy ${isAnimating ? 'enemy-destroyed' : ''}`}
+            className={`enemy ${isAnimating ? 'enemy-destruction' : ''}`}
             style={{
                 left: `${x}px`,
                 top: `${y}px`,
             }}
         >
             <p>{type}</p>
-            {shield && (
+
+            {shieldState && !isDestroyed && (
                 <img
-                    className="enemy-shield"
+                    className={` enemy-shield ${
+                        shieldAnim ? 'enemy-shield--destroyed' : ''
+                    }`}
                     src={enemyShield}
                     alt="bouclier d'énergie"
                 />
             )}
+
             <img
                 src={currentSprite}
                 alt={isDestroyed ? 'Explosion' : 'Vaisseau ennemi'}
