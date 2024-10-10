@@ -19,6 +19,7 @@ const Enemy = ({ id, x, y, type, isDestroyed, destructionTimer, shield }) => {
     ]
     const [currentSprite, setCurrentSprite] = useState(ennemyShip)
     const [isAnimating, setIsAnimating] = useState(false)
+    // eslint-disable-next-line no-unused-vars
     const [currentFrame, setCurrentFrame] = useState(0)
     const [shieldState, setShieldState] = useState(shield)
     const [shieldAnim, setShieldAnim] = useState(false)
