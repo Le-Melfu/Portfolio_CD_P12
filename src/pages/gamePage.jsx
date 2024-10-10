@@ -73,6 +73,7 @@ const GamePage = () => {
     ]
     const [enemies, setEnemies] = useState([])
     const [destroyingEnemies, setDestroyingEnemies] = useState([])
+    const [enemyProjectiles, setEnemyProjectiles] = useState([])
 
     // Gérer les inputs de mouvement
     useEffect(() => {
@@ -238,10 +239,10 @@ const GamePage = () => {
         return false
     }
 
-    const destructionTimer = 600
+    const destructionTimer = 500
     const handleEnemyDestruction = async (enemyId) => {
         // You may want to add a delay before proceeding to remove the enemy from the state
-
+        setScore((prevScore) => prevScore + 1)
         setTimeout(() => {
             setEnemies((prev) => prev.filter((enemy) => enemy.id !== enemyId))
         }, destructionTimer)
@@ -305,7 +306,6 @@ const GamePage = () => {
                     // Handle enemy destruction
                     enemiesToDestroy.forEach((enemyId) => {
                         if (!destroyingEnemies.includes(enemyId)) {
-                            setScore((prevScore) => prevScore + 1)
                             setDestroyingEnemies((prev) => [...prev, enemyId])
                             handleEnemyDestruction(enemyId)
                         }
@@ -349,6 +349,10 @@ const GamePage = () => {
             }
 
             setEnemies((prevEnemies) => [...prevEnemies, newEnemy])
+
+            setTimeout(() => {
+                spawnEnemyProjectile(enemyX, 0) // Vous pouvez ajuster la position Y selon le niveau de l'ennemi
+            }, 100) // Délai avant que l'ennemi tire (par exemple, 2 secondes)
         }
         if (isGameRunning) {
             const enemyInterval = setInterval(spawnEnemy, 2000) // Spawn every 2 seconds
@@ -358,6 +362,75 @@ const GamePage = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGameRunning])
+
+    const spawnEnemyProjectile = (enemyX, enemyY) => {
+        setEnemyProjectiles((prev) => [
+            ...prev,
+            {
+                id: 'enemy-proj-' + Date.now(),
+                x: enemyX + 30, // Centrer le projectile
+                y: enemyY + 60, // Position initiale en dessous de l'ennemi
+                speed: 5,
+            },
+        ])
+    }
+
+    useEffect(() => {
+        const updateEnemyProjectiles = () => {
+            setEnemyProjectiles((prevProjectiles) => {
+                return prevProjectiles
+                    .map((proj) => ({ ...proj, y: proj.y + proj.speed })) // Descendre le projectile
+                    .filter((proj) => proj.y < gameHeight) // Garder les projectiles à l'écran
+            })
+        }
+
+        const enemyProjectileInterval = setInterval(updateEnemyProjectiles, 16) // approx. 60 FPS
+        return () => clearInterval(enemyProjectileInterval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGameRunning])
+
+    const [playerHitAnim, setPlayerHitAnim] = useState(false)
+    // Collision entre les projectiles ennemis et le joueur
+    useEffect(() => {
+        const checkEnemyProjectileCollision = () => {
+            enemyProjectiles.forEach((proj) => {
+                const isCollision =
+                    proj.x < playerPosition.x + 50 && // Largeur du joueur
+                    proj.x + 4 > playerPosition.x &&
+                    proj.y < playerPosition.y + 50 && // Hauteur du joueur
+                    proj.y + 4 > playerPosition.y
+
+                if (isCollision) {
+                    setPlayerHitAnim(true)
+                    setTimeout(() => {
+                        setPlayerHitAnim(false)
+                    }, 100)
+                    hitSound.currentTime = 0
+                    hitSound
+                        .play()
+                        .catch((error) =>
+                            console.error('Erreur de lecture du son:', error)
+                        )
+                    // Gérer les points de vie ici
+                    setHealthPoints((prevHealth) => {
+                        const newHealth = prevHealth - 1
+                        if (newHealth <= 0) {
+                            setPlayerLost(true)
+                            setIsGameRunning(false)
+                        }
+                        return newHealth
+                    })
+                    setEnemyProjectiles((prev) =>
+                        prev.filter((p) => p.id !== proj.id)
+                    ) // Supprimer le projectile
+                }
+            })
+        }
+
+        const collisionInterval = setInterval(checkEnemyProjectileCollision, 1)
+        return () => clearInterval(collisionInterval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [enemyProjectiles, playerPosition, isGameRunning])
 
     // Mettre à jour la position des ennemis
     useEffect(() => {
@@ -419,7 +492,7 @@ const GamePage = () => {
             {playerLost && ( // Écran de Game Over
                 <div className="game-over-screen">
                     <h2>Game Over</h2>
-                    <p>Score: {score}</p>
+                    <p>Score: {score / 2}</p>
                     <button onClick={startGame}>Rejouer</button>
                 </div>
             )}
@@ -427,7 +500,9 @@ const GamePage = () => {
                 !playerLost && ( // Zone de jeu active
                     <>
                         <div
-                            className="player"
+                            className={`player ${
+                                playerHitAnim ? 'player--hit' : ''
+                            }`}
                             style={{
                                 left: `${playerPosition.x}px`,
                                 top: `${playerPosition.y}px`,
@@ -441,6 +516,17 @@ const GamePage = () => {
                                     key={proj.id}
                                     x={proj.x}
                                     y={proj.y}
+                                    type="player"
+                                />
+                            ))}
+                        </>
+                        <>
+                            {enemyProjectiles.map((proj) => (
+                                <Projectile
+                                    key={proj.id}
+                                    x={proj.x}
+                                    y={proj.y}
+                                    type="enemy"
                                 />
                             ))}
                         </>

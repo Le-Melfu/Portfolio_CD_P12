@@ -2,14 +2,37 @@
 
 .player {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     img {
         width: inherit;
         height: inherit;
     }
+    &--hit {
+        animation: hitPlayerAnim 150ms forwards;
+    }
 }
 
+@keyframes hitPlayerAnim {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .game {
     position: absolute;
     display: flex;
@@ -39,8 +62,14 @@
 
 .health {
     position: absolute;
-    bottom: 50px;
-    right: 50px;
+    display: flex;
+    flex-direction: column;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    gap: 20px;
+    font-size: 16px;
 }
 
 .game-over-screen {

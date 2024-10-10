@@ -1,14 +1,18 @@
-const Projectile = ({ x, y }) => {
+import './gameProjectile.scss'
+import playerBeam from '../../assets/images/gamePageAssets/playerBeam.png'
+import ennemyBeam from '../../assets/images/gamePageAssets/ennemyBeam.png'
+
+const Projectile = ({ x, y, type }) => {
     return (
-        <div
-            className="projectile"
+        <img
+            src={type === 'player' ? playerBeam : ennemyBeam}
+            alt="projectile"
+            className={`projectile ${
+                type === 'player' ? 'player-proj' : 'enemy-proj'
+            }`}
             style={{
-                position: 'absolute',
                 left: `${x}px`,
                 top: `${y}px`,
-                width: '4px',
-                height: '15px',
-                backgroundColor: 'red', // Changez cela par une image de projectile si besoin
             }}
         />
     )
