@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ExperiencePage from './pages/experiencePage'
 import ProjectPage from './pages/projectsPage'
 import InterestsPage from './pages/interestsPage'
+import GamePage from './pages/gamePage'
 import Header from './components/organisms/header'
 import Footer from './components/organisms/footer'
 import OpenAnim from './components/organisms/openAnim'
@@ -37,6 +38,7 @@ root.render(
                                 path="/interests"
                                 element={<InterestsPage />}
                             />
+                            <Route path="/game" element={<GamePage />} />
                             {/* <Route path="/contact" element={<ContactPage />} /> */}
                             <Route path="*" element={<ErrorPage />} />
                         </Routes>

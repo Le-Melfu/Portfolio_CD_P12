@@ -1,0 +1,13 @@
+.projectile {
+    position: absolute;
+    width: auto;
+    height: 20px;
+}
+
+.player-proj {
+    transform: rotate(-90deg);
+}
+
+.enemy-proj {
+    transform: rotate(90deg) scale(2);
+}
