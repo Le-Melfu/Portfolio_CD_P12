@@ -149,11 +149,7 @@ const GamePage = () => {
     useEffect(() => {
         if (gameMusic) {
             if (isGameRunning) {
-                gameMusic
-                    .play()
-                    .catch((error) =>
-                        console.error('Erreur de lecture de la musique:', error)
-                    )
+                gameMusic.play()
             } else {
                 gameMusic.pause()
                 gameMusic.currentTime = 0 // Réinitialiser au début
@@ -166,11 +162,7 @@ const GamePage = () => {
         const handleSpaceDown = (event) => {
             if (event.code === 'Space' && canShoot) {
                 const laserSound = new Audio(shootMP3)
-                laserSound
-                    .play()
-                    .catch((error) =>
-                        console.error('Erreur de lecture du son:', error)
-                    )
+                laserSound.play()
                 setCanShoot(false)
                 setProjectiles((prevProjectiles) => [
                     ...prevProjectiles,
@@ -229,11 +221,7 @@ const GamePage = () => {
             proj.y + 4 > enemy.y
         if (isCollision) {
             hitSound.currentTime = 0
-            hitSound
-                .play()
-                .catch((error) =>
-                    console.error('Erreur de lecture du son:', error)
-                )
+            hitSound.play()
             return true
         }
         return false
@@ -279,7 +267,6 @@ const GamePage = () => {
                         }
 
                         if (hit && enemy.shield) {
-                            console.log('Avant mise à jour:', enemy)
                             setEnemies((prevEnemies) =>
                                 prevEnemies.map((e) => {
                                     if (e.id === enemy.id) {
@@ -289,10 +276,6 @@ const GamePage = () => {
                                             shield: false,
                                             health: 1,
                                         }
-                                        console.log(
-                                            'Après mise à jour:',
-                                            updatedEnemy
-                                        ) // État après mise à jour
                                         return updatedEnemy // Désactiver le bouclier
                                     }
                                     return e
@@ -406,11 +389,7 @@ const GamePage = () => {
                         setPlayerHitAnim(false)
                     }, 100)
                     hitSound.currentTime = 0
-                    hitSound
-                        .play()
-                        .catch((error) =>
-                            console.error('Erreur de lecture du son:', error)
-                        )
+                    hitSound.play()
                     // Gérer les points de vie ici
                     setHealthPoints((prevHealth) => {
                         const newHealth = prevHealth - 1
