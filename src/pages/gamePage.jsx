@@ -7,6 +7,7 @@ import Enemy from '../components/atoms/gameEnnemy'
 import shootMP3 from '../assets/music/shoot.mp3'
 import hitMP3 from '../assets/music/hit.mp3'
 import gameMusicMP3 from '../assets/music/portfoliogamu.mp3'
+import bottomHitMP3 from '../assets/music/bottomHit.mp3'
 import health1 from '../assets/images/gamePageAssets/health1.png'
 import health2 from '../assets/images/gamePageAssets/health2.png'
 import health3 from '../assets/images/gamePageAssets/health3.png'
@@ -18,6 +19,7 @@ const GamePage = () => {
     const { isDark } = useContext(ThemeContext)
     const [hitSound, setHitSound] = useState(null)
     const [gameMusic, setGameMusic] = useState(null)
+    const [bottomHitSound, setBottomHitSound] = useState(null)
     const [inputs, setInputs] = useState({
         left: false,
         right: false,
@@ -163,14 +165,17 @@ const GamePage = () => {
         setGameMusic(music)
 
         const sound2 = new Audio(hitMP3)
+        const bottomHitSound = new Audio(bottomHitMP3)
 
         setHitSound(sound2)
+        setBottomHitSound(bottomHitSound)
 
         return () => {
             // Optionnel : Libération des ressources audio si nécessaire
             music.pause()
             music.currentTime = 0
             sound2.pause()
+            bottomHitSound.pause()
         }
     }, [])
 
@@ -489,8 +494,8 @@ const GamePage = () => {
                     const updatedEnemies = prevEnemies.filter((enemy) => {
                         if (enemy.y >= window.innerHeight - 50) {
                             setPlayerHitAnim(true)
-                            hitSound.currentTime = 0
-                            hitSound.play()
+                            bottomHitSound.currentTime = 0
+                            bottomHitSound.play()
                             // Si l'ennemi touche le bas de l'écran, diminuer les points de vie
                             setHealthPoints((prevHealth) => {
                                 const newHealth = prevHealth - 1
