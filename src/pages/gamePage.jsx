@@ -437,7 +437,7 @@ const GamePage = () => {
                     setPlayerHitAnim(true)
                     setTimeout(() => {
                         setPlayerHitAnim(false)
-                    }, 100)
+                    }, 200)
                     hitSound.currentTime = 0
                     hitSound.play()
                     // Gérer les points de vie ici
@@ -488,6 +488,9 @@ const GamePage = () => {
                 setEnemies((prevEnemies) => {
                     const updatedEnemies = prevEnemies.filter((enemy) => {
                         if (enemy.y >= window.innerHeight - 50) {
+                            setPlayerHitAnim(true)
+                            hitSound.currentTime = 0
+                            hitSound.play()
                             // Si l'ennemi touche le bas de l'écran, diminuer les points de vie
                             setHealthPoints((prevHealth) => {
                                 const newHealth = prevHealth - 1
@@ -499,7 +502,9 @@ const GamePage = () => {
                                 }
                                 return newHealth
                             })
-
+                            setTimeout(() => {
+                                setPlayerHitAnim(false)
+                            }, 200)
                             return false // Retirer l'ennemi
                         }
                         return true // Garder l'ennemi
