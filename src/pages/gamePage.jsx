@@ -561,7 +561,7 @@ const GamePage = () => {
                     <h2>Game Over</h2>
                     <p className="game-over-score">Score: {score}</p>
                     <p className="game-over-catch">
-                        Si seulement vous aviez un junior pour vous assister...
+                        Si seulement vous aviez un junior pour votre équipe...
                     </p>
                     <p className="game-over-catch">
                         <a href="mailto:degardenzi.clement@gmail.com">
