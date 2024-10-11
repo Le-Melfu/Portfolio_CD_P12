@@ -7,6 +7,12 @@ import Enemy from '../components/atoms/gameEnnemy'
 import shootMP3 from '../assets/music/shoot.mp3'
 import hitMP3 from '../assets/music/hit.mp3'
 import gameMusicMP3 from '../assets/music/portfoliogamu.mp3'
+import health1 from '../assets/images/gamePageAssets/health1.png'
+import health2 from '../assets/images/gamePageAssets/health2.png'
+import health3 from '../assets/images/gamePageAssets/health3.png'
+import health4 from '../assets/images/gamePageAssets/health4.png'
+import controlsArrow from '../assets/images/gamePageAssets/controlsArrow.png'
+import controlsSpaceBar from '../assets/images/gamePageAssets/controlsSpaceBar.png'
 
 const GamePage = () => {
     const { isDark } = useContext(ThemeContext)
@@ -34,10 +40,32 @@ const GamePage = () => {
             x: gameWidth / 2 - 25,
             y: gameHeight / 2 + 150,
         })
-        setHealthPoints(3)
+        setHealthPoints(4)
+        setCurrentHealthAsset(getHealthAsset(4))
     }
     // État pour les points de vie
-    const [healthPoints, setHealthPoints] = useState(3)
+    const [healthPoints, setHealthPoints] = useState(4)
+    const healthAssets = [
+        health1, // 1 HP
+        health2, // 2 HP
+        health3, // 3 HP
+        health4, // 4 HP (max)
+    ]
+    const [currentHealthAsset, setCurrentHealthAsset] = useState(health4)
+
+    // Fonction pour obtenir l'image en fonction des points de vie
+    const getHealthAsset = (healthPoints) => {
+        if (healthPoints <= 1) return healthAssets[0]
+        if (healthPoints <= 2) return healthAssets[1]
+        if (healthPoints <= 3) return healthAssets[2]
+        return healthAssets[3]
+    }
+
+    useEffect(() => {
+        const newHealthAsset = getHealthAsset(healthPoints)
+        setCurrentHealthAsset(newHealthAsset)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [healthPoints, isGameRunning])
 
     const [playerPosition, setPlayerPosition] = useState({
         x: gameWidth / 2 - 25,
@@ -157,10 +185,27 @@ const GamePage = () => {
         }
     }, [isGameRunning, gameMusic])
 
+    useEffect(() => {
+        const handleEnterDown = (event) => {
+            if (!isGameRunning && event.code === 'Enter') {
+                startGame()
+            }
+        }
+
+        // Ajouter l'écouteur d'événements
+        window.addEventListener('keydown', handleEnterDown)
+
+        // Nettoyer l'écouteur d'événements lors du démontage du composant
+        return () => {
+            window.removeEventListener('keydown', handleEnterDown)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGameRunning])
+
     // Gérer l'entrée de tir séparément
     useEffect(() => {
         const handleSpaceDown = (event) => {
-            if (event.code === 'Space' && canShoot) {
+            if (isGameRunning && event.code === 'Space' && canShoot) {
                 const laserSound = new Audio(shootMP3)
                 laserSound.play()
                 setCanShoot(false)
@@ -176,13 +221,14 @@ const GamePage = () => {
                 setTimeout(() => setCanShoot(true), 50)
             }
         }
-        if (isGameRunning) {
-            window.addEventListener('keydown', handleSpaceDown)
-        }
+
+        window.addEventListener('keydown', handleSpaceDown)
+
         return () => {
             window.removeEventListener('keydown', handleSpaceDown)
         }
-    }, [canShoot, playerPosition.x, playerPosition.y, isGameRunning])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGameRunning, canShoot, playerPosition.x, playerPosition.y])
 
     // Mettre à jour la position du joueur
     useEffect(() => {
@@ -205,27 +251,11 @@ const GamePage = () => {
             })
         }
 
-        const interval = setInterval(movePlayer, 16) // approx. 60 FPS
+        const interval = setInterval(movePlayer, 18) // approx. 60 FPS
 
         return () => clearInterval(interval)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputs])
-
-    const checkCollision = (proj, enemy) => {
-        const enemyWidth = 70 // Set to your enemy width
-        const enemyHeight = 70 // Set to your enemy height
-        const isCollision =
-            proj.x < enemy.x + enemyWidth &&
-            proj.x + 4 > enemy.x &&
-            proj.y < enemy.y + enemyHeight &&
-            proj.y + 4 > enemy.y
-        if (isCollision) {
-            hitSound.currentTime = 0
-            hitSound.play()
-            return true
-        }
-        return false
-    }
 
     const destructionTimer = 500
     const handleEnemyDestruction = async (enemyId) => {
@@ -241,7 +271,22 @@ const GamePage = () => {
 
     // Mettre à jour les projectiles
     useEffect(() => {
-        const projectilesToRemove = []
+        const checkCollision = (proj, enemy) => {
+            const enemyWidth = 70 // Set to your enemy width
+            const enemyHeight = 70 // Set to your enemy height
+            const isCollision =
+                proj.x < enemy.x + enemyWidth &&
+                proj.x + 4 > enemy.x &&
+                proj.y < enemy.y + enemyHeight &&
+                proj.y + 4 > enemy.y
+            if (isCollision) {
+                hitSound.currentTime = 0
+                hitSound.play()
+                return true
+            }
+            return false
+        }
+
         const update = async () => {
             setProjectiles((prevProjectiles) => {
                 const updatedProjectiles = prevProjectiles
@@ -253,9 +298,9 @@ const GamePage = () => {
                     const enemiesToDestroy = []
 
                     const remainingEnemies = prevEnemies.map((enemy) => {
-                        const hit = updatedProjectiles.some((proj) => {
+                        const hit = updatedProjectiles.some((proj, id) => {
                             if (checkCollision(proj, enemy)) {
-                                projectilesToRemove.push(proj.id) // Marque le projectile pour suppression
+                                updatedProjectiles.splice(id, 1) // Marque le projectile pour suppression
                                 return true
                             }
                             return false
@@ -298,9 +343,7 @@ const GamePage = () => {
                 })
 
                 // Remove projectiles that hit an enemy
-                return updatedProjectiles.filter(
-                    (proj) => !projectilesToRemove.includes(proj.id)
-                )
+                return updatedProjectiles
             })
         }
 
@@ -308,7 +351,7 @@ const GamePage = () => {
 
         return () => cancelAnimationFrame(animationFrameId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [projectiles, isGameRunning])
+    }, [projectiles, isGameRunning, destroyingEnemies])
 
     // Gérer les ennemis
     useEffect(() => {
@@ -316,7 +359,7 @@ const GamePage = () => {
             const randomChallenge =
                 challenges[Math.floor(Math.random() * challenges.length)]
             const enemyX = Math.random() * (gameWidth - 50) // Position X aléatoire
-            const enemySpeed = Math.random() * 2 + 1
+            const enemySpeed = Math.random() * 2 + 1 // Vitesse de l'ennemi
             const enemyId = Date.now()
             const shield = Math.random() < 0.3
             const enemyHealth = shield ? 2 : 1
@@ -336,11 +379,18 @@ const GamePage = () => {
             setTimeout(() => {
                 spawnEnemyProjectile(enemyX, 0) // Vous pouvez ajuster la position Y selon le niveau de l'ennemi
             }, 100) // Délai avant que l'ennemi tire (par exemple, 2 secondes)
-        }
-        if (isGameRunning) {
-            const enemyInterval = setInterval(spawnEnemy, 2000) // Spawn every 2 seconds
 
-            return () => clearInterval(enemyInterval)
+            // Appelle à nouveau spawnEnemy avec un délai aléatoire
+            const randomDelay = Math.random() * (2000 - 1000) + 1000 // Délai entre 1 et 3 secondes
+            enemyInterval = setTimeout(spawnEnemy, randomDelay)
+        }
+
+        let enemyInterval // Variable pour stocker le timeout
+
+        if (isGameRunning) {
+            spawnEnemy() // Appelle la fonction une première fois pour démarrer le processus
+
+            return () => clearTimeout(enemyInterval) // Nettoie le timeout
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -397,8 +447,10 @@ const GamePage = () => {
                             setPlayerLost(true)
                             setIsGameRunning(false)
                         }
+
                         return newHealth
                     })
+
                     setEnemyProjectiles((prev) =>
                         prev.filter((p) => p.id !== proj.id)
                     ) // Supprimer le projectile
@@ -445,7 +497,6 @@ const GamePage = () => {
                                     setIsGameRunning(false)
                                     return 0
                                 }
-
                                 return newHealth
                             })
 
@@ -458,26 +509,71 @@ const GamePage = () => {
             }
         }, 16)
         return () => clearInterval(enemyMovementInterval)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGameRunning])
 
     return (
-        <main className={`game page fade-in ${isDark ? '' : 'light'}`}>
+        <main
+            id="gamePage"
+            className={`game page fade-in ${isDark ? '' : 'light'}`}
+            style={{ zIndex: isGameRunning ? 1 : -1 }}
+        >
             {!isGameRunning &&
                 !playerLost && ( // Écran de démarrage
                     <div className="start-screen">
-                        <button onClick={startGame}>Start</button>
+                        <button onClick={startGame}>
+                            Appuyez sur Entrée pour jouer
+                        </button>
+                        <div className="controls">
+                            <div className="controls__scheme">
+                                <div>
+                                    <h3>Commande de Tir</h3>
+                                    <img
+                                        className="controlsSpaceBar"
+                                        src={controlsSpaceBar}
+                                        alt="Barre espace"
+                                    />
+                                </div>
+                                <div>
+                                    <h3>Déplacements</h3>
+                                    <img
+                                        className="controlsArrow"
+                                        src={controlsArrow}
+                                        alt="Flèches directionelles"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             {playerLost && ( // Écran de Game Over
                 <div className="game-over-screen">
                     <h2>Game Over</h2>
-                    <p>Score: {score}</p>
-                    <button onClick={startGame}>Rejouer</button>
+                    <p className="game-over-score">Score: {score}</p>
+                    <p className="game-over-catch">
+                        Si seulement vous aviez un junior pour vous assister...
+                    </p>
+                    <p className="game-over-catch">
+                        <a href="mailto:degardenzi.clement@gmail.com">
+                            degardenzi.clement@gmail.com
+                        </a>
+                    </p>
+
+                    <button onClick={startGame}>
+                        Appuyez sur Entrée pour rejouer
+                    </button>
                 </div>
             )}
             {isGameRunning &&
                 !playerLost && ( // Zone de jeu active
                     <>
+                        <div
+                            className={`game-interface-hitscreen ${
+                                playerHitAnim
+                                    ? 'game-interface-hitscreen--hit'
+                                    : ''
+                            }`}
+                        />
                         <div
                             className={`player ${
                                 playerHitAnim ? 'player--hit' : ''
@@ -487,7 +583,16 @@ const GamePage = () => {
                                 top: `${playerPosition.y}px`,
                             }}
                         >
-                            <img src={spaceshipAsset} alt="vaisseau spatial" />
+                            <img
+                                className="player-ship"
+                                src={spaceshipAsset}
+                                alt="vaisseau spatial"
+                            />
+                            <img
+                                src={currentHealthAsset}
+                                alt={`health-${healthPoints}`}
+                                className="game-interface-health"
+                            />
                         </div>
                         <>
                             {projectiles.map((proj) => (
@@ -525,9 +630,17 @@ const GamePage = () => {
                                 />
                             ))}
                         </>
-                        <div className="health">
-                            <p>Health Points: {healthPoints}</p>
-                            <p>Score: {score}</p>
+                        <div className="game-interface">
+                            <p className="game-interface-score">
+                                Score: {score}
+                            </p>
+                            <img
+                                src={currentHealthAsset}
+                                alt={`health-${healthPoints}`}
+                                className={`game-interface-health--static ${
+                                    playerHitAnim ? 'player--hit' : ''
+                                }`}
+                            />
                         </div>
                     </>
                 )}

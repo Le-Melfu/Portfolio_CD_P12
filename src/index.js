@@ -4,7 +4,7 @@ import './index.scss'
 import Home from './pages/home'
 import MusicPage from './pages/musique'
 import ErrorPage from './pages/errorPage'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ExperiencePage from './pages/experiencePage'
 import ProjectPage from './pages/projectsPage'
 import InterestsPage from './pages/interestsPage'
@@ -15,6 +15,10 @@ import OpenAnim from './components/organisms/openAnim'
 import { ThemeProvider } from './assets/ThemeContext'
 import { ProjectsProvider } from './assets/projectContext'
 import BackgroundVideo from './components/atoms/backgroundVideo'
+
+const isMobileDevice = () => {
+    return /Mobi|Android/i.test(window.navigator.userAgent)
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -38,7 +42,16 @@ root.render(
                                 path="/interests"
                                 element={<InterestsPage />}
                             />
-                            <Route path="/game" element={<GamePage />} />
+                            <Route
+                                path="/game"
+                                element={
+                                    isMobileDevice() ? (
+                                        <Navigate to="/" /> // Redirection si mobile
+                                    ) : (
+                                        <GamePage /> // Sinon accès à la page
+                                    )
+                                }
+                            />
                             {/* <Route path="/contact" element={<ContactPage />} /> */}
                             <Route path="*" element={<ErrorPage />} />
                         </Routes>
