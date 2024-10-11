@@ -7,9 +7,23 @@ const Navbar = () => {
     const handleTouchEnd = (link) => {
         navigate(link)
     }
+    const isMobileDevice = () => {
+        return /Mobi|Android/i.test(window.navigator.userAgent)
+    }
 
     return (
         <div className="nav-bar__container">
+            {!isMobileDevice() ? (
+                <Link
+                    to={'/game'}
+                    className="play-game-btn"
+                    onTouchEnd={() => handleTouchEnd('/')}
+                >
+                    Envie de jouer ?
+                </Link>
+            ) : (
+                ''
+            )}
             <nav className="nav-bar">
                 <Link
                     to={'/'}

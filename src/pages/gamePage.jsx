@@ -381,7 +381,7 @@ const GamePage = () => {
             }, 100) // Délai avant que l'ennemi tire (par exemple, 2 secondes)
 
             // Appelle à nouveau spawnEnemy avec un délai aléatoire
-            const randomDelay = Math.random() * (2000 - 1000) + 1000 // Délai entre 1 et 3 secondes
+            const randomDelay = Math.random() * (3000 - 1000) + 1000 // Délai entre 1 et 3 secondes
             enemyInterval = setTimeout(spawnEnemy, randomDelay)
         }
 
