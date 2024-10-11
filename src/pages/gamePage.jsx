@@ -471,7 +471,7 @@ const GamePage = () => {
             {playerLost && ( // Écran de Game Over
                 <div className="game-over-screen">
                     <h2>Game Over</h2>
-                    <p>Score: {score / 2}</p>
+                    <p>Score: {score}</p>
                     <button onClick={startGame}>Rejouer</button>
                 </div>
             )}
