@@ -78,29 +78,47 @@ const GamePage = () => {
     const [projectiles, setProjectiles] = useState([])
     const [canShoot, setCanShoot] = useState(true) // État pour contrôler le tir
     const challenges = [
-        'HTML',
-        'CSS',
-        'JavaScript',
-        'React',
-        'SASS',
-        'Responsive Design',
-        'Accessibilité',
-        'Performances',
-        'Optimisation',
-        'Gestion des images',
-        'Compatibilité entre navigateurs',
-        'Gestion de version',
-        'Débogage',
-        'Résolution de problèmes',
-        'Intégration API',
-        'Gestion des états',
-        "Travail d'équipe",
-        'Sécurité',
-        'Déploiement',
-        'Veille technologique',
-        'Communication',
-        'Méthodes agiles',
+        'Dette technique',
+        'Legacy Firebase',
+        'State spaghetti',
+        'Race condition',
+        'Memory leak',
+        'Rebuild Flutter',
+        'Schema drift',
+        'God class',
+        'Null pointer',
+        'Merge conflict',
+        'Cache stale',
+        'Cold start',
+        'Contrat API',
+        'Widget rebuild',
+        'Cloud timeout',
+        'Firestore rules',
+        'Circular dep',
+        'Flaky test',
+        'Vendor lock-in',
+        'Streaming lag',
+        'Tight coupling',
+        'N+1 query',
+        'Hot reload',
+        'Config hell',
+        'Determinisme',
     ]
+    const ENEMY_WIGGLE = 10
+    const ENEMY_HIT = { offsetX: 4, offsetY: 18, w: 62, h: 48 }
+    const PLAYER_HIT = { offsetX: 8, offsetY: 8, w: 34, h: 34 }
+    const PLAYER_SHOT = { offsetX: -3, offsetY: -8, w: 10, h: 22 }
+    const ENEMY_SHOT = { offsetX: -4, offsetY: 0, w: 16, h: 20 }
+
+    const hitBox = (x, y, box) => ({
+        x: x + box.offsetX,
+        y: y + box.offsetY,
+        w: box.w,
+        h: box.h,
+    })
+
+    const rectsOverlap = (a, b) =>
+        a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y
     const [enemies, setEnemies] = useState([])
     const [destroyingEnemies, setDestroyingEnemies] = useState([])
     const [enemyProjectiles, setEnemyProjectiles] = useState([])
@@ -277,13 +295,14 @@ const GamePage = () => {
     // Mettre à jour les projectiles
     useEffect(() => {
         const checkCollision = (proj, enemy) => {
-            const enemyWidth = 70 // Set to your enemy width
-            const enemyHeight = 70 // Set to your enemy height
-            const isCollision =
-                proj.x < enemy.x + enemyWidth &&
-                proj.x + 4 > enemy.x &&
-                proj.y < enemy.y + enemyHeight &&
-                proj.y + 4 > enemy.y
+            const shot = hitBox(proj.x, proj.y, PLAYER_SHOT)
+            const target = {
+                x: enemy.x + ENEMY_HIT.offsetX - ENEMY_WIGGLE,
+                y: enemy.y + ENEMY_HIT.offsetY,
+                w: ENEMY_HIT.w + ENEMY_WIGGLE * 2,
+                h: ENEMY_HIT.h,
+            }
+            const isCollision = rectsOverlap(shot, target)
             if (isCollision) {
                 hitSound.currentTime = 0
                 hitSound.play()
@@ -432,11 +451,10 @@ const GamePage = () => {
     useEffect(() => {
         const checkEnemyProjectileCollision = () => {
             enemyProjectiles.forEach((proj) => {
-                const isCollision =
-                    proj.x < playerPosition.x + 50 && // Largeur du joueur
-                    proj.x + 4 > playerPosition.x &&
-                    proj.y < playerPosition.y + 50 && // Hauteur du joueur
-                    proj.y + 4 > playerPosition.y
+                const isCollision = rectsOverlap(
+                    hitBox(proj.x, proj.y, ENEMY_SHOT),
+                    hitBox(playerPosition.x, playerPosition.y, PLAYER_HIT)
+                )
 
                 if (isCollision) {
                     setPlayerHitAnim(true)

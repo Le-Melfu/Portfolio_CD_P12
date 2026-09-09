@@ -31,7 +31,7 @@ root.render(
                     <Header />
                     <div className="main-container">
                         <Routes>
-                            <Route exact path="/" element={<Home />} />
+                            <Route path="/" element={<Home />} />
                             <Route
                                 path="/experiences"
                                 element={<ExperiencePage />}
@@ -46,13 +46,12 @@ root.render(
                                 path="/game"
                                 element={
                                     isMobileDevice() ? (
-                                        <Navigate to="/" /> // Redirection si mobile
+                                        <Navigate to="/" />
                                     ) : (
-                                        <GamePage /> // Sinon accès à la page
+                                        <GamePage />
                                     )
                                 }
                             />
-                            {/* <Route path="/contact" element={<ContactPage />} /> */}
                             <Route path="*" element={<ErrorPage />} />
                         </Routes>
                     </div>

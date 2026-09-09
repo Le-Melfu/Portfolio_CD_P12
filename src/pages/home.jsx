@@ -27,16 +27,16 @@ const Home = () => {
     const defaultArticle = {
         title: 'Bienvenue',
         desc: [
-            `Mon nom est Clément Degardenzi, je suis intégrateur
-                    développeur front-end, situé dans le Nord de la
-                    France. Durant ma formation et ma pratique, j’ai pu
-                    expérimenter et m’améliorer sur différents aspects
-                    du front-end, avec des bases en HTML/CSS/JS, mais
-                    également des outils tels que React et Redux
-                    Toolkit.`,
-            `Je suis féru de perfection de précision, tout en
-                    pouvant proposer la meilleure optimisation possible
-                    de vos interfaces.`,
+            `Mon nom est Clément Degardenzi, je suis Software
+                    Engineer Full-Stack, situé dans la métropole
+                    lilloise. Près de deux ans d’expérience en
+                    environnement produit, de la conception à
+                    l’implémentation, sur Flutter, TypeScript/Node.js,
+                    Firebase/GCP, Java/Spring et React.`,
+            `J’ai une appétence pour l’architecture logicielle,
+                    les interfaces modulaires et la simplification de
+                    systèmes legacy, tout en soignant la précision et
+                    l’optimisation des interfaces.`,
         ],
     }
 

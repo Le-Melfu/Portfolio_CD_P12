@@ -11,7 +11,7 @@ const MusicPage = () => {
         <div className={`music page fade-in ${isDark ? '' : 'light'}`}>
             <SectionHeader
                 title="Musique"
-                desc="Passioné de musique depuis très jeune et ayant commencé la guitare à l'âge de 11 ans, je dédie une grande partie de mon temps libre à cette activité, que ce soit dans la pratique d'instruments divers (guitare, basse, voix...), mais également dans la pratique de la MAO. J'ai plusieurs fois eu l'occasion lors de concours de court-métrages de réaliser des musiques pour certaines d'entre eux."
+                desc="Passionné de musique depuis très jeune et ayant commencé la guitare à l'âge de 11 ans, je dédie une grande partie de mon temps libre à cette activité, que ce soit dans la pratique d'instruments divers (guitare, basse, voix...), mais également dans la pratique de la MAO. J'ai plusieurs fois eu l'occasion lors de concours de court-métrages de réaliser des musiques pour certains d'entre eux."
             />
             <AudioPlayer />
             <SoundcloudBtn />

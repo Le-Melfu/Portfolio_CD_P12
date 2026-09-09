@@ -42,7 +42,7 @@ const ProjectPage = () => {
                         {currentModalContent && (
                             <>
                                 <i
-                                    class="fa-solid fa-circle-xmark modal-close-btn"
+                                    className="fa-solid fa-circle-xmark modal-close-btn"
                                     onClick={closeModal}
                                 ></i>
                                 <ArticleCarousel
@@ -57,7 +57,7 @@ const ProjectPage = () => {
             )}
             <SectionHeader
                 title="Mes Réalisations"
-                desc="Découvrez les différents projets que j'ai pu réaliser au cours de ma formation d'intégrateur WEB, ce qui m'a permit d'acquérir des compétences en HTML, CSS, JAVASCRIPT mais également en REACT et REDUX"
+                desc="Découvrez les projets que j'ai réalisés, de la formation d'intégrateur web jusqu'à mon activité de Software Engineer Full-Stack."
             />
             {loading ? (
                 <LoadingCircle />

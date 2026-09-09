@@ -56,7 +56,7 @@ const NavbarMobile = () => {
                 {!isCollapsed && (
                     <ul className="nav-dropdown-menu">
                         <li onClick={() => setIsCollapsed(true)}>
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </li>
                         <DarkModeBtn className="slider-mobile" />
                         <li

@@ -11,73 +11,75 @@ const ExperiencePage = () => {
         <main className={`xp page fade-in ${isDark ? '' : 'light'}`}>
             <SectionHeader
                 title="expériences & études"
-                desc="Organisation, Adaptation, Indépendance, Anglais bilingue, Permis B"
+                desc="Organisation, Adaptation, Autonomie, Anglais professionnel, Permis B"
             />
             <div className="xp__content">
                 {/* Need to specify number of banners in SASS loop */}
                 <ScrolledBanner bannerNum="1">
                     <h3>Formations et diplômes</h3>
                     <ul>
-                        <li>Intégrateur web - OpenClassrooms</li>
                         <li>
-                            Musicien Interprète des Musiques Actuelles - EF2M
-                            Tourcoing
+                            RNCP niveau 6 — Cursus Java / conception logicielle
+                            (Alternance), 2024–2026
                         </li>
+                        <li>Intégrateur Web — RNCP 5, OpenClassrooms, 2024</li>
                         <li>
-                            CESS (Bac) option Auxiliète Administratif et
-                            d’Accueil - SAAVUTUS Rixensart Belgique
+                            Musicien Interprète — RNCP 5, EF2M Tourcoing,
+                            2016–2017
                         </li>
-                        <li>Infographie - Don Bosco Tournai Belgique</li>
-                        <li>Illustration - Saint-Luc Tournai Belgique</li>
                     </ul>
                 </ScrolledBanner>
                 <ScrolledBanner bannerNum="2" className="align-right">
-                    <h3>Compétences</h3>
+                    <h3>Frontend & UI</h3>
                     <ul>
-                        <h4 className="skill-list-title">Hard Skills</h4>
-                        <li>HTML, CSS, JAVASCRIPT</li>
-                        <li>REACT, REDUX</li>
-                        <li>SCSS, Animations CSS</li>
-                        <li>Rédaction de tests unitaires</li>
-                        <li>Rédaction de spécifications techniques</li>
-                        <li>
-                            Musique (Guitare, chant, batterie, basse, piano,MAO)
-                        </li>
-                        <li>Gestion de projet agile</li>
+                        <li>Flutter / Dart</li>
+                        <li>React / Redux</li>
+                        <li>Architecture de composants</li>
+                        <li>UI responsive, performance & accessibilité</li>
                     </ul>
+                </ScrolledBanner>
+                <ScrolledBanner bannerNum="3">
+                    <h3>Backend & Data</h3>
                     <ul>
-                        <h4 className="skill-list-title">Soft Skills</h4>
+                        <li>TypeScript / Node.js</li>
+                        <li>Java / Spring Boot</li>
+                        <li>Firebase / Firestore / Cloud Functions</li>
+                        <li>GCP / REST APIs</li>
+                    </ul>
+                </ScrolledBanner>
+                <ScrolledBanner bannerNum="4" className="align-right">
+                    <h3>Software Engineering</h3>
+                    <ul>
+                        <li>System Design & Data Modeling</li>
+                        <li>Refactoring</li>
+                        <li>Testing & Observability</li>
+                        <li>Git</li>
+                        <li>Agents IA & workflows automatisés</li>
+                    </ul>
+                </ScrolledBanner>
+                <ScrolledBanner bannerNum="5">
+                    <h3>Soft Skills</h3>
+                    <ul>
                         <li>Autonomie</li>
                         <li>Travail d'équipe</li>
                         <li>Communication</li>
                         <li>Sens de l'organisation</li>
                         <li>Prise d'initiative</li>
                         <li>Soif d'apprendre</li>
-                        <li>Pensée en arborescence (Mind Mapping)</li>
                     </ul>
                 </ScrolledBanner>
-                <ScrolledBanner bannerNum="3">
+                <ScrolledBanner bannerNum="6" className="align-right">
                     <h3>Expériences</h3>
                     <ul>
-                        <li>Mes Projets de formation, 2023-2024</li>
                         <li>
-                            Musicien Professionel (Plusieurs formations dans le
-                            Nord), 2010-2023
+                            Software Engineer Full-Stack — Mukiz (Alternance),
+                            Déc. 2024 – Déc. 2026
                         </li>
                         <li>
-                            Cuisinier Préparateur, OhCanada Foodtruck, 2020-2021
+                            Nythral — RPG procédural / simulation (C#/.NET,
+                            Unreal Engine), 2026
                         </li>
-                        <li>
-                            Assistant d’éducation - Lycée Colbert, Tourcoing,
-                            2017-2019
-                        </li>
-                        <li>
-                            Employé polyvalent - NOZ, Cournon-d’Auvergne, 2015
-                        </li>
-
-                        <li>
-                            Serveur - Le Bistrot du Coin, Tournai, 2010-2012
-                        </li>
+                        <li>Musicien professionnel, 2017–2024</li>
                     </ul>
                 </ScrolledBanner>
             </div>

@@ -22,16 +22,17 @@
     }
 }
 
-@for $i from 1 through 3 {
+@for $i from 1 through 6 {
     .banner3d-#{$i} {
         display: flex;
         width: 100%;
         perspective: 100vh;
         transform-style: preserve-3d;
-        margin-bottom: 70px;
+        margin-bottom: 120px;
     }
 
     .banner3d-#{$i}-front {
+        position: relative;
         width: 100%;
         padding: 60px;
         border: $primary-border-color 1px solid;
@@ -74,7 +75,7 @@
         width: 80%;
         margin: auto;
     }
-    @for $i from 1 through 3 {
+    @for $i from 1 through 6 {
         .banner3d-#{$i}-front {
             padding: 30px;
         }
